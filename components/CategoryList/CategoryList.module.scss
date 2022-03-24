@@ -1,0 +1,19 @@
+.CategoryList {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  .CategoryTitle {
+    margin-right: 26px;
+    padding-right: 24px;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100px;
+    font: 400 16px 'Inter';
+    color: #666666;
+  }
+  .CategoryItem {
+    margin-right: 20px;
+    padding: 10px 16px;
+    border-radius: 18px;
+    height: 36px;
+  }
+}
