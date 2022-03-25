@@ -1,66 +1,73 @@
 import cn from 'classnames';
-import { useRef, useState } from 'react';
+import Image from 'next/image';
+import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react';
+
+import { useIconFont } from '@/utils/hooks/useIconFont';
 
 import styles from './Input.module.scss';
 
-interface InputProps {
+type InputSize = 'lg' | 'sm';
+
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLElement>, 'size'> {
   className?: string;
-  placeholderClassName?: string;
-  cb: (value: string) => void;
-  property: React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >;
+  disabled?: boolean;
+  size?: InputSize;
+  icon?: string;
+  prepend?: string | React.ReactNode;
+  append?: string | React.ReactNode;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-// react-i18next的bug，详见 https://stackoverflow.com/questions/69112341/nextjs-react-i18next-images-and-input-placeholders-are-not-translated
-/**
- * Single line input with i18n placeholder
- * @param props
- * @returns
- */
-export function Input(props: InputProps) {
-  const { className, property, placeholderClassName, cb } = props;
-  const { placeholder, multiple, ...rest } = property;
-  const ref = useRef<HTMLInputElement | null>(null);
-  const [isShowPlaceHolder, setIsShowPlaceHolder] = useState(true);
-  const [value, setValue] = useState<string>('');
+const Input: React.FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
+  (props: InputProps, ref) => {
+    const {
+      className,
+      disabled,
+      size,
+      icon,
+      style,
+      prepend,
+      append,
+      ...restProps
+    } = props;
 
-  return (
-    <div className={cn(styles.Input, 'relative')}>
-      <input
-        onClick={() => {
-          ref.current?.focus();
-          setIsShowPlaceHolder(false);
-        }}
-        onBlur={(e) => {
-          if (!e.target.value) {
-            setIsShowPlaceHolder(true);
-          }
-        }}
-        value={value}
-        onChange={(e) => {
-          setValue(e.target.value);
-          cb(e.target.value);
-        }}
-        ref={ref}
-        className={cn(className, 'z-0')}
-        {...rest}
-        multiple={false}
-      />
-      <div
-        onClick={() => {
-          ref.current?.focus();
-          setIsShowPlaceHolder(false);
-        }}
-        className={cn(
-          'absolute text-stone-500 w-full whitespace-nowrap overflow-hidden text-ellipsis',
-          isShowPlaceHolder ? '' : 'hidden',
-          placeholderClassName
-        )}
-      >
-        {placeholder}
+    const classnames = cn(styles.Input, className, {
+      [`input-size-${size as string}`]: size,
+      'input-group': prepend || append,
+      'input-group-append': !!append,
+      'input-group-prepend': !!prepend,
+      'is-disabled': disabled
+    });
+
+    const { IconFont } = useIconFont();
+
+    const fixControlledValue = (value?: string) => {
+      if (typeof value === 'undefined' || value === null) {
+        return '';
+      }
+      return value;
+    };
+
+    if ('value' in props) {
+      delete restProps.defaultValue;
+      restProps.value = fixControlledValue(props.value);
+    }
+
+    return (
+      <div className={classnames} style={style}>
+        {prepend && <div className={styles.InputPrepend}>{prepend}</div>}
+        {icon && <IconFont className={styles.InputIcon} type={icon} />}
+        <input
+          ref={ref}
+          className={styles.InputInner}
+          disabled={disabled}
+          {...restProps}
+        />
+        {append && <div className={styles.InputAppend}>{append}</div>}
       </div>
-    </div>
-  );
-}
+    );
+  }
+);
+
+export default Input;
