@@ -125,7 +125,7 @@ const Select: React.FC<SelectProps> = (props: SelectProps) => {
           readOnly={true}
           disabled={disabled}
           name={name}
-          icon="icon-arrow-down"
+          icon="arrow-down"
         />
       </div>
       <SelectContext.Provider value={passedContext}>

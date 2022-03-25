@@ -34,6 +34,7 @@ function Market(props: marketProps) {
         <Select
           style={{ width: '12.5rem', marginRight: '3rem' }}
           placeholder="select your preference"
+          defaultValue={'Price-Highest'}
         >
           {selectOptions1.map((option: string) => (
             <Option key={option} value={option}>
@@ -44,6 +45,7 @@ function Market(props: marketProps) {
         <Select
           style={{ width: '12.5rem' }}
           placeholder="select your preference"
+          defaultValue={'Add Time Newest'}
         >
           {selectOptions2.map((option: string) => (
             <Option key={option} value={option}>
