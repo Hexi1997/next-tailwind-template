@@ -1,7 +1,7 @@
 import { Checkbox, STYLE_TYPE } from 'baseui/checkbox';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Languages } from '../../LocaleSwitch';
 
@@ -19,13 +19,17 @@ export default function MobileLanguageToggle() {
 
   const [checked, setChecked] = useState(false);
 
+  useEffect(() => {
+    setChecked(router.locale === 'en');
+  }, [router.locale]);
+
   return (
     <div className="absolute right-0 bottom-0 p-4 w-full flex justify-end bg-white">
       <Checkbox
         checked={checked}
         onChange={(e) => {
-          handleLocaleChange();
           setChecked(e.currentTarget.checked);
+          setTimeout(handleLocaleChange, 300);
         }}
         checkmarkType={STYLE_TYPE.toggle_round}
       >
