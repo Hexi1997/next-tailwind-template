@@ -1,8 +1,7 @@
 import cn from 'classnames';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
-
-import { useTranslation } from '@/assets/i18n';
 
 import styles from './Header.module.scss';
 import { LocaleSwitch } from './LocaleSwitch';
@@ -17,7 +16,7 @@ interface HeaderProps {
 
 export function Header(props: HeaderProps) {
   const { className } = props;
-  const { t } = useTranslation();
+  const { t } = useTranslation('common');
 
   return (
     <header

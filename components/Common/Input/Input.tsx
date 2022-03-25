@@ -19,7 +19,7 @@ export interface InputProps
 }
 
 const Input: React.FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
-  (props: InputProps, ref) => {
+  (props: InputProps, ref: any) => {
     const {
       className,
       disabled,
@@ -50,7 +50,7 @@ const Input: React.FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
 
     if ('value' in props) {
       delete restProps.defaultValue;
-      restProps.value = fixControlledValue(props.value);
+      restProps.value = fixControlledValue(String(props.value));
     }
 
     return (

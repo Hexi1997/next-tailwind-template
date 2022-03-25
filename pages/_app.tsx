@@ -11,22 +11,18 @@ import { Provider as StyletronProvider } from 'styletron-react';
 
 import { Layout } from '@/components/Layout';
 import { theme } from '@/styles/baseuiTheme';
-
-import { I18nextProvider } from '../assets/i18n/index';
-import { styletron } from '../styletron';
+import { styletron } from '@/styletron';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
-      <I18nextProvider>
-        <StyletronProvider value={styletron}>
-          <BaseProvider theme={theme}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </BaseProvider>
-        </StyletronProvider>
-      </I18nextProvider>
+      <StyletronProvider value={styletron}>
+        <BaseProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </BaseProvider>
+      </StyletronProvider>
     </ThemeProvider>
   );
 }

@@ -1,10 +1,10 @@
 import cn from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import { useWindowSize } from 'react-use';
 
-import { useTranslation } from '@/assets/i18n';
 import infoImg from '@/assets/images/header/admin.svg';
 import collectionsImg from '@/assets/images/header/collections.svg';
 import collectionsWhiteImg from '@/assets/images/header/collections_white.svg';
@@ -58,7 +58,7 @@ export function UserInfo(props: UserInfoProps) {
   const [isShowUserInfo, setIsShowUserInfo] = useState(false);
   const [isHoverSignOut, setIsHoverSignOut] = useState(false);
   const { width } = useWindowSize();
-  const { t } = useTranslation();
+  const { t } = useTranslation('menu');
 
   return (
     <div className={cn(styles.UserInfo, className)}>

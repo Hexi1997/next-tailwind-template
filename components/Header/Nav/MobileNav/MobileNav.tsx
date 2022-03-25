@@ -3,10 +3,10 @@ import { ANCHOR, SIZE } from 'baseui/drawer';
 import cn from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { useToggle } from 'react-use';
 
-import { useTranslation } from '@/assets/i18n';
 import { Drawer } from '@/components/Common/Drawer';
 import { useIconFont } from '@/utils/hooks/useIconFont';
 
@@ -22,7 +22,7 @@ interface MobileNavProps {
 export function MobileNav(props: MobileNavProps) {
   const { className } = props;
   const { IconFont } = useIconFont();
-  const { t } = useTranslation();
+  const { t } = useTranslation('menu');
   const [isShowDrawer, toggleShowDrawer] = useToggle(false);
 
   return (
