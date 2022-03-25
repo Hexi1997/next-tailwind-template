@@ -22,7 +22,10 @@ function Sports(props: sportsProps) {
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title="sports collection"
+        description="sports collection description"
+      />
       <div className={cn(styles.sports, className)}>sports</div>
     </>
   );

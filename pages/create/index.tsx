@@ -22,7 +22,7 @@ function Create(props: createProps) {
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo title="create page" description="create page description" />
       <div className={cn(styles.create, className)}>create</div>
     </>
   );

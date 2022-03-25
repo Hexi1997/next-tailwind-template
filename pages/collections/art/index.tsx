@@ -22,7 +22,10 @@ function Art(props: artProps) {
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title="art collections"
+        description="art collections description"
+      />
       <div className={cn(styles.art, className)}>art</div>
     </>
   );

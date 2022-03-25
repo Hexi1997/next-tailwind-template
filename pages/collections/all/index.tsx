@@ -22,7 +22,10 @@ function All(props: allProps) {
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title="all collections"
+        description="all collections description"
+      />
       <div className={cn(styles.all, className)}>all</div>
     </>
   );

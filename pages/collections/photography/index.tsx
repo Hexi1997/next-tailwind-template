@@ -22,7 +22,10 @@ function Photography(props: photographyProps) {
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title="photography collection"
+        description="photography collection description"
+      />
       <div className={cn(styles.photography, className)}>photography</div>
     </>
   );

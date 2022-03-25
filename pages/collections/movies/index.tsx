@@ -22,7 +22,10 @@ function Movies(props: moviesProps) {
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title="movies collection"
+        description="movies collection description"
+      />
       <div className={cn(styles.movies, className)}>movies</div>
     </>
   );

@@ -22,7 +22,10 @@ function Music(props: musicProps) {
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title="music collection"
+        description="music collection description"
+      />
       <div className={cn(styles.music, className)}>music</div>
     </>
   );

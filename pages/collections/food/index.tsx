@@ -22,7 +22,10 @@ function Food(props: foodProps) {
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title="food collections"
+        description="food collections description"
+      />
       <div className={cn(styles.food, className)}>food</div>
     </>
   );

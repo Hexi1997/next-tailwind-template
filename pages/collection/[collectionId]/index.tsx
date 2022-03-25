@@ -23,7 +23,7 @@ function CollectionId(props: collectionIdProps) {
   const router = useRouter();
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo title="collection page" description="collection's description" />
       <div className={cn(styles.collectionId, className)}>
         Collection {router.query.collectionId}
       </div>
