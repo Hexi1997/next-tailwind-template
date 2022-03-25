@@ -10,14 +10,6 @@ interface collectionIdProps {
   className?: string;
 }
 
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale || ''))
-    }
-  };
-}
-
 function CollectionId(props: collectionIdProps) {
   const { className } = props;
   const router = useRouter();

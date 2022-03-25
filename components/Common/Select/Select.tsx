@@ -119,7 +119,7 @@ const Select: React.FC<SelectProps> = (props: SelectProps) => {
     <div className={containerClass} ref={containerRef} style={style}>
       <div className={styles.SelectInput} onClick={handleClick}>
         <Input
-          ref={input}
+          // ref={input}
           placeholder={placeholder}
           value={value}
           readOnly={true}

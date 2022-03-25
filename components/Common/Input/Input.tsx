@@ -19,7 +19,7 @@ export interface InputProps
 }
 
 const Input: React.FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
-  (props: InputProps, ref) => {
+  (props: InputProps, ref: any) => {
     const {
       className,
       disabled,
