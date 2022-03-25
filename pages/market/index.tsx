@@ -3,7 +3,13 @@ import cn from 'classnames';
 import { CategoryList, ItemCard, Option, Select } from '@/components';
 
 import styles from './_index.module.scss';
-import { Category1Data, Category2Data, hotBidsData } from './mock';
+import {
+  Category1Data,
+  Category2Data,
+  hotBidsData,
+  selectOptions1,
+  selectOptions2
+} from './mock';
 
 interface marketProps {
   className?: string;
@@ -25,10 +31,25 @@ function Market(props: marketProps) {
       />
 
       <div className={styles.marketSelect}>
-        <Select placeholder="select your preference">
-          <Option value={'test1'}>test1</Option>
-          <Option value={'test2'}>test2</Option>
-          <Option value={'test3'}>test3</Option>
+        <Select
+          style={{ width: '12.5rem', marginRight: '3rem' }}
+          placeholder="select your preference"
+        >
+          {selectOptions1.map((option: string) => (
+            <Option key={option} value={option}>
+              {option}
+            </Option>
+          ))}
+        </Select>
+        <Select
+          style={{ width: '12.5rem' }}
+          placeholder="select your preference"
+        >
+          {selectOptions2.map((option: string) => (
+            <Option key={option} value={option}>
+              {option}
+            </Option>
+          ))}
         </Select>
       </div>
 

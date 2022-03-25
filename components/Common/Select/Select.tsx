@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import React, {
   createContext,
+  CSSProperties,
   FunctionComponentElement,
   useEffect,
   useRef,
@@ -15,6 +16,7 @@ import styles from './Select.module.scss';
 
 export interface SelectProps {
   className?: string;
+  style?: CSSProperties;
   defaultValue?: string | string[];
   placeholder?: string;
   disabled?: boolean;
@@ -37,6 +39,7 @@ export const SelectContext = createContext<ISelectContext>({
 const Select: React.FC<SelectProps> = (props: SelectProps) => {
   const {
     className,
+    style,
     placeholder,
     defaultValue,
     name,
@@ -113,7 +116,7 @@ const Select: React.FC<SelectProps> = (props: SelectProps) => {
   });
 
   return (
-    <div className={containerClass} ref={containerRef}>
+    <div className={containerClass} ref={containerRef} style={style}>
       <div className={styles.SelectInput} onClick={handleClick}>
         <Input
           ref={input}
@@ -122,6 +125,7 @@ const Select: React.FC<SelectProps> = (props: SelectProps) => {
           readOnly={true}
           disabled={disabled}
           name={name}
+          icon="icon-arrow-down"
         />
       </div>
       <SelectContext.Provider value={passedContext}>

@@ -85,3 +85,6 @@ export const hotBidsData = [
     price: '2.00 FLOW'
   }
 ];
+
+export const selectOptions1 = ['Price-Highest', 'Price-Lowest', 'Time-Newest'];
+export const selectOptions2 = ['Add Time Newest', 'Add Time Oldest'];
