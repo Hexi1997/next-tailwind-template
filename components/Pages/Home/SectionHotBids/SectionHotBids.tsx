@@ -1,6 +1,6 @@
 import cn from 'classnames';
+import { useTranslation } from 'next-i18next';
 
-import { useTranslation } from '@/assets/i18n';
 import hotBidsImg1 from '@/assets/images/home/hot_bids_2.png';
 import hotBidsImg2 from '@/assets/images/home/hot_bids_3.png';
 import hotBidsImg3 from '@/assets/images/home/hot_bids_4.png';
@@ -85,7 +85,7 @@ const data: IITem[] = [
 
 export function SectionHotBids(props: SectionHotBidsProps) {
   const { className } = props;
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
   return (
     <div className={cn(styles.SectionHotBids, className)}>
       <SectionTitle className="mt-16 mb-10">

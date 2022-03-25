@@ -1,6 +1,6 @@
 import cn from 'classnames';
+import { useTranslation } from 'next-i18next';
 
-import { useTranslation } from '@/assets/i18n';
 import collectionIconImg from '@/assets/images/home/usericon2.png';
 import { Button } from '@/components/Common/Button';
 import { SectionTitle } from '@/components/SectionTitle';
@@ -80,7 +80,7 @@ export function SectionTopCollectionsOneDay(
   props: SectionTopCollectionsOneDayProps
 ) {
   const { className } = props;
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
   return (
     <div className={cn(styles.SectionTopCollectionsOneDay, className)}>
       <SectionTitle className="mt-[78px] mb-[45px]">

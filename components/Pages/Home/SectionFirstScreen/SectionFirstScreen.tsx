@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 
-import { useTranslation } from '@/assets/i18n';
 import maskImg from '@/assets/images/home/mask.png';
 import { Button } from '@/components/Common/Button';
 
@@ -13,7 +13,7 @@ interface SectionFirstScreenProps {
 
 export function SectionFirstScreen(props: SectionFirstScreenProps) {
   const { className } = props;
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
 
   return (
     <div

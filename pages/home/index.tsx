@@ -1,4 +1,6 @@
 import cn from 'classnames';
+import { GetStaticPropsContext } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
@@ -9,6 +11,14 @@ import { SectionLatest } from '@/components/Pages/Home/SectionLatest';
 import { SectionTopCollectionsOneDay } from '@/components/Pages/Home/SectionTopCollectionsOneDay';
 
 import styles from './_index.module.scss';
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || ''))
+    }
+  };
+}
 
 const Home = () => {
   return (

@@ -1,31 +1,35 @@
 import { Checkbox, STYLE_TYPE } from 'baseui/checkbox';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import React, { useCallback, useState } from 'react';
 
-import {
-  Languages,
-  LanguageType,
-  switchLanguage,
-  useTranslation
-} from '@/assets/i18n';
-export default function MobileLanguageToggle() {
-  const { i18n, t } = useTranslation();
-  const [checked, setChecked] = useState(false);
+import { Languages } from '../../LocaleSwitch';
 
-  const handleLocaleChange = useCallback((language: string) => {
-    switchLanguage(language as LanguageType);
-  }, []);
+export default function MobileLanguageToggle() {
+  const router = useRouter();
+  const { t } = useTranslation();
+
+  const handleLocaleChange = useCallback(() => {
+    router
+      .replace(router.pathname, router.pathname, {
+        locale: router.locale === 'zh' ? 'en' : 'zh'
+      })
+      .catch(console.error);
+  }, [router]);
+
+  const [checked, setChecked] = useState(false);
 
   return (
     <div className="absolute right-0 bottom-0 p-4 w-full flex justify-end bg-white">
       <Checkbox
         checked={checked}
         onChange={(e) => {
-          handleLocaleChange(i18n.language === 'zh' ? 'en' : 'zh');
+          handleLocaleChange();
           setChecked(e.currentTarget.checked);
         }}
         checkmarkType={STYLE_TYPE.toggle_round}
       >
-        {t('COMMON_LANGUAGE')}: {Languages[i18n.language]?.subMenuLabel}
+        {t('COMMON_LANGUAGE')}: {Languages[router.locale || '']?.subMenuLabel}
       </Checkbox>
     </div>
   );

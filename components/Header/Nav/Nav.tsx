@@ -2,9 +2,9 @@ import cn from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import React, { useMemo, useState } from 'react';
 
-import { useTranslation } from '@/assets/i18n';
 import allImg from '@/assets/images/header/all.svg';
 import artImg from '@/assets/images/header/art.svg';
 import foodImg from '@/assets/images/header/food.svg';
@@ -89,7 +89,7 @@ export function Nav(props: NavProps) {
   const { className } = props;
   const router = useRouter();
   const [hoverMenuName, setHoverMenuName] = useState('');
-  const { t } = useTranslation();
+  const { t } = useTranslation('menu');
   const focusMenuItem = useMemo(() => {
     const routeArr = router.asPath.split('/');
     if (routeArr.length >= 2) {

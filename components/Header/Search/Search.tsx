@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import { useTranslation } from '@/assets/i18n';
 import searchImg from '@/assets/images/header/search.svg';
 import { Input } from '@/components/Common/Input';
 
