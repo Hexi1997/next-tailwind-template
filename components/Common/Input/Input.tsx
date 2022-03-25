@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import Image from 'next/image';
 import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react';
 
 import { useIconFont } from '@/utils/hooks/useIconFont';
