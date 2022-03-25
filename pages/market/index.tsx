@@ -1,31 +1,13 @@
 import cn from 'classnames';
 
-import { CategoryList } from '@/components';
+import { CategoryList, ItemCard, Option, Select } from '@/components';
 
 import styles from './_index.module.scss';
+import { Category1Data, Category2Data, hotBidsData } from './mock';
 
 interface marketProps {
   className?: string;
 }
-
-const Category1Data = {
-  title: 'Category',
-  categories: [
-    'All',
-    'Food',
-    'Minted',
-    'Stars',
-    'Music',
-    'Sports',
-    'Movies',
-    'Art',
-    'Photography'
-  ]
-};
-const Category2Data = {
-  title: 'Sale Type',
-  categories: ['All', 'Listings', 'Minted', 'Sales', 'Bids', 'Transfers']
-};
 
 function Market(props: marketProps) {
   const { className } = props;
@@ -41,6 +23,20 @@ function Market(props: marketProps) {
         title={Category2Data.title}
         categories={Category2Data.categories}
       />
+
+      <div className={styles.marketSelect}>
+        <Select placeholder="select your preference">
+          <Option value={'test1'}>test1</Option>
+          <Option value={'test2'}>test2</Option>
+          <Option value={'test3'}>test3</Option>
+        </Select>
+      </div>
+
+      <div className={styles.marketList}>
+        {hotBidsData.map((item) => (
+          <ItemCard className={styles.marketItem} key={item.id} data={item} />
+        ))}
+      </div>
     </div>
   );
 }
