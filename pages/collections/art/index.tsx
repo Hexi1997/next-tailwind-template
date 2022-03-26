@@ -26,7 +26,7 @@ function Art(props: artProps) {
         title="art collections"
         description="art collections description"
       />
-      <div className={cn(styles.art, className)}>art</div>
+      <div className={cn(styles.art, className, 'container')}>art</div>
     </>
   );
 }

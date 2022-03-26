@@ -26,7 +26,9 @@ function Photography(props: photographyProps) {
         title="photography collection"
         description="photography collection description"
       />
-      <div className={cn(styles.photography, className)}>photography</div>
+      <div className={cn(styles.photography, className, 'container')}>
+        photography
+      </div>
     </>
   );
 }

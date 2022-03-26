@@ -26,7 +26,7 @@ function Sports(props: sportsProps) {
         title="sports collection"
         description="sports collection description"
       />
-      <div className={cn(styles.sports, className)}>sports</div>
+      <div className={cn(styles.sports, className, 'container')}>sports</div>
     </>
   );
 }

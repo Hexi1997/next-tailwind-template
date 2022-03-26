@@ -26,7 +26,7 @@ function Stars(props: starsProps) {
         title="stars collection"
         description="stars collection description"
       />
-      <div className={cn(styles.stars, className)}>stars</div>
+      <div className={cn(styles.stars, className, 'container')}>stars</div>
     </>
   );
 }

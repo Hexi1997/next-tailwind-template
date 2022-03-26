@@ -16,7 +16,7 @@ function CollectionId(props: collectionIdProps) {
   return (
     <>
       <NextSeo title="collection page" description="collection's description" />
-      <div className={cn(styles.collectionId, className)}>
+      <div className={cn(styles.collectionId, className, 'container')}>
         Collection {router.query.collectionId}
       </div>
     </>

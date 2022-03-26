@@ -26,7 +26,7 @@ function All(props: allProps) {
         title="all collections"
         description="all collections description"
       />
-      <div className={cn(styles.all, className)}>all</div>
+      <div className={cn(styles.all, className, 'container')}>all</div>
     </>
   );
 }

@@ -26,7 +26,7 @@ function Movies(props: moviesProps) {
         title="movies collection"
         description="movies collection description"
       />
-      <div className={cn(styles.movies, className)}>movies</div>
+      <div className={cn(styles.movies, className, 'container')}>movies</div>
     </>
   );
 }

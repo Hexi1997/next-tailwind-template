@@ -26,7 +26,7 @@ function Food(props: foodProps) {
         title="food collections"
         description="food collections description"
       />
-      <div className={cn(styles.food, className)}>food</div>
+      <div className={cn(styles.food, className, 'container')}>food</div>
     </>
   );
 }

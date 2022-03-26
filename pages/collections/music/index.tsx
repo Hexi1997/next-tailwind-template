@@ -26,7 +26,7 @@ function Music(props: musicProps) {
         title="music collection"
         description="music collection description"
       />
-      <div className={cn(styles.music, className)}>music</div>
+      <div className={cn(styles.music, className, 'container')}>music</div>
     </>
   );
 }

@@ -26,7 +26,9 @@ function Activities(props: activitiesProps) {
         title="activities page"
         description="activities page's description"
       />
-      <div className={cn(styles.activities, className)}>activities</div>
+      <div className={cn(styles.activities, className, 'container')}>
+        activities
+      </div>
     </>
   );
 }
