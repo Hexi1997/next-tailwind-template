@@ -35,13 +35,20 @@ export function LocaleSwitch(props: LocaleSwitchProps) {
   const { className } = props;
   const router = useRouter();
 
-  const handleLocaleChange = useCallback(() => {
-    router
-      .replace(router.pathname, router.pathname, {
-        locale: router.locale === 'zh' ? 'en' : 'zh'
-      })
-      .catch(console.error);
-  }, [router]);
+  const handleLocaleChange = useCallback(
+    (value: string) => {
+      return () => {
+        if (value !== router.locale) {
+          router
+            .replace(router.pathname, router.pathname, {
+              locale: router.locale === 'zh' ? 'en' : 'zh'
+            })
+            .catch(console.error);
+        }
+      };
+    },
+    [router]
+  );
 
   const [isShowLocaleSubMenu, setIsShowLocaleSubMenu] = useState(false);
 
@@ -65,7 +72,7 @@ export function LocaleSwitch(props: LocaleSwitchProps) {
             <ul>
               {languages.map((item) => (
                 <li
-                  onClick={handleLocaleChange}
+                  onClick={handleLocaleChange(item.value)}
                   key={item.value}
                   className={cn(
                     'w-40 h-10 hover:bg-themeGreen hover:text-white'
