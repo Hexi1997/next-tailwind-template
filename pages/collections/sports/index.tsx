@@ -29,7 +29,7 @@ function Sports(props: sportsProps) {
   return (
     <>
       <NextSeo
-        title="sports collection"
+        title="Sports Collection"
         description="sports collection description"
       />
       <div className={cn(styles.sports, className, 'container')}>

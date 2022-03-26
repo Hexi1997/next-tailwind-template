@@ -29,7 +29,7 @@ function Photography(props: photographyProps) {
   return (
     <>
       <NextSeo
-        title="photography collection"
+        title="Photography Collection"
         description="photography collection description"
       />
       <div className={cn(styles.photography, className, 'container')}>

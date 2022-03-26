@@ -29,7 +29,7 @@ function Movies(props: moviesProps) {
   return (
     <>
       <NextSeo
-        title="movies collection"
+        title="Movies Collection"
         description="movies collection description"
       />
       <div className={cn(styles.movies, className, 'container')}>

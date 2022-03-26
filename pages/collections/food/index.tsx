@@ -29,7 +29,7 @@ function Food(props: foodProps) {
   return (
     <>
       <NextSeo
-        title="food collections"
+        title="Food Collections"
         description="food collections description"
       />
       <div className={cn(styles.food, className, 'container')}>

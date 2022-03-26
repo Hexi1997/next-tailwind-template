@@ -29,7 +29,7 @@ function Stars(props: starsProps) {
   return (
     <>
       <NextSeo
-        title="stars collection"
+        title="Stars Collection"
         description="stars collection description"
       />
       <div className={cn(styles.stars, className, 'container')}>
