@@ -28,6 +28,49 @@ interface IMenu {
   sub?: IMenu[];
 }
 
+export const collectionSubMenus: IMenu[] = [
+  {
+    name: 'MENU_COLLECTIONS_ALL',
+    link: '/collections/all',
+    icon: allImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_ART',
+    link: '/collections/art',
+    icon: artImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_SPORTS',
+    link: '/collections/sports',
+    icon: sportsImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_MUSIC',
+    link: '/collections/music',
+    icon: musicImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_MOVIES',
+    link: '/collections/movies',
+    icon: moviesImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_PHOTOGRAPHY',
+    link: '/collections/photography',
+    icon: photographyImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_FOOD',
+    link: '/collections/food',
+    icon: foodImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_STARS',
+    link: '/collections/stars',
+    icon: starsImg
+  }
+];
+
 export const menus: IMenu[] = [
   {
     name: 'MENU_MARKET',
@@ -36,48 +79,7 @@ export const menus: IMenu[] = [
   {
     name: 'MENU_COLLECTIONS',
     link: '/collections',
-    sub: [
-      {
-        name: 'MENU_COLLECTIONS_ALL',
-        link: '/collections/all',
-        icon: allImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_ART',
-        link: '/collections/art',
-        icon: artImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_SPORTS',
-        link: '/collections/sports',
-        icon: sportsImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_MUSIC',
-        link: '/collections/music',
-        icon: musicImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_MOVIES',
-        link: '/collections/movies',
-        icon: moviesImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_PHOTOGRAPHY',
-        link: '/collections/photography',
-        icon: photographyImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_FOOD',
-        link: '/collections/food',
-        icon: foodImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_STARS',
-        link: '/collections/stars',
-        icon: starsImg
-      }
-    ]
+    sub: collectionSubMenus
   },
   {
     name: 'MENU_CREATE',
