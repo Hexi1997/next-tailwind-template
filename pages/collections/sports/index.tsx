@@ -18,7 +18,7 @@ interface sportsProps {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale || ''))
+      ...(await serverSideTranslations(locale || '', ['menu', 'common']))
     }
   };
 }

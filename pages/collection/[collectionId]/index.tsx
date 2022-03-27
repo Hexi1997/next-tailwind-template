@@ -10,12 +10,20 @@ interface collectionIdProps {
   className?: string;
 }
 
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || '', ['menu', 'common']))
+    }
+  };
+}
+
 function CollectionId(props: collectionIdProps) {
   const { className } = props;
   const router = useRouter();
   return (
     <>
-      <NextSeo title="collection page" description="collection's description" />
+      <NextSeo title="Collection Page" description="collection's description" />
       <div className={cn(styles.collectionId, className, 'container')}>
         Collection {router.query.collectionId}
       </div>
