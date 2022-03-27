@@ -58,7 +58,8 @@ export function UserInfo(props: UserInfoProps) {
   const [isShowUserInfo, setIsShowUserInfo] = useState(false);
   const [isHoverSignOut, setIsHoverSignOut] = useState(false);
   const { width } = useWindowSize();
-  const { t } = useTranslation('menu');
+  // useTranslation可以引入多个namespace，然后t方法调用的时候设置ns参数指定namespace,如果不传，默认指向第一个
+  const { t } = useTranslation(['menu', 'common']);
 
   return (
     <div className={cn(styles.UserInfo, className)}>
@@ -81,7 +82,9 @@ export function UserInfo(props: UserInfoProps) {
           <RoundedContainer className="absolute top-16 -left-40 flex flex-col text-base">
             <span className="pt-6 pb-2 px-[18px]">0x88b4b153184...7c1bd</span>
             <div className="rounded-lg shadow-xl flex p-5 flex-col space-y-2 pb-3 mx-[18px]">
-              <span className="font-medium">{t('COMMON_BALANCE')}</span>
+              <span className="font-medium">
+                {t('COMMON_BALANCE', { ns: 'common' })}
+              </span>
               <div className="flex justify-between items-center">
                 <span className="text-[#666666] text-sm">FLOW</span>
                 <span className="font-bold text-xl">0.014</span>
