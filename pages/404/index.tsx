@@ -13,18 +13,21 @@ interface PageNotFoundProps {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale || ''))
+      ...(await serverSideTranslations(locale || '', ['menu', '404', 'common']))
     }
   };
 }
 
 function PageNotFound(props: PageNotFoundProps) {
   const { className } = props;
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('404');
 
   return (
     <>
-      <NextSeo title="Page Not Found" description="Page Not Found" />
+      <NextSeo
+        title={t('404_PAGE_SEO_TITLE')}
+        description={t('404_PAGE_SEO_DESC')}
+      />
       <div
         className={cn(
           styles.PageNotFound,
@@ -35,7 +38,7 @@ function PageNotFound(props: PageNotFoundProps) {
         <div className="flex item-center justify-center">
           <span className="font-bold text-2xl">404</span>
           <div className="w-[2px] bg-gray-300 h-10 mx-5"></div>
-          <div className="text-base mt-1">{t('COMMON_PAGE_NOT_FOUND')}</div>
+          <div className="text-base mt-1">{t('404_PAGE_SEO_DESC')}</div>
         </div>
       </div>
     </>
