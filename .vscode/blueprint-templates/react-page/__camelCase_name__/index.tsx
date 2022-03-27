@@ -23,7 +23,7 @@ function {{pascalCase name}}(props: {{name}}Props) {
   return (
     <>
       <NextSeo title="seo title" description="seo description" />
-      <div className={cn(styles.{{camelCase name}}, className)}>{{name}}</div>
+      <div className={cn(styles.{{camelCase name}}, 'container', className)}>{{name}}</div>
     </>
   );
 }
