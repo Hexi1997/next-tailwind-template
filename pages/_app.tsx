@@ -4,10 +4,9 @@ import '../styles/globals.css';
 
 import { BaseProvider } from 'baseui';
 import type { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
 import { appWithTranslation } from 'next-i18next';
 import { ThemeProvider } from 'next-themes';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Provider as StyletronProvider } from 'styletron-react';
 
 import { LoadingBar } from '@/components/Common/LoadingBar';
