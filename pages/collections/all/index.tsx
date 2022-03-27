@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { shuffle } from 'lodash';
 import { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 
@@ -17,7 +18,11 @@ interface allProps {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale || '', ['menu', 'common']))
+      ...(await serverSideTranslations(locale || '', [
+        'menu',
+        'common',
+        'collections'
+      ]))
     }
   };
 }
@@ -31,12 +36,13 @@ export const collectionAllMockData = [
 
 function All(props: allProps) {
   const { className } = props;
+  const { t } = useTranslation('collections');
 
   return (
     <>
       <NextSeo
-        title="All Collections"
-        description="all collections description"
+        title={t('COLLECTIONS_ALL_PAGE_SEO_TITLE')}
+        description={t('COLLECTIONS_ALL_PAGE_SEO_DESC')}
       />
       <div className={cn(styles.all, className, 'container')}>
         <CollectionsLayout>

@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { shuffle } from 'lodash';
 import { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 import React from 'react';
@@ -18,19 +19,24 @@ interface photographyProps {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale || '', ['menu', 'common']))
+      ...(await serverSideTranslations(locale || '', [
+        'menu',
+        'common',
+        'collections'
+      ]))
     }
   };
 }
 
 function Photography(props: photographyProps) {
   const { className } = props;
+  const { t } = useTranslation('collections');
 
   return (
     <>
       <NextSeo
-        title="Photography Collection"
-        description="photography collection description"
+        title={t('COLLECTIONS_PHOTOGRAPHY_PAGE_SEO_TITLE')}
+        description={t('COLLECTIONS_PHOTOGRAPHY_PAGE_SEO_DESC')}
       />
       <div className={cn(styles.photography, className, 'container')}>
         <CollectionsLayout>

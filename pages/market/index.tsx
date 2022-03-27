@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 
@@ -104,17 +105,25 @@ interface marketProps {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale || '', ['menu', 'common']))
+      ...(await serverSideTranslations(locale || '', [
+        'menu',
+        'common',
+        'market'
+      ]))
     }
   };
 }
 
 function Market(props: marketProps) {
   const { className } = props;
+  const { t } = useTranslation('market');
 
   return (
     <>
-      <NextSeo title="market page" description="market page description" />
+      <NextSeo
+        title={t('MARKET_PAGE_SEO_TITLE')}
+        description={t('MARKET_PAGE_SEO_DESC')}
+      />
       <div className={cn(styles.market, className)}>
         <div className={styles.marketTitle}>Explore all collections</div>
         <CategoryList

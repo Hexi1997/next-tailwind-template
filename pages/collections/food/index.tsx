@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { shuffle } from 'lodash';
 import { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 import React from 'react';
@@ -18,19 +19,24 @@ interface foodProps {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale || ''))
+      ...(await serverSideTranslations(locale || '', [
+        'menu',
+        'common',
+        'collections'
+      ]))
     }
   };
 }
 
 function Food(props: foodProps) {
   const { className } = props;
+  const { t } = useTranslation('collections');
 
   return (
     <>
       <NextSeo
-        title="Food Collections"
-        description="food collections description"
+        title={t('COLLECTIONS_FOOD_PAGE_SEO_TITLE')}
+        description={t('COLLECTIONS_FOOD_PAGE_SEO_DESC')}
       />
       <div className={cn(styles.food, className, 'container')}>
         <CollectionsLayout>

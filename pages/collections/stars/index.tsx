@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { shuffle } from 'lodash';
 import { GetStaticPropsContext } from 'next';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 import React from 'react';
@@ -18,19 +19,24 @@ interface starsProps {
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      ...(await serverSideTranslations(locale || '', ['menu', 'common']))
+      ...(await serverSideTranslations(locale || '', [
+        'menu',
+        'common',
+        'collections'
+      ]))
     }
   };
 }
 
 function Stars(props: starsProps) {
   const { className } = props;
+  const { t } = useTranslation('collections');
 
   return (
     <>
       <NextSeo
-        title="Stars Collection"
-        description="stars collection description"
+        title={t('COLLECTIONS_STARS_PAGE_SEO_TITLE')}
+        description={t('COLLECTIONS_STARS_PAGE_SEO_DESC')}
       />
       <div className={cn(styles.stars, className, 'container')}>
         <CollectionsLayout>
