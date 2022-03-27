@@ -65,7 +65,7 @@ export function ImageSwiper(props: ImageSwiperProps) {
       <div
         className={cn(
           styles.cardContainer,
-          'w-72 h-72 sm:w-[385px] sm:h-[385px]'
+          'h-72 w-72 sm:h-[385px] sm:w-[385px]'
         )}
       >
         <div
@@ -82,7 +82,7 @@ export function ImageSwiper(props: ImageSwiperProps) {
             }
           }}
         >
-          <ArrowRightOutlined className="text-white opacity-75 absolute right-0 top-4 text-4xl cursor-pointer hover:opacity-95" />
+          <ArrowRightOutlined className="absolute right-0 top-4 cursor-pointer text-4xl text-white opacity-75 hover:opacity-95" />
         </div>
         <div
           className={cn(styles.controller, styles.left)}
@@ -98,7 +98,7 @@ export function ImageSwiper(props: ImageSwiperProps) {
             }
           }}
         >
-          <ArrowLeftOutlined className="text-white opacity-75 absolute left-0 top-4 text-4xl cursor-pointer hover:opacity-95" />
+          <ArrowLeftOutlined className="absolute left-0 top-4 cursor-pointer text-4xl text-white opacity-75 hover:opacity-95" />
         </div>
         <div className={styles.cardHolder}>
           {imgs.map((item) => (

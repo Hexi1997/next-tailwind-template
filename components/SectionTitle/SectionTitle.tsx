@@ -13,7 +13,7 @@ export function SectionTitle(props: SectionTitleProps) {
 
   return (
     <div className={cn(styles.SectionTitle, className)}>
-      <h3 className="text-[28px] font-bold text-center">{children}</h3>
+      <h3 className="text-center text-[28px] font-bold">{children}</h3>
     </div>
   );
 }

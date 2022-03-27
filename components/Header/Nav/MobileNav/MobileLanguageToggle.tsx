@@ -24,7 +24,7 @@ export default function MobileLanguageToggle() {
   }, [router.locale]);
 
   return (
-    <div className="absolute right-0 bottom-0 p-4 w-full flex justify-end bg-white">
+    <div className="absolute right-0 bottom-0 flex w-full justify-end bg-white p-4">
       <Checkbox
         checked={checked}
         onChange={(e) => {

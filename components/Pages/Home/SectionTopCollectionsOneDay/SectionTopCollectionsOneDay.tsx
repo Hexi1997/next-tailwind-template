@@ -86,7 +86,7 @@ export function SectionTopCollectionsOneDay(
       <SectionTitle className="mt-[78px] mb-[45px]">
         {t('HOME_SECTION_TOP_COLLECTION_1_DAY')}
       </SectionTitle>
-      <div className="pl-4 sm:pl-0 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 pl-4 sm:pl-0 lg:grid-cols-2 xl:grid-cols-3">
         {[0, 1, 2].map((_, index) => {
           const colData = data.slice(index * 3, (index + 1) * 3);
           return (
@@ -98,7 +98,7 @@ export function SectionTopCollectionsOneDay(
           );
         })}
       </div>
-      <Button className="mx-auto mt-[44px] mb-[70px] w-[289px] h-[40px] !rounded-full">
+      <Button className="mx-auto mt-[44px] mb-[70px] h-[40px] w-[289px] !rounded-full">
         {t('HOME_GO_TO_RANK_BUTTON_TEXT')}
       </Button>
     </div>

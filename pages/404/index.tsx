@@ -32,13 +32,13 @@ function PageNotFound(props: PageNotFoundProps) {
         className={cn(
           styles.PageNotFound,
           className,
-          'w-[100vw] h-[calc(100vh_-_64px)] flex items-center justify-center'
+          'flex h-[calc(100vh_-_64px)] w-[100vw] items-center justify-center'
         )}
       >
-        <div className="flex item-center justify-center">
-          <span className="font-bold text-2xl">404</span>
-          <div className="w-[2px] bg-gray-300 h-10 mx-5"></div>
-          <div className="text-base mt-1">{t('404_PAGE_SEO_DESC')}</div>
+        <div className="item-center flex justify-center">
+          <span className="text-2xl font-bold">404</span>
+          <div className="mx-5 h-10 w-[2px] bg-gray-300"></div>
+          <div className="mt-1 text-base">{t('404_PAGE_SEO_DESC')}</div>
         </div>
       </div>
     </>

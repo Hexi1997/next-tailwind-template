@@ -17,21 +17,21 @@ export function TopRank(props: TopRankProps) {
 
   return (
     <div className={cn(styles.TopRank, className)}>
-      <Button type="Default" className="relative w-[316px] h-16 !rounded-full">
+      <Button type="Default" className="relative h-16 w-[316px] !rounded-full">
         <div className="absolute -left-4 top-1">
           <Image src={data.icon} width="56" height="56" />
-          <div className="absolute -left-2 -top-2 w-[73px] h-[73px]">
+          <div className="absolute -left-2 -top-2 h-[73px] w-[73px]">
             <Image src={circleImg} width="73" height="73" />
           </div>
-          <div className="absolute -left-3 -top-1  bg-white shadow-md w-[26px] h-[26px] leading-[26px] text-center rounded-full text-themeGreen">
+          <div className="absolute -left-3 -top-1  h-[26px] w-[26px] rounded-full bg-white text-center leading-[26px] text-themeGreen shadow-md">
             {data.rank}
           </div>
         </div>
-        <div className="absolute left-16 top-0 h-16 w-[232px] text-left flex flex-col justify-center space-y-1">
+        <div className="absolute left-16 top-0 flex h-16 w-[232px] flex-col justify-center space-y-1 text-left">
           <span className="text-xl font-medium line-clamp-1 hover:font-bold">
             {data.name}
           </span>
-          <span className="text-sm line-clamp-1 text-[#66666699]">
+          <span className="text-sm text-[#66666699] line-clamp-1">
             {data.sales}
           </span>
         </div>

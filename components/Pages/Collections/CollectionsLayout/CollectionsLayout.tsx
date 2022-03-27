@@ -14,7 +14,7 @@ export function CollectionsLayout(props: CollectionsLayoutProps) {
 
   return (
     <div className={cn(styles.CollectionsLayout, className)}>
-      <h1 className="mt-8 mb-2 font-bold text-[28px] text-[#333333] sm:mb-4 lg:mb-6 xl:mb-6">
+      <h1 className="mt-8 mb-2 text-[28px] font-bold text-[#333333] sm:mb-4 lg:mb-6 xl:mb-6">
         Explore All Collections
       </h1>
       <CollectionTypeSelector className="mb-6 sm:mb-12" />

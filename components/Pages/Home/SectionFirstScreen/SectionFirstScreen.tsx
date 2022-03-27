@@ -24,31 +24,31 @@ export function SectionFirstScreen(props: SectionFirstScreenProps) {
         'bg-gradient-to-b from-[#eeffbf72] to-[#e6ffbf00] text-[#333333]'
       )}
     >
-      <div className="absolute select-none hidden blur-3xl w-96 -left-4 top-0 sm:block -z-10">
+      <div className="absolute -left-4 top-0 -z-10 hidden w-96 select-none blur-3xl sm:block">
         <Image src={maskImg} />
       </div>
-      <div className="overflow-hidden select-none blur-2xl -z-10 absolute hidden rotate-90 w-[500px] -right-40 -bottom-64 sm:block">
+      <div className="absolute -right-40 -bottom-64 -z-10 hidden w-[500px] rotate-90 select-none overflow-hidden blur-2xl sm:block">
         <Image src={maskImg} />
       </div>
       <div
         className={cn(
-          'flex flex-col justify-between items-center min-h-[calc(100vh_-_64px)] lg:flex-row'
+          'flex min-h-[calc(100vh_-_64px)] flex-col items-center justify-between lg:flex-row'
         )}
       >
         <div>
-          <h1 className="text-[32px] font-bold sm:text-[52px] pt-16 sm:pt-0">
+          <h1 className="pt-16 text-[32px] font-bold sm:pt-0 sm:text-[52px]">
             {t('HOME_MARKET_NAME')}
           </h1>
-          <p className="text-lg max-w-[670px] mt-[9px] mb-[51px] sm:text-2xl font-medium">
+          <p className="mt-[9px] mb-[51px] max-w-[670px] text-lg font-medium sm:text-2xl">
             {t('HOME_MARKET_DESC')}
           </p>
           <div className="flex">
-            <Button type="Primary" className="w-[105px] h-9 !rounded-lg">
+            <Button type="Primary" className="h-9 w-[105px] !rounded-lg">
               {t('HOME_CREATE_BUTTON_TEXT')}
             </Button>
             <Button
               type="Default"
-              className="w-[105px] h-9 ml-[14px] !rounded-lg"
+              className="ml-[14px] h-9 w-[105px] !rounded-lg"
             >
               {t('HOME_MARKET_BUTTON_TEXT')}
             </Button>

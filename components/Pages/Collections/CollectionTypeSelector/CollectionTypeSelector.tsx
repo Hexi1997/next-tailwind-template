@@ -30,7 +30,7 @@ export function CollectionTypeSelector(props: CollectionTypeSelectorProps) {
           <Button
             type="Default"
             className={cn(
-              'px-4 border-gray-100 border-2 border-solid py-[10px] !rounded-full text-[14px] mr-4 mt-2 hover:!bg-themeGreen hover:!text-white',
+              'mr-4 mt-2 !rounded-full border-2 border-solid border-gray-100 px-4 py-[10px] text-[14px] hover:!bg-themeGreen hover:!text-white',
               item.link.replace('/collections/', '') === collectionType
                 ? '!bg-themeGreen !text-white'
                 : ''

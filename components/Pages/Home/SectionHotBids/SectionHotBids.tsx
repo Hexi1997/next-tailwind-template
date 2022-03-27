@@ -91,7 +91,7 @@ export function SectionHotBids(props: SectionHotBidsProps) {
       <SectionTitle className="mt-16 mb-10">
         {t('HOME_SECTION_HOT_BIDS_TITLE')}
       </SectionTitle>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-y-8">
+      <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 xl:grid-cols-3">
         {data.map((item, index) => (
           <ItemCard data={item} key={index} />
         ))}

@@ -30,7 +30,7 @@ export function MobileNav(props: MobileNavProps) {
       <IconFont
         onClick={toggleShowDrawer}
         type="icon-et-more"
-        className="text-[26px] cursor-pointer"
+        className="cursor-pointer text-[26px]"
       />
       <Drawer
         anchor={ANCHOR.right}
@@ -40,7 +40,7 @@ export function MobileNav(props: MobileNavProps) {
         size={SIZE.full}
       >
         <ul className="px-2 pt-4 pb-14 md:px-4 lg:px-12">
-          <Search className="block sm:hidden m-4" />
+          <Search className="m-4 block sm:hidden" />
           <Accordion accordion={true}>
             {menus.map((item) => {
               if (item.sub?.length) {
@@ -56,13 +56,13 @@ export function MobileNav(props: MobileNavProps) {
                         <div
                           key={subItem.name}
                           className={cn(
-                            'w-full h-[52px] flex items-center border-solid border-gray-200 px-5 text-[16px]',
+                            'flex h-[52px] w-full items-center border-solid border-gray-200 px-5 text-[16px]',
                             !isLast ? 'border-b-[1px]' : ''
                           )}
                         >
                           <Link href={subItem.link}>
                             <a
-                              className="flex w-full h-full justify-between items-center"
+                              className="flex h-full w-full items-center justify-between"
                               onClick={toggleShowDrawer}
                             >
                               <span>{t(subItem.name)}</span>
@@ -78,7 +78,7 @@ export function MobileNav(props: MobileNavProps) {
                 return (
                   <Link key={item.name} href={item.link}>
                     <a
-                      className="w-full h-[52px] flex items-center border-solid border-b-[1px] border-gray-200 px-5 text-[16px] cursor-pointer"
+                      className="flex h-[52px] w-full cursor-pointer items-center border-b-[1px] border-solid border-gray-200 px-5 text-[16px]"
                       onClick={toggleShowDrawer}
                     >
                       {t(item.name)}
