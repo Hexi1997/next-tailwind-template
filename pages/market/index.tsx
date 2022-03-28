@@ -11,6 +11,7 @@ import hotBidsImg4 from '@/assets/images/home/hot_bids_5.png';
 import hotBidsImg5 from '@/assets/images/home/hot_bids_6.png';
 import userIconImg from '@/assets/images/home/usericon2.png';
 import {
+  Button,
   CategoryList,
   ItemCard,
   MobileCategoryList,
@@ -173,7 +174,9 @@ function Market(props: marketProps) {
           <Select style={{ width: '12.5rem' }} options={selectOptions2} />
         </div>
 
-        <div className="lg:hidden">mobile selections</div>
+        <Button className="fixed bottom-9 right-5 lg:hidden">
+          mobile filter
+        </Button>
 
         <div className="grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
           {hotBidsData.map((item) => (
