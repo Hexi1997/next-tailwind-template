@@ -137,8 +137,10 @@ function Market(props: marketProps) {
   return (
     <>
       <NextSeo title="market page" description="market page description" />
-      <div className={cn(styles.market, 'container')}>
-        <div className={styles.marketTitle}>Explore all collections</div>
+      <div className={cn(styles.market, className, 'container')}>
+        <div className="my-10 text-[1.75rem] font-bold">
+          Explore all collections
+        </div>
         <CategoryList
           title={Category1Data.title}
           categories={Category1Data.categories}
@@ -148,7 +150,7 @@ function Market(props: marketProps) {
           categories={Category2Data.categories}
         />
 
-        <div className={styles.marketSelect}>
+        <div className="mb-10 flex">
           <Select
             style={{ width: '12.5rem', marginRight: '3rem' }}
             options={selectOptions1}
@@ -156,7 +158,7 @@ function Market(props: marketProps) {
           <Select style={{ width: '12.5rem' }} options={selectOptions2} />
         </div>
 
-        <div className={styles.marketList}>
+        <div className="grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
           {hotBidsData.map((item) => (
             <ItemCard className={styles.marketItem} key={item.id} data={item} />
           ))}
