@@ -9,7 +9,7 @@ import hotBidsImg3 from '@/assets/images/home/hot_bids_4.png';
 import hotBidsImg4 from '@/assets/images/home/hot_bids_5.png';
 import hotBidsImg5 from '@/assets/images/home/hot_bids_6.png';
 import userIconImg from '@/assets/images/home/usericon2.png';
-import { CategoryList, ItemCard, Option, Select } from '@/components';
+import { CategoryList, ItemCard, Select } from '@/components';
 
 import styles from './_index.module.scss';
 
@@ -94,8 +94,30 @@ const hotBidsData = [
   }
 ];
 
-const selectOptions1 = ['Price-Highest', 'Price-Lowest', 'Time-Newest'];
-const selectOptions2 = ['Add Time Newest', 'Add Time Oldest'];
+const selectOptions1 = [
+  {
+    label: 'Price-Highest',
+    id: 1
+  },
+  {
+    label: 'Price-Lowest',
+    id: 2
+  },
+  {
+    label: 'Time-Newest',
+    id: 3
+  }
+];
+const selectOptions2 = [
+  {
+    label: 'Add Time Newest',
+    id: 1
+  },
+  {
+    label: 'Add Time Oldest',
+    id: 2
+  }
+];
 
 interface marketProps {
   className?: string;
@@ -115,7 +137,7 @@ function Market(props: marketProps) {
   return (
     <>
       <NextSeo title="market page" description="market page description" />
-      <div className={cn(styles.market, className)}>
+      <div className={cn(styles.market, 'container')}>
         <div className={styles.marketTitle}>Explore all collections</div>
         <CategoryList
           title={Category1Data.title}
@@ -129,26 +151,9 @@ function Market(props: marketProps) {
         <div className={styles.marketSelect}>
           <Select
             style={{ width: '12.5rem', marginRight: '3rem' }}
-            placeholder="select your preference"
-            defaultValue={'Price-Highest'}
-          >
-            {selectOptions1.map((option: string) => (
-              <Option key={option} value={option}>
-                {option}
-              </Option>
-            ))}
-          </Select>
-          <Select
-            style={{ width: '12.5rem' }}
-            placeholder="select your preference"
-            defaultValue={'Add Time Newest'}
-          >
-            {selectOptions2.map((option: string) => (
-              <Option key={option} value={option}>
-                {option}
-              </Option>
-            ))}
-          </Select>
+            options={selectOptions1}
+          />
+          <Select style={{ width: '12.5rem' }} options={selectOptions2} />
         </div>
 
         <div className={styles.marketList}>
