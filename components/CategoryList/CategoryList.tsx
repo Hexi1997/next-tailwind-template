@@ -23,19 +23,25 @@ export function CategoryList(props: CategoryListProps) {
   };
 
   return (
-    <div className={cn(styles.CategoryList, className)}>
-      {title && <div className={styles.CategoryTitle}>{title}</div>}
-      {categories.map((item) => (
-        <Button
-          key={item}
-          className={styles.CategoryItem}
-          type={item === selected ? 'Primary' : 'Border'}
-          shadow={false}
-          onClick={() => handleSelected(item)}
-        >
-          {item}
-        </Button>
-      ))}
+    <div className={cn(className, 'mb-[25px] hidden lg:flex lg:items-center')}>
+      {title && (
+        <div className="w-25 mr-[27px] whitespace-nowrap border-r-[1px] border-solid border-neutral-300 pr-6 text-[1rem] text-[#666666]">
+          {title}
+        </div>
+      )}
+      <div className="flex flex-wrap">
+        {categories.map((item) => (
+          <Button
+            key={item}
+            className="mr-5 h-9 rounded-[1.125rem] py-4 px-2.5"
+            type={item === selected ? 'Primary' : 'Border'}
+            shadow={false}
+            onClick={() => handleSelected(item)}
+          >
+            {item}
+          </Button>
+        ))}
+      </div>
     </div>
   );
 }
