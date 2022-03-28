@@ -23,7 +23,7 @@ export function CategoryList(props: CategoryListProps) {
   };
 
   return (
-    <div className={cn(className, 'mb-[25px] flex items-center')}>
+    <div className={cn(className, 'mb-[25px] lg:flex lg:items-center hidden')}>
       {title && (
         <div className="mr-[27px] pr-6 w-25 border-r-[1px] border-solid border-neutral-300 text-[1rem] text-[#666666] whitespace-nowrap">
           {title}
@@ -33,7 +33,7 @@ export function CategoryList(props: CategoryListProps) {
         {categories.map((item) => (
           <Button
             key={item}
-            className="mr-5 py-4 px-2.5 h-9 rounded-[18px]"
+            className="mr-5 py-4 px-2.5 h-9 rounded-[1.125rem]"
             type={item === selected ? 'Primary' : 'Border'}
             shadow={false}
             onClick={() => handleSelected(item)}

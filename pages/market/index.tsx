@@ -9,7 +9,12 @@ import hotBidsImg3 from '@/assets/images/home/hot_bids_4.png';
 import hotBidsImg4 from '@/assets/images/home/hot_bids_5.png';
 import hotBidsImg5 from '@/assets/images/home/hot_bids_6.png';
 import userIconImg from '@/assets/images/home/usericon2.png';
-import { CategoryList, ItemCard, Select } from '@/components';
+import {
+  CategoryList,
+  ItemCard,
+  MobileCategoryList,
+  Select
+} from '@/components';
 
 import styles from './_index.module.scss';
 
@@ -149,14 +154,17 @@ function Market(props: marketProps) {
           title={Category2Data.title}
           categories={Category2Data.categories}
         />
+        <MobileCategoryList />
 
-        <div className="mb-10 flex">
+        <div className="mb-10 lg:flex hidden">
           <Select
             style={{ width: '12.5rem', marginRight: '3rem' }}
             options={selectOptions1}
           />
           <Select style={{ width: '12.5rem' }} options={selectOptions2} />
         </div>
+
+        <div className="lg:hidden">mobile selections</div>
 
         <div className="grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
           {hotBidsData.map((item) => (
