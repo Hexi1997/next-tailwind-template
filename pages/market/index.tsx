@@ -13,7 +13,7 @@ import { CategoryList, ItemCard, Option, Select } from '@/components';
 
 import styles from './_index.module.scss';
 
-export const Category1Data = {
+const Category1Data = {
   title: 'Category',
   categories: [
     'All',
@@ -27,11 +27,11 @@ export const Category1Data = {
     'Photography'
   ]
 };
-export const Category2Data = {
+const Category2Data = {
   title: 'Sale Type',
   categories: ['All', 'Listings', 'Minted', 'Sales', 'Bids', 'Transfers']
 };
-export const hotBidsData = [
+const hotBidsData = [
   {
     id: 1,
     img: hotBidsImg1,
@@ -94,8 +94,8 @@ export const hotBidsData = [
   }
 ];
 
-export const selectOptions1 = ['Price-Highest', 'Price-Lowest', 'Time-Newest'];
-export const selectOptions2 = ['Add Time Newest', 'Add Time Oldest'];
+const selectOptions1 = ['Price-Highest', 'Price-Lowest', 'Time-Newest'];
+const selectOptions2 = ['Add Time Newest', 'Add Time Oldest'];
 
 interface marketProps {
   className?: string;
