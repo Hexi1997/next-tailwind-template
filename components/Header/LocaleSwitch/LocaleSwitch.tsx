@@ -40,7 +40,7 @@ export function LocaleSwitch(props: LocaleSwitchProps) {
       return () => {
         if (value !== router.locale) {
           router
-            .replace(router.pathname, router.pathname, {
+            .replace(router.asPath, router.asPath, {
               locale: router.locale === 'zh' ? 'en' : 'zh'
             })
             .catch(console.error);

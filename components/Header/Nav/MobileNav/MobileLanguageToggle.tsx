@@ -11,7 +11,7 @@ export default function MobileLanguageToggle() {
 
   const handleLocaleChange = useCallback(() => {
     router
-      .replace(router.pathname, router.pathname, {
+      .replace(router.asPath, router.asPath, {
         locale: router.locale === 'zh' ? 'en' : 'zh'
       })
       .catch(console.error);
