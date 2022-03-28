@@ -26,13 +26,13 @@ export function Button(props: ButtonProps) {
       onClick={onClick}
       className={cn(
         styles.Button,
-        type === 'Primary' ? 'bg-themeGreen hover:bg-green-500 text-white' : '',
-        type === 'Default' ? 'bg-white hover:bg-gray-50 text-[#333333]' : '',
+        type === 'Primary' ? 'bg-themeGreen text-white hover:bg-green-500' : '',
+        type === 'Default' ? 'bg-white text-[#333333] hover:bg-gray-50' : '',
         type === 'Border'
-          ? `bg-white hover:bg-gray-50 text-[#333333] ${styles.ButtonBorder}`
+          ? `bg-white text-[#333333] hover:bg-gray-50 ${styles.ButtonBorder}`
           : '',
         shadow ? 'shadow-lg hover:shadow-xl' : '',
-        'flex items-center justify-center hover:font-bold transition-all duration-300 rounded-lg',
+        'flex items-center justify-center rounded-lg transition-all duration-300 hover:font-bold',
         className
       )}
     >

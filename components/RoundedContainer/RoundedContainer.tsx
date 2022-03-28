@@ -16,7 +16,7 @@ export function RoundedContainer(props: RoundedContainerProps) {
       className={cn(
         styles.RoundedContainer,
         className,
-        'rounded-lg border-2 bg-white shadow-lg overflow-hidden'
+        'overflow-hidden rounded-lg border-2 bg-white shadow-lg'
       )}
     >
       {children}

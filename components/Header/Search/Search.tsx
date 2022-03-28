@@ -19,7 +19,7 @@ export function Search(props: SearchProps) {
       <input
         type="text"
         placeholder={t('COMMON_SEARCH_PLACEHOLDER')}
-        className="h-9 w-full rounded-full border-2 px-12 text-sm text-stone-500 focus:outline-none"
+        className="h-9 w-full  rounded-full border-2 px-12 text-sm text-stone-500 focus:outline-none"
       />
       <div className="absolute top-2 left-4">
         <Image src={searchImg} className="h-5 w-5" />

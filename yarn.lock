@@ -267,7 +267,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.16.7"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.17", "@babel/runtime@^7.14.5", "@babel/runtime@^7.17.2", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.13", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.17", "@babel/runtime@^7.14.5", "@babel/runtime@^7.17.2", "@babel/runtime@^7.17.8", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.7":
   version "7.17.8"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.8.tgz#3e56e4aff81befa55ac3ac6a0967349fd1c5bca2"
   integrity sha512-dQpEpK0O9o6lj6oPu0gRDbbnk+4LeHlNcBpspf6Olzt3GIX4P1lWF1gS+pHLDFlaJvbR6q7jCfQ08zA4QJBnmA==
@@ -492,6 +492,15 @@
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.3.1.tgz#4d8441b509b87ece84e94f28a4aa9998413ab849"
   integrity sha512-pNr0T8LAc3TUx/gxCfQZRe9NB2dPEo/cedPHzUGIPxqDMhgjwNm6jYxww4W5l0zAsAddxr+XfZcqttGiFDgrGg==
+
+"@tanem/react-nprogress@^4.0.12":
+  version "4.0.12"
+  resolved "https://registry.yarnpkg.com/@tanem/react-nprogress/-/react-nprogress-4.0.12.tgz#0d1319691613291691f24abfdb5a05975e65776a"
+  integrity sha512-a3kjiYWPWpe9flbbYY/M8S7uxGtezerFl9ct8BBFYszXdDFHZBYF7a8cWC/aSF5ssD3ElKqHeyMi1bZlW3HhTw==
+  dependencies:
+    "@babel/runtime" "^7.17.8"
+    hoist-non-react-statics "^3.3.2"
+    prop-types "^15.8.1"
 
 "@toml-tools/lexer@^0.3.1":
   version "0.3.1"
@@ -2555,7 +2564,7 @@ has@^1.0.3:
   dependencies:
     traverse ">=0.2.4"
 
-hoist-non-react-statics@^3.2.0, hoist-non-react-statics@^3.3.0:
+hoist-non-react-statics@^3.2.0, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -3798,6 +3807,11 @@ prettier-plugin-sh@0.7.1:
   dependencies:
     mvdan-sh "^0.5.0"
 
+prettier-plugin-tailwindcss@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.1.8.tgz#ba0f606ed91959ede670303d905b99106e9e6293"
+  integrity sha512-hwarSBCswAXa+kqYtaAkFr3Vop9o04WOyZs0qo3NyvW8L7f1rif61wRyq0+ArmVThOuRBcJF5hjGXYk86cwemg==
+
 prettier-plugin-toml@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/prettier-plugin-toml/-/prettier-plugin-toml-0.3.1.tgz#71b5291ef9c2a20865d2dfe1dbc24435bcb596b5"
@@ -3834,7 +3848,7 @@ prop-types-extra@^1.1.0:
     react-is "^16.3.2"
     warning "^4.0.0"
 
-prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==

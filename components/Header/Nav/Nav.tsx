@@ -28,6 +28,49 @@ interface IMenu {
   sub?: IMenu[];
 }
 
+export const collectionSubMenus: IMenu[] = [
+  {
+    name: 'MENU_COLLECTIONS_ALL',
+    link: '/collections/all',
+    icon: allImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_ART',
+    link: '/collections/art',
+    icon: artImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_SPORTS',
+    link: '/collections/sports',
+    icon: sportsImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_MUSIC',
+    link: '/collections/music',
+    icon: musicImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_MOVIES',
+    link: '/collections/movies',
+    icon: moviesImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_PHOTOGRAPHY',
+    link: '/collections/photography',
+    icon: photographyImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_FOOD',
+    link: '/collections/food',
+    icon: foodImg
+  },
+  {
+    name: 'MENU_COLLECTIONS_STARS',
+    link: '/collections/stars',
+    icon: starsImg
+  }
+];
+
 export const menus: IMenu[] = [
   {
     name: 'MENU_MARKET',
@@ -36,48 +79,7 @@ export const menus: IMenu[] = [
   {
     name: 'MENU_COLLECTIONS',
     link: '/collections',
-    sub: [
-      {
-        name: 'MENU_COLLECTIONS_ALL',
-        link: '/collections/all',
-        icon: allImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_ART',
-        link: '/collections/art',
-        icon: artImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_SPORTS',
-        link: '/collections/sports',
-        icon: sportsImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_MUSIC',
-        link: '/collections/music',
-        icon: musicImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_MOVIES',
-        link: '/collections/movies',
-        icon: moviesImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_PHOTOGRAPHY',
-        link: '/collections/photography',
-        icon: photographyImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_FOOD',
-        link: '/collections/food',
-        icon: foodImg
-      },
-      {
-        name: 'MENU_COLLECTIONS_STARS',
-        link: '/collections/stars',
-        icon: starsImg
-      }
-    ]
+    sub: collectionSubMenus
   },
   {
     name: 'MENU_CREATE',
@@ -99,7 +101,7 @@ export function Nav(props: NavProps) {
   return (
     <div className={cn(styles.Nav, className, 'hidden lg:block')}>
       <nav>
-        <ul className="flex items-center space-x-2 h-16">
+        <ul className="flex h-16 items-center space-x-2">
           {menus.map((item) => (
             <li
               key={item.name}
@@ -114,7 +116,7 @@ export function Nav(props: NavProps) {
               <Link href={item.link}>
                 <a
                   className={cn(
-                    'text-sm text-neutral-700 h-16 flex items-center'
+                    'flex h-16 items-center text-sm text-neutral-700'
                   )}
                 >
                   <span
@@ -136,14 +138,14 @@ export function Nav(props: NavProps) {
                       <li
                         key={subitem.name}
                         className={cn(
-                          'w-48 h-10 hover:bg-themeGreen hover:text-white'
+                          'h-10 w-48 hover:bg-themeGreen hover:text-white'
                         )}
                         onClick={() => {
                           setHoverMenuName('');
                         }}
                       >
                         <Link href={subitem.link}>
-                          <a className="w-full h-full pl-3 text-sm flex items-center space-x-4">
+                          <a className="flex h-full w-full items-center space-x-4 pl-3 text-sm">
                             <Image src={subitem.icon || ''} width="22" />
                             <span>{t(subitem.name)}</span>
                           </a>

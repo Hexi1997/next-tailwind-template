@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@tanem/react-nprogress": "^4.0.12",
     "axios": "^0.26.1",
     "baseui": "^10.10.0",
     "classnames": "^2.3.1",
@@ -49,6 +50,7 @@
     "postcss": "^8.4.12",
     "postcss-sass": "^0.5.0",
     "postcss-scss": "^4.0.3",
+    "prettier-plugin-tailwindcss": "^0.1.8",
     "react-transition-group": "^4.4.2",
     "sass": "^1.49.9",
     "stylelint": "14.2.0",

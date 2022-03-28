@@ -23,17 +23,17 @@ export function Header(props: HeaderProps) {
       className={cn(
         styles.Header,
         className,
-        'sticky top-0 z-10 flex items-center justify-between space-x-4 bg-white shadow-md dark:bg-black text-[#333333] px-2 md:px-4 lg:px-12'
+        'sticky top-0 z-10 flex items-center justify-between space-x-4 bg-white px-2 text-[#333333] shadow-md dark:bg-black md:px-4 lg:px-12'
       )}
     >
       {/* logo area */}
-      <div className="flex items-center flex-1 space-x-4">
+      <div className="flex flex-1 items-center space-x-4">
         <Link href="/">
           <span className="text-base font-semibold text-stone-800 hover:cursor-pointer">
             {t('COMMON_MARKET_NAME')}
           </span>
         </Link>
-        <Search className="hidden sm:block max-w-[456px]" />
+        <Search className="hidden max-w-[456px] sm:block" />
       </div>
       <div className="flex items-center sm:space-x-4">
         <Nav />

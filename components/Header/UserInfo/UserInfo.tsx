@@ -58,12 +58,13 @@ export function UserInfo(props: UserInfoProps) {
   const [isShowUserInfo, setIsShowUserInfo] = useState(false);
   const [isHoverSignOut, setIsHoverSignOut] = useState(false);
   const { width } = useWindowSize();
-  const { t } = useTranslation('menu');
+  // useTranslation可以引入多个namespace，然后t方法调用的时候设置ns参数指定namespace,如果不传，默认指向第一个
+  const { t } = useTranslation(['menu', 'common']);
 
   return (
     <div className={cn(styles.UserInfo, className)}>
       <div
-        className="p-4 h-16 flex cursor-pointer items-center justify-center relative z-20 sm:p-0"
+        className="relative z-20 flex h-16 cursor-pointer items-center justify-center p-4 sm:p-0"
         onMouseEnter={() => {
           if (width > 640) {
             setIsShowUserInfo(true);
@@ -79,28 +80,30 @@ export function UserInfo(props: UserInfoProps) {
         <Image src={infoImg} />
         {isShowUserInfo && (
           <RoundedContainer className="absolute top-16 -left-40 flex flex-col text-base">
-            <span className="pt-6 pb-2 px-[18px]">0x88b4b153184...7c1bd</span>
-            <div className="rounded-lg shadow-xl flex p-5 flex-col space-y-2 pb-3 mx-[18px]">
-              <span className="font-medium">{t('COMMON_BALANCE')}</span>
-              <div className="flex justify-between items-center">
-                <span className="text-[#666666] text-sm">FLOW</span>
-                <span className="font-bold text-xl">0.014</span>
+            <span className="px-[18px] pt-6 pb-2">0x88b4b153184...7c1bd</span>
+            <div className="mx-[18px] flex flex-col space-y-2 rounded-lg p-5 pb-3 shadow-xl">
+              <span className="font-medium">
+                {t('COMMON_BALANCE', { ns: 'common' })}
+              </span>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-[#666666]">FLOW</span>
+                <span className="text-xl font-bold">0.014</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-[#666666] text-sm">FUSD</span>
-                <span className="font-bold text-xl">21.501</span>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-[#666666]">FUSD</span>
+                <span className="text-xl font-bold">21.501</span>
               </div>
               <Button
                 onClick={() => {
                   console.log('click add');
                 }}
                 type="Primary"
-                className="w-full h-8 !rounded-full"
+                className="h-8 w-full !rounded-full"
               >
                 {t('MENU_USER_BUTTON_ADD_FUNDS')}
               </Button>
             </div>
-            <ul className="pt-4 flex flex-col w-full">
+            <ul className="flex w-full flex-col pt-4">
               {links.map((item) => (
                 <Link href={item.link} key={item.title}>
                   <a
@@ -112,7 +115,7 @@ export function UserInfo(props: UserInfoProps) {
                     }}
                     className={cn(
                       styles.icon,
-                      'flex w-full h-10 items-center px-[18px] space-x-3',
+                      'flex h-10 w-full items-center space-x-3 px-[18px]',
                       hoverSubMenuTitle === item.title
                         ? 'bg-themeGreen text-white'
                         : ''
@@ -145,7 +148,7 @@ export function UserInfo(props: UserInfoProps) {
                   setIsHoverSignOut(false);
                 }}
                 className={cn(
-                  'flex w-full h-12 items-center px-[18px] space-x-3',
+                  'flex h-12 w-full items-center space-x-3 px-[18px]',
                   isHoverSignOut ? 'bg-themeGreen text-white' : ''
                 )}
               >
