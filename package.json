@@ -49,7 +49,6 @@
     "postcss": "^8.4.12",
     "postcss-sass": "^0.5.0",
     "postcss-scss": "^4.0.3",
-    "react-transition-group": "^4.4.2",
     "sass": "^1.49.9",
     "stylelint": "14.2.0",
     "stylelint-config-prettier": "^9.0.3",
