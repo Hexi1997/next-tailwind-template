@@ -180,7 +180,7 @@ function Market(props: marketProps) {
           categories={Category2Data.categories}
         />
 
-        <div className="mb-10 hidden lg:flex">
+        <div className={cn('mb-10 hidden', 'lg:flex')}>
           <Select
             style={{ width: '12.5rem', marginRight: '3rem' }}
             options={selectOptions1}
@@ -189,12 +189,15 @@ function Market(props: marketProps) {
         </div>
 
         <Button
-          className=" font-[14px] fixed bottom-9 right-5 z-10 h-[40px] w-[110px] rounded-[23px] bg-[#333333] lg:hidden"
+          className={cn(
+            'font-[14px] fixed bottom-9 right-5 z-10 h-[40px] w-[110px] rounded-[23px] bg-[#333333]',
+            'lg:hidden'
+          )}
           onClick={() => toggleFilter(true)}
         >
           Filter
           <IconFont
-            className="font-[20px] font-[32px] h-[20px] w-[20px]"
+            className="h-[1.5rem] w-[1rem] text-[28px]"
             type="icon-filter"
           />
         </Button>
