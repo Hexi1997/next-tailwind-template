@@ -152,6 +152,8 @@ function Market(props: marketProps) {
   const { className } = props;
   const { t } = useTranslation('market');
   const [showFilter, setShowFilter] = useState(false);
+  const [category, setCategory] = useState('All');
+  const [saleType, setSaleType] = useState('All');
 
   const toggleFilter = (visible: boolean) => {
     setShowFilter(visible);
@@ -166,35 +168,42 @@ function Market(props: marketProps) {
         description={t('MARKET_PAGE_SEO_DESC')}
       />
       <div className={cn(styles.market, className, 'container')}>
-        <div className="my-10 text-[1.75rem] font-bold">
+        <div className="my-10 text-[28px] font-bold">
           Explore all collections
         </div>
         <CategoryList
           className="hidden"
           title={Category1Data.title}
           categories={Category1Data.categories}
+          value={category}
+          onSelected={setCategory}
         />
         <CategoryList
           className="hidden"
           title={Category2Data.title}
           categories={Category2Data.categories}
+          value={saleType}
+          onSelected={setSaleType}
         />
 
-        <div className="mb-10 hidden lg:flex">
+        <div className={cn('mb-10 hidden', 'lg:flex')}>
           <Select
-            style={{ width: '12.5rem', marginRight: '3rem' }}
+            style={{ width: '200px', marginRight: '36px' }}
             options={selectOptions1}
           />
-          <Select style={{ width: '12.5rem' }} options={selectOptions2} />
+          <Select style={{ width: '200px' }} options={selectOptions2} />
         </div>
 
         <Button
-          className=" font-[14px] fixed bottom-9 right-5 z-10 h-[40px] w-[110px] rounded-[23px] bg-[#333333] lg:hidden"
+          className={cn(
+            'font-[14px] fixed bottom-9 right-5 z-10 h-[40px] w-[110px] rounded-[23px] bg-[#333333]',
+            'lg:hidden'
+          )}
           onClick={() => toggleFilter(true)}
         >
           Filter
           <IconFont
-            className="font-[20px] font-[32px] h-[20px] w-[20px]"
+            className="h-[24px] w-[16px] text-[28px]"
             type="icon-filter"
           />
         </Button>
@@ -206,20 +215,25 @@ function Market(props: marketProps) {
             title={Category1Data.title}
             categories={Category1Data.categories}
             isMobile={true}
+            value={category}
+            onSelected={setCategory}
           />
           <CategoryList
             title={Category2Data.title}
             categories={Category2Data.categories}
             isMobile={true}
+            value={saleType}
+            onSelected={setSaleType}
           />
           <CategoryList
             title={Category3Data.title}
             categories={Category3Data.categories}
             isMobile={true}
+            value={''}
           />
         </MobileCategoryList>
 
-        <div className="grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
+        <div className="mb-[115px] grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
           {hotBidsData.map((item) => (
             <ItemCard className={styles.marketItem} key={item.id} data={item} />
           ))}
