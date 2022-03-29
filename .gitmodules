@@ -1,4 +1,0 @@
-[submodule "assets/i18n/flowmarket-frontend-copywriter"]
-	path = assets/i18n/flowmarket-frontend-copywriter
-	url = git@github.com:WhiteMatrixTech/flowmarket-frontend-copywriter.git
-	branch = main

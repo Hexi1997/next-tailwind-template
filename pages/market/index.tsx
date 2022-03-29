@@ -3,6 +3,7 @@ import { GetStaticPropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
+import { useState } from 'react';
 
 import hotBidsImg1 from '@/assets/images/home/hot_bids_2.png';
 import hotBidsImg2 from '@/assets/images/home/hot_bids_3.png';
@@ -10,11 +11,18 @@ import hotBidsImg3 from '@/assets/images/home/hot_bids_4.png';
 import hotBidsImg4 from '@/assets/images/home/hot_bids_5.png';
 import hotBidsImg5 from '@/assets/images/home/hot_bids_6.png';
 import userIconImg from '@/assets/images/home/usericon2.png';
-import { CategoryList, ItemCard, Option, Select } from '@/components';
+import {
+  Button,
+  CategoryList,
+  ItemCard,
+  MobileCategoryList,
+  Select
+} from '@/components';
+import { useIconFont } from '@/utils/hooks/useIconFont';
 
 import styles from './_index.module.scss';
 
-export const Category1Data = {
+const Category1Data = {
   title: 'Category',
   categories: [
     'All',
@@ -28,11 +36,15 @@ export const Category1Data = {
     'Photography'
   ]
 };
-export const Category2Data = {
+const Category2Data = {
   title: 'Sale Type',
   categories: ['All', 'Listings', 'Minted', 'Sales', 'Bids', 'Transfers']
 };
-export const hotBidsData = [
+const Category3Data = {
+  title: 'Sort',
+  categories: ['Price:High To Low', 'Price:Low To High', 'Recently Listed']
+};
+const hotBidsData = [
   {
     id: 1,
     img: hotBidsImg1,
@@ -95,8 +107,30 @@ export const hotBidsData = [
   }
 ];
 
-export const selectOptions1 = ['Price-Highest', 'Price-Lowest', 'Time-Newest'];
-export const selectOptions2 = ['Add Time Newest', 'Add Time Oldest'];
+const selectOptions1 = [
+  {
+    label: 'Price-Highest',
+    id: 1
+  },
+  {
+    label: 'Price-Lowest',
+    id: 2
+  },
+  {
+    label: 'Time-Newest',
+    id: 3
+  }
+];
+const selectOptions2 = [
+  {
+    label: 'Add Time Newest',
+    id: 1
+  },
+  {
+    label: 'Add Time Oldest',
+    id: 2
+  }
+];
 
 interface marketProps {
   className?: string;
@@ -117,6 +151,13 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 function Market(props: marketProps) {
   const { className } = props;
   const { t } = useTranslation('market');
+  const [showFilter, setShowFilter] = useState(false);
+
+  const toggleFilter = (visible: boolean) => {
+    setShowFilter(visible);
+  };
+
+  const { IconFont } = useIconFont();
 
   return (
     <>
@@ -124,43 +165,61 @@ function Market(props: marketProps) {
         title={t('MARKET_PAGE_SEO_TITLE')}
         description={t('MARKET_PAGE_SEO_DESC')}
       />
-      <div className={cn(styles.market, className)}>
-        <div className={styles.marketTitle}>Explore all collections</div>
+      <div className={cn(styles.market, className, 'container')}>
+        <div className="my-10 text-[1.75rem] font-bold">
+          Explore all collections
+        </div>
         <CategoryList
+          className="hidden"
           title={Category1Data.title}
           categories={Category1Data.categories}
         />
         <CategoryList
+          className="hidden"
           title={Category2Data.title}
           categories={Category2Data.categories}
         />
 
-        <div className={styles.marketSelect}>
+        <div className="mb-10 hidden lg:flex">
           <Select
             style={{ width: '12.5rem', marginRight: '3rem' }}
-            placeholder="select your preference"
-            defaultValue={'Price-Highest'}
-          >
-            {selectOptions1.map((option: string) => (
-              <Option key={option} value={option}>
-                {option}
-              </Option>
-            ))}
-          </Select>
-          <Select
-            style={{ width: '12.5rem' }}
-            placeholder="select your preference"
-            defaultValue={'Add Time Newest'}
-          >
-            {selectOptions2.map((option: string) => (
-              <Option key={option} value={option}>
-                {option}
-              </Option>
-            ))}
-          </Select>
+            options={selectOptions1}
+          />
+          <Select style={{ width: '12.5rem' }} options={selectOptions2} />
         </div>
 
-        <div className={styles.marketList}>
+        <Button
+          className=" font-[14px] fixed bottom-9 right-5 z-10 h-[40px] w-[110px] rounded-[23px] bg-[#333333] lg:hidden"
+          onClick={() => toggleFilter(true)}
+        >
+          Filter
+          <IconFont
+            className="font-[20px] font-[32px] h-[20px] w-[20px]"
+            type="icon-filter"
+          />
+        </Button>
+        <MobileCategoryList
+          visible={showFilter}
+          onClose={() => toggleFilter(false)}
+        >
+          <CategoryList
+            title={Category1Data.title}
+            categories={Category1Data.categories}
+            isMobile={true}
+          />
+          <CategoryList
+            title={Category2Data.title}
+            categories={Category2Data.categories}
+            isMobile={true}
+          />
+          <CategoryList
+            title={Category3Data.title}
+            categories={Category3Data.categories}
+            isMobile={true}
+          />
+        </MobileCategoryList>
+
+        <div className="grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
           {hotBidsData.map((item) => (
             <ItemCard className={styles.marketItem} key={item.id} data={item} />
           ))}
