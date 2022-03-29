@@ -1,12 +1,9 @@
 import cn from 'classnames';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
 
 import circleImg from '@/assets/images/collection/circle.png';
 import addressTypeImg from '@/assets/images/collection/ethereum.svg';
 import { Button } from '@/components/Common/Button';
-import { RoundedContainer } from '@/components/RoundedContainer';
 import { ICollectionDetail } from '@/pages/collection/[collectionId]';
 import { ellipseAddress } from '@/utils/common';
 

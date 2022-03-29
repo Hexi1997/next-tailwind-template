@@ -12,6 +12,7 @@ import discordIcon from '@/assets/images/collection/discord.svg';
 import insIcon from '@/assets/images/collection/ins.svg';
 import twitterIcon from '@/assets/images/collection/twitter.svg';
 import websiteIcon from '@/assets/images/collection/website.svg';
+import { Tabs } from '@/components/Common/Tabs';
 import { CollectionDetailHeader } from '@/components/Pages/Collection/CollectionDetailHeader';
 
 import styles from './_index.module.scss';
@@ -109,6 +110,12 @@ function CollectionId(props: collectionIdProps) {
         ></div>
         <div className="container">
           <CollectionDetailHeader data={collectionDetailMockData} />
+          <Tabs
+            tabs={[
+              { title: 'Items', element: <div>111</div> },
+              { title: 'Activities', element: <div>ac</div> }
+            ]}
+          />
         </div>
       </div>
     </>

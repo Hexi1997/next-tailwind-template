@@ -9,7 +9,8 @@
     "semibold",
     "stylelint",
     "submodule",
-    "tailwindcss"
+    "tailwindcss",
+    "titem"
   ],
   "prettier.configPath": ".prettierrc.js",
   "stylelint.enable": true,
