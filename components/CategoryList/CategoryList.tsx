@@ -2,13 +2,18 @@ import cn from 'classnames';
 import { FC, useState } from 'react';
 
 import { Button } from '@/components';
+import { useIconFont } from '@/utils/hooks/useIconFont';
 
 import styles from './CategoryList.module.scss';
 
+type CategoryItem = {
+  icon?: string;
+  label: string;
+};
 interface CategoryListProps {
   className?: string;
   title?: string;
-  categories: string[];
+  categories: CategoryItem[];
   value: string | number;
   onSelected?: (item: string) => void;
   isMobile?: boolean; // 是否移动端
@@ -31,6 +36,8 @@ const CategoryList: FC<CategoryListProps> = (props) => {
     onSelected && onSelected(item);
     setSelected(item);
   };
+
+  const { IconFont } = useIconFont();
 
   return (
     <div
@@ -63,7 +70,7 @@ const CategoryList: FC<CategoryListProps> = (props) => {
       >
         {categories.map((item, index) => (
           <Button
-            key={item}
+            key={item.label}
             className={cn(
               'h-[28px] rounded-[14px]',
               isMobile && 'w-3/4',
@@ -80,11 +87,12 @@ const CategoryList: FC<CategoryListProps> = (props) => {
                 : '',
               'lg:mr-5 lg:h-[36px] lg:rounded-[18px] lg:py-4 lg:px-2.5'
             )}
-            type={item === selected ? 'Primary' : 'Border'}
+            type={item.label === selected ? 'Primary' : 'Border'}
             shadow={false}
-            onClick={() => handleSelected(item)}
+            onClick={() => handleSelected(item.label)}
           >
-            {item}
+            {item.label}
+            {item.icon && <IconFont className="pl-2" type={item.icon} />}
           </Button>
         ))}
       </div>

@@ -25,24 +25,35 @@ import styles from './_index.module.scss';
 const Category1Data = {
   title: 'Category',
   categories: [
-    'All',
-    'Food',
-    'Minted',
-    'Stars',
-    'Music',
-    'Sports',
-    'Movies',
-    'Art',
-    'Photography'
+    { label: 'All' },
+    { label: 'Food' },
+    { label: 'Minted' },
+    { label: 'Stars' },
+    { label: 'Music' },
+    { label: 'Sports' },
+    { label: 'Movies' },
+    { label: 'Art' },
+    { label: 'Photography' }
   ]
 };
 const Category2Data = {
   title: 'Sale Type',
-  categories: ['All', 'Listings', 'Minted', 'Sales', 'Bids', 'Transfers']
+  categories: [
+    { label: 'All' },
+    { label: 'Listings' },
+    { label: 'Minted' },
+    { label: 'Sales' },
+    { label: 'Bids' },
+    { label: 'Transfers' }
+  ]
 };
 const Category3Data = {
   title: 'Sort',
-  categories: ['Price:High To Low', 'Price:Low To High', 'Recently Listed']
+  categories: [
+    { label: 'Price:High To Low', icon: 'icon-sort-asc' },
+    { label: 'Price:Low To High', icon: 'icon-sort-desc' },
+    { label: 'Recently Listed' }
+  ]
 };
 const hotBidsData = [
   {
