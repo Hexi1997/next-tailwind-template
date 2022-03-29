@@ -12,7 +12,9 @@ import insIcon from '@/assets/images/collection/ins.svg';
 import twitterIcon from '@/assets/images/collection/twitter.svg';
 import websiteIcon from '@/assets/images/collection/website.svg';
 import { Tabs } from '@/components/Common/Tabs';
+import { CollectionDetailActivities } from '@/components/Pages/Collection/CollectionDetailActivities';
 import { CollectionDetailHeader } from '@/components/Pages/Collection/CollectionDetailHeader';
+import { CollectionDetailItems } from '@/components/Pages/Collection/CollectionDetailItems';
 
 import styles from './_index.module.scss';
 
@@ -114,11 +116,11 @@ function CollectionId(props: collectionIdProps) {
             tabs={[
               {
                 title: t('COLLECTION_DETAIL_TAB_ITEMS'),
-                element: <div>111</div>
+                element: <CollectionDetailItems />
               },
               {
                 title: t('COLLECTION_DETAIL_TAB_ACTIVITIES'),
-                element: <div>ac</div>
+                element: <CollectionDetailActivities />
               }
             ]}
           />

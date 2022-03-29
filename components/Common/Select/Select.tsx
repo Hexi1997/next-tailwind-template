@@ -1,56 +1,65 @@
 import { ChevronDown } from 'baseui/icon';
-import { Select as BaseSelect, Value } from 'baseui/select';
-import { CSSProperties, FC, useState } from 'react';
+import {
+  Select as BaseSelect,
+  SelectProps as BaseUISelectProps,
+  Value
+} from 'baseui/select';
+import cn from 'classnames';
+import { uniqueId } from 'lodash';
+import { CSSProperties, FC } from 'react';
+
+import styles from './Select.module.scss';
 
 type SelectOptions = {
   label: string;
   id: string | number;
 };
 
-interface SelectProps {
+interface SelectProps extends BaseUISelectProps {
   className?: string;
   style?: CSSProperties;
   options?: SelectOptions[];
-  placeholder?: string;
 }
 
 const Select: FC<SelectProps> = (props) => {
-  const { style, options, placeholder } = props;
-  const [value, setValue] = useState([] as Value);
+  const { style, options, className, ...rest } = props;
 
   return (
-    <BaseSelect
-      options={options}
-      value={value}
-      placeholder={placeholder}
-      onChange={(param) => setValue(param.value)}
-      overrides={{
-        Root: {
-          style: () => ({
-            outline: '#999999 solid .0625rem',
-            height: '2.25rem',
-            padding: '0',
-            borderRadius: '1.125rem',
-            ...style
-          })
-        },
-        ControlContainer: {
-          style: () => ({
-            backgroundColor: 'white',
-            border: 'none',
-            height: '2.25rem',
-            font: '400 .875rem Inter'
-          })
-        },
-        SelectArrow: {
-          props: {
-            overrides: {
-              Svg: () => <ChevronDown size={20} color="#999999" />
+    <div className={cn(styles.Select, className)}>
+      <BaseSelect
+        options={options}
+        searchable={false}
+        {...rest}
+        overrides={{
+          Root: {
+            style: () => ({
+              outline: 'none',
+              height: '2.25rem',
+              padding: '0',
+              border: '1px solid #999',
+              borderRadius: '18px',
+              overflow: 'hidden',
+              ...style
+            })
+          },
+          ControlContainer: {
+            style: () => ({
+              backgroundColor: 'white',
+              border: 'none',
+              height: '2.25rem',
+              font: '400 .875rem Inter'
+            })
+          },
+          SelectArrow: {
+            props: {
+              overrides: {
+                Svg: () => <ChevronDown size={30} color="#999999" />
+              }
             }
           }
-        }
-      }}
-    />
+        }}
+      />
+    </div>
   );
 };
 

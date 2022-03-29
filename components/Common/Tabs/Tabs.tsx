@@ -29,6 +29,11 @@ export function Tabs(props: TabsProps) {
             style: () => ({
               backgroundColor: '#ffffff'
             })
+          },
+          TabContent: {
+            style: () => ({
+              padding: 0
+            })
           }
         }}
       >

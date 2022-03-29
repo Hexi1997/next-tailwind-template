@@ -26,7 +26,7 @@ export interface IITem {
   price: string;
 }
 
-const data: IITem[] = [
+export const ItemsData: IITem[] = [
   {
     img: hotBidsImg1,
     name: 'Matrix Land（140，15）Long name long name',
@@ -92,7 +92,7 @@ export function SectionHotBids(props: SectionHotBidsProps) {
         {t('HOME_SECTION_HOT_BIDS_TITLE')}
       </SectionTitle>
       <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 xl:grid-cols-3">
-        {data.map((item, index) => (
+        {ItemsData.map((item, index) => (
           <ItemCard data={item} key={index} />
         ))}
       </div>
