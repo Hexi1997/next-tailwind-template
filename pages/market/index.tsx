@@ -3,6 +3,7 @@ import { GetStaticPropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
+import { useState } from 'react';
 
 import hotBidsImg1 from '@/assets/images/home/hot_bids_2.png';
 import hotBidsImg2 from '@/assets/images/home/hot_bids_3.png';
@@ -17,6 +18,7 @@ import {
   MobileCategoryList,
   Select
 } from '@/components';
+import { useIconFont } from '@/utils/hooks/useIconFont';
 
 import styles from './_index.module.scss';
 
@@ -37,6 +39,10 @@ const Category1Data = {
 const Category2Data = {
   title: 'Sale Type',
   categories: ['All', 'Listings', 'Minted', 'Sales', 'Bids', 'Transfers']
+};
+const Category3Data = {
+  title: 'Sort',
+  categories: ['Price:High To Low', 'Price:Low To High', 'Recently Listed']
 };
 const hotBidsData = [
   {
@@ -145,6 +151,13 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 function Market(props: marketProps) {
   const { className } = props;
   const { t } = useTranslation('market');
+  const [showFilter, setShowFilter] = useState(false);
+
+  const toggleFilter = (visible: boolean) => {
+    setShowFilter(visible);
+  };
+
+  const { IconFont } = useIconFont();
 
   return (
     <>
@@ -157,14 +170,15 @@ function Market(props: marketProps) {
           Explore all collections
         </div>
         <CategoryList
+          className="hidden"
           title={Category1Data.title}
           categories={Category1Data.categories}
         />
         <CategoryList
+          className="hidden"
           title={Category2Data.title}
           categories={Category2Data.categories}
         />
-        <MobileCategoryList />
 
         <div className="mb-10 hidden lg:flex">
           <Select
@@ -174,9 +188,33 @@ function Market(props: marketProps) {
           <Select style={{ width: '12.5rem' }} options={selectOptions2} />
         </div>
 
-        <Button className="fixed bottom-9 right-5 lg:hidden">
-          mobile filter
+        <Button
+          className=" font-[14px] fixed bottom-9 right-5 z-10 h-[40px] w-[110px] rounded-[23px] bg-[#333333] lg:hidden"
+          onClick={() => toggleFilter(true)}
+        >
+          Filter
+          <IconFont
+            className="font-[20px] font-[32px] h-[20px] w-[20px]"
+            type="icon-filter"
+          />
         </Button>
+        <MobileCategoryList
+          visible={showFilter}
+          onClose={() => toggleFilter(false)}
+        >
+          <CategoryList
+            title={Category1Data.title}
+            categories={Category1Data.categories}
+          />
+          <CategoryList
+            title={Category2Data.title}
+            categories={Category2Data.categories}
+          />
+          <CategoryList
+            title={Category3Data.title}
+            categories={Category3Data.categories}
+          />
+        </MobileCategoryList>
 
         <div className="grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
           {hotBidsData.map((item) => (

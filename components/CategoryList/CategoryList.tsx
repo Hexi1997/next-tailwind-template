@@ -12,6 +12,7 @@ interface CategoryListProps {
   onSelected?: (item: string) => void;
 }
 
+// 多于5个就一行3个，否则一行2个
 export function CategoryList(props: CategoryListProps) {
   const { className, title, categories, onSelected } = props;
 
@@ -23,17 +24,52 @@ export function CategoryList(props: CategoryListProps) {
   };
 
   return (
-    <div className={cn(className, 'mb-[25px] hidden lg:flex lg:items-center')}>
+    <div
+      className={cn(
+        styles.CategoryList,
+        className,
+        'mb-4',
+        'lg:mb-[25px] lg:flex lg:items-center'
+      )}
+    >
       {title && (
-        <div className="w-25 mr-[27px] whitespace-nowrap border-r-[1px] border-solid border-neutral-300 pr-6 text-[1rem] text-[#666666]">
+        <div
+          className={cn(
+            'whitespace-nowrap text-[1rem] text-[#666666]',
+            'mb-4',
+            'lg:w-25 lg:mr-[27px] lg:border-r-[1px] lg:border-solid lg:border-neutral-300 lg:pr-6'
+          )}
+        >
           {title}
         </div>
       )}
-      <div className="flex flex-wrap">
-        {categories.map((item) => (
+      <div
+        className={cn(
+          'grid gap-y-4 gap-x-4',
+          categories.length > 4
+            ? 'grid-cols-3 grid-rows-1'
+            : 'grid-cols-2 grid-rows-2',
+          'lg:flex lg:flex-wrap'
+        )}
+      >
+        {categories.map((item, index) => (
           <Button
             key={item}
-            className="mr-5 h-9 rounded-[1.125rem] py-4 px-2.5"
+            className={cn(
+              'rounded-6 h-7 w-3/4',
+              categories.length < 5
+                ? index % 2
+                  ? 'justify-self-end'
+                  : 'justify-self-start'
+                : '',
+              categories.length > 4 && index % 3 === 1
+                ? 'justify-self-center'
+                : '',
+              categories.length > 4 && index % 3 === 2
+                ? 'justify-self-end'
+                : '',
+              'lg:mr-5 lg:h-9 lg:rounded-[1.125rem] lg:py-4 lg:px-2.5'
+            )}
             type={item === selected ? 'Primary' : 'Border'}
             shadow={false}
             onClick={() => handleSelected(item)}
