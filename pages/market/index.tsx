@@ -168,7 +168,7 @@ function Market(props: marketProps) {
         description={t('MARKET_PAGE_SEO_DESC')}
       />
       <div className={cn(styles.market, className, 'container')}>
-        <div className="my-10 text-[1.75rem] font-bold">
+        <div className="my-10 text-[28px] font-bold">
           Explore all collections
         </div>
         <CategoryList
@@ -188,10 +188,10 @@ function Market(props: marketProps) {
 
         <div className={cn('mb-10 hidden', 'lg:flex')}>
           <Select
-            style={{ width: '12.5rem', marginRight: '3rem' }}
+            style={{ width: '200px', marginRight: '36px' }}
             options={selectOptions1}
           />
-          <Select style={{ width: '12.5rem' }} options={selectOptions2} />
+          <Select style={{ width: '200px' }} options={selectOptions2} />
         </div>
 
         <Button
@@ -203,7 +203,7 @@ function Market(props: marketProps) {
         >
           Filter
           <IconFont
-            className="h-[1.5rem] w-[1rem] text-[28px]"
+            className="h-[24px] w-[16px] text-[28px]"
             type="icon-filter"
           />
         </Button>
@@ -229,6 +229,7 @@ function Market(props: marketProps) {
             title={Category3Data.title}
             categories={Category3Data.categories}
             isMobile={true}
+            value={''}
           />
         </MobileCategoryList>
 

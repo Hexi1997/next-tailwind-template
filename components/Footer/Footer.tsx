@@ -50,7 +50,7 @@ export function Footer(props: FooterProps) {
       >
         <div
           className={cn(
-            'grid translate-y-[-50%] items-center justify-items-center gap-x-20 text-[1.5rem] font-black leading-[1.5rem]',
+            'grid translate-y-[-50%] items-center justify-items-center gap-x-20 text-[24px] font-black leading-[24px]',
             'lg:my-0',
             'sm:my-8 sm:grid-cols-3 sm:grid-rows-1',
             'gap-y-6',
@@ -66,14 +66,14 @@ export function Footer(props: FooterProps) {
             className={cn(
               'text-xl font-extralight',
               'lg:mb-[20px] lg:mr-0',
-              'mr-[2rem]'
+              'mr-[32px]'
             )}
           >
             contact us
           </p>
           <div
             className={cn(
-              'item-center grid grid-cols-3 grid-rows-1 justify-between gap-x-[2rem]'
+              'item-center grid grid-cols-3 grid-rows-1 justify-between gap-x-[32px]'
             )}
           >
             <Link href="/">
