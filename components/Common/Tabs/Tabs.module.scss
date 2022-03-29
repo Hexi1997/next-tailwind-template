@@ -2,6 +2,17 @@
   :global {
     div[data-baseweb='tabs'] {
       div[role='tablist'] {
+        position: relative !important;
+        &::after {
+          position: absolute;
+          bottom: -1px;
+          height: 1px;
+          content: '';
+          display: block;
+          left: 20px;
+          width: calc(100% - 40px);
+          background: rgba(0, 0, 0, 0.1);
+        }
         div[role='tab'] {
           font-size: 18px !important;
           color: rgba(51, 51, 51, 0.5) !important;
@@ -16,8 +27,10 @@
             display: block;
             width: 100%;
             height: 4px;
-            bottom: 0px;
+            bottom: -2px;
             left: 0;
+            z-index: 1;
+            border-radius: 2px;
             background: linear-gradient(
               89.87deg,
               #ffef9c 9.08%,

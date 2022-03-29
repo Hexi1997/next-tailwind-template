@@ -1,11 +1,10 @@
 import cn from 'classnames';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import collectionIcon from '@/assets/images/collection/collectionIcon.png';
 import discordIcon from '@/assets/images/collection/discord.svg';
@@ -111,9 +110,16 @@ function CollectionId(props: collectionIdProps) {
         <div className="container">
           <CollectionDetailHeader data={collectionDetailMockData} />
           <Tabs
+            className="xl:mt-18 mt-2 sm:mt-4 lg:mt-6"
             tabs={[
-              { title: 'Items', element: <div>111</div> },
-              { title: 'Activities', element: <div>ac</div> }
+              {
+                title: t('COLLECTION_DETAIL_TAB_ITEMS'),
+                element: <div>111</div>
+              },
+              {
+                title: t('COLLECTION_DETAIL_TAB_ACTIVITIES'),
+                element: <div>ac</div>
+              }
             ]}
           />
         </div>
