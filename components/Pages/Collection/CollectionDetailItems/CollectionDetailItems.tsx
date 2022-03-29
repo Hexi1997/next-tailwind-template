@@ -86,7 +86,7 @@ export function CollectionDetailItems(props: CollectionDetailItemsProps) {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 xl:grid-cols-3">
+      <div className="mb-10 grid grid-cols-1 gap-y-8 lg:grid-cols-2 xl:grid-cols-3">
         {ItemsData.map((item, index) => (
           <ItemCard data={item} key={index} className="lg:!mx-0" />
         ))}

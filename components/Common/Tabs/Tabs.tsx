@@ -32,7 +32,7 @@ export function Tabs(props: TabsProps) {
           },
           TabContent: {
             style: () => ({
-              padding: 0
+              padding: '0 10px'
             })
           }
         }}
