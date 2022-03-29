@@ -5,7 +5,7 @@ import styles from './Button.module.scss';
 
 interface ButtonProps {
   className?: string;
-  type?: 'Primary' | 'Default' | 'Border';
+  type?: 'Primary' | 'Default' | 'Border' | 'Address';
   children: ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick?: any;
@@ -28,6 +28,7 @@ export function Button(props: ButtonProps) {
         styles.Button,
         type === 'Primary' ? 'bg-themeGreen text-white hover:bg-green-500' : '',
         type === 'Default' ? 'bg-white text-[#333333] hover:bg-gray-50' : '',
+        type === 'Address' ? 'bg-[#ADD976] text-white hover:bg-[#acdf6e]' : '',
         type === 'Border'
           ? `bg-white text-[#333333] hover:bg-gray-50 ${styles.ButtonBorder}`
           : '',
