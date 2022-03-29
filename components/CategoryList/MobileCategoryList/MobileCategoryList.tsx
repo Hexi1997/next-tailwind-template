@@ -37,11 +37,14 @@ const MobileCategoryList: FC<MobileCategoryListProps> = (props) => {
       >
         <div className="text-center text-[1rem] font-[500]">Filter</div>
         {children}
-        <Button className="absolute bottom-4 left-8 h-9 w-40 rounded-[1.5rem] bg-[#666666]">
+        <Button
+          type="None"
+          className="absolute bottom-4 left-8 h-[2.25rem] w-[10rem] rounded-[1.125rem] bg-[#666666] text-white"
+        >
           Restart
         </Button>
         <Button
-          className="absolute bottom-4 right-8 h-9 w-40 rounded-[1.5rem]"
+          className="absolute bottom-4 right-8 h-[2.25rem] w-[10rem] rounded-[1.125rem]"
           onClick={onClose}
         >
           Finished

@@ -2,27 +2,42 @@ import cn from 'classnames';
 import { FC, useState } from 'react';
 
 import { Button } from '@/components';
+import { useIconFont } from '@/utils/hooks/useIconFont';
 
 import styles from './CategoryList.module.scss';
 
+type CategoryItem = {
+  icon?: string;
+  label: string;
+};
 interface CategoryListProps {
   className?: string;
   title?: string;
-  categories: string[];
+  categories: CategoryItem[];
+  value: string | number;
   onSelected?: (item: string) => void;
   isMobile?: boolean; // 是否移动端
 }
 
 // 多于5个就一行3个，否则一行2个
 const CategoryList: FC<CategoryListProps> = (props) => {
-  const { className, title, categories, isMobile, onSelected } = props;
+  const {
+    className,
+    title,
+    categories,
+    value = null,
+    isMobile,
+    onSelected
+  } = props;
 
-  const [selected, setSelected] = useState(categories[0]);
+  const [selected, setSelected] = useState(value);
 
   const handleSelected = (item: string) => {
     onSelected && onSelected(item);
     setSelected(item);
   };
+
+  const { IconFont } = useIconFont();
 
   return (
     <div
@@ -36,9 +51,9 @@ const CategoryList: FC<CategoryListProps> = (props) => {
       {title && (
         <div
           className={cn(
-            'whitespace-nowrap text-[1rem] text-[#666666]',
-            isMobile && 'mb-[1rem]',
-            'lg:w-25 lg:mr-[27px] lg:border-r-[1px] lg:border-solid lg:border-neutral-300 lg:pr-6'
+            'whitespace-nowrap text-[16px] text-[#666666]',
+            isMobile && 'mb-[16px]',
+            'lg:mr-[27px] lg:w-[100px] lg:border-r-[1px] lg:border-solid lg:border-neutral-300 lg:pr-6'
           )}
         >
           {title}
@@ -55,9 +70,9 @@ const CategoryList: FC<CategoryListProps> = (props) => {
       >
         {categories.map((item, index) => (
           <Button
-            key={item}
+            key={item.label}
             className={cn(
-              'rounded-6 h-7',
+              'h-[28px] rounded-[14px]',
               isMobile && 'w-3/4',
               categories.length < 5
                 ? index % 2
@@ -70,13 +85,14 @@ const CategoryList: FC<CategoryListProps> = (props) => {
               categories.length > 4 && index % 3 === 2
                 ? 'justify-self-end'
                 : '',
-              'lg:mr-5 lg:h-9 lg:rounded-[1.125rem] lg:py-4 lg:px-2.5'
+              'lg:mr-5 lg:h-[36px] lg:rounded-[18px] lg:py-4 lg:px-2.5'
             )}
-            type={item === selected ? 'Primary' : 'Border'}
+            type={item.label === selected ? 'Primary' : 'Border'}
             shadow={false}
-            onClick={() => handleSelected(item)}
+            onClick={() => handleSelected(item.label)}
           >
-            {item}
+            {item.label}
+            {item.icon && <IconFont className="pl-2" type={item.icon} />}
           </Button>
         ))}
       </div>
