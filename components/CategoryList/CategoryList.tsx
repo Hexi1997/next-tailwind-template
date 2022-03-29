@@ -9,15 +9,23 @@ interface CategoryListProps {
   className?: string;
   title?: string;
   categories: string[];
+  value: string | number;
   onSelected?: (item: string) => void;
   isMobile?: boolean; // 是否移动端
 }
 
 // 多于5个就一行3个，否则一行2个
 const CategoryList: FC<CategoryListProps> = (props) => {
-  const { className, title, categories, isMobile, onSelected } = props;
+  const {
+    className,
+    title,
+    categories,
+    value = null,
+    isMobile,
+    onSelected
+  } = props;
 
-  const [selected, setSelected] = useState(categories[0]);
+  const [selected, setSelected] = useState(value);
 
   const handleSelected = (item: string) => {
     onSelected && onSelected(item);

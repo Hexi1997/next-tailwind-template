@@ -152,6 +152,8 @@ function Market(props: marketProps) {
   const { className } = props;
   const { t } = useTranslation('market');
   const [showFilter, setShowFilter] = useState(false);
+  const [category, setCategory] = useState('All');
+  const [saleType, setSaleType] = useState('All');
 
   const toggleFilter = (visible: boolean) => {
     setShowFilter(visible);
@@ -173,11 +175,15 @@ function Market(props: marketProps) {
           className="hidden"
           title={Category1Data.title}
           categories={Category1Data.categories}
+          value={category}
+          onSelected={setCategory}
         />
         <CategoryList
           className="hidden"
           title={Category2Data.title}
           categories={Category2Data.categories}
+          value={saleType}
+          onSelected={setSaleType}
         />
 
         <div className={cn('mb-10 hidden', 'lg:flex')}>
@@ -209,11 +215,15 @@ function Market(props: marketProps) {
             title={Category1Data.title}
             categories={Category1Data.categories}
             isMobile={true}
+            value={category}
+            onSelected={setCategory}
           />
           <CategoryList
             title={Category2Data.title}
             categories={Category2Data.categories}
             isMobile={true}
+            value={saleType}
+            onSelected={setSaleType}
           />
           <CategoryList
             title={Category3Data.title}
