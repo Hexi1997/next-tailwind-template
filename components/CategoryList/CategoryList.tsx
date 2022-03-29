@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
 import { Button } from '@/components';
 
@@ -10,11 +10,12 @@ interface CategoryListProps {
   title?: string;
   categories: string[];
   onSelected?: (item: string) => void;
+  isMobile?: boolean; // 是否移动端
 }
 
 // 多于5个就一行3个，否则一行2个
-export function CategoryList(props: CategoryListProps) {
-  const { className, title, categories, onSelected } = props;
+const CategoryList: FC<CategoryListProps> = (props) => {
+  const { className, title, categories, isMobile, onSelected } = props;
 
   const [selected, setSelected] = useState(categories[0]);
 
@@ -36,7 +37,7 @@ export function CategoryList(props: CategoryListProps) {
         <div
           className={cn(
             'whitespace-nowrap text-[1rem] text-[#666666]',
-            'mb-4',
+            isMobile && 'mb-[1rem]',
             'lg:w-25 lg:mr-[27px] lg:border-r-[1px] lg:border-solid lg:border-neutral-300 lg:pr-6'
           )}
         >
@@ -46,17 +47,18 @@ export function CategoryList(props: CategoryListProps) {
       <div
         className={cn(
           'grid gap-y-4 gap-x-4',
+          'lg:flex lg:flex-wrap',
           categories.length > 4
             ? 'grid-cols-3 grid-rows-1'
-            : 'grid-cols-2 grid-rows-2',
-          'lg:flex lg:flex-wrap'
+            : 'grid-cols-2 grid-rows-2'
         )}
       >
         {categories.map((item, index) => (
           <Button
             key={item}
             className={cn(
-              'rounded-6 h-7 w-3/4',
+              'rounded-6 h-7',
+              isMobile && 'w-3/4',
               categories.length < 5
                 ? index % 2
                   ? 'justify-self-end'
@@ -80,4 +82,8 @@ export function CategoryList(props: CategoryListProps) {
       </div>
     </div>
   );
-}
+};
+
+CategoryList.defaultProps = {};
+
+export default CategoryList;

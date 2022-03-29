@@ -205,14 +205,17 @@ function Market(props: marketProps) {
           <CategoryList
             title={Category1Data.title}
             categories={Category1Data.categories}
+            isMobile={true}
           />
           <CategoryList
             title={Category2Data.title}
             categories={Category2Data.categories}
+            isMobile={true}
           />
           <CategoryList
             title={Category3Data.title}
             categories={Category3Data.categories}
+            isMobile={true}
           />
         </MobileCategoryList>
 
