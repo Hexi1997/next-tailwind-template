@@ -13,7 +13,9 @@ export function SectionTitle(props: SectionTitleProps) {
 
   return (
     <div className={cn(styles.SectionTitle, className)}>
-      <h3 className="text-center text-[28px] font-bold">{children}</h3>
+      <h3 className="flex flex-nowrap items-center justify-center text-center text-[28px] font-bold">
+        {children}
+      </h3>
     </div>
   );
 }

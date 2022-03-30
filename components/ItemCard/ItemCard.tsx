@@ -27,8 +27,8 @@ export function ItemCard(props: ItemCardProps) {
       <Image src={data.img} width="320" height="312" />
       <div
         className={cn(
-          styles.contentArea,
-          'z-10 -translate-y-16 bg-white px-4 py-2 transition-all duration-300 sm:translate-y-0 sm:hover:-translate-y-16'
+          'z-10 -translate-y-16 bg-white px-4 py-2 transition-all duration-300 sm:translate-y-0',
+          styles.contentArea
         )}
       >
         <div className="flex items-center justify-between">

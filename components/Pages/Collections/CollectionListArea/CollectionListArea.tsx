@@ -42,7 +42,7 @@ export function CollectionListArea(props: CollectionCardProps) {
                   <h3 className="overflow-hidden text-base font-semibold line-clamp-1 sm:max-w-[200px] sm:text-lg">
                     {item.name}
                   </h3>
-                  <Button className="mt-2 !bg-[#ADD976] px-4 py-1 sm:mt-0">
+                  <Button className="mt-2 !bg-[#ADD976] px-4 py-1 !shadow-none sm:mt-0">
                     <div className="w-40 line-clamp-1">{item.author}</div>
                   </Button>
                 </div>

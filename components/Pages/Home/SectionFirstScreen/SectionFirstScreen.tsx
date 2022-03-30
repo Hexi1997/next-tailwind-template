@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
 import maskImg from '@/assets/images/home/mask.png';
@@ -43,15 +44,19 @@ export function SectionFirstScreen(props: SectionFirstScreenProps) {
             {t('HOME_MARKET_DESC')}
           </p>
           <div className="flex">
-            <Button type="Primary" className="h-9 w-[105px] !rounded-lg">
-              {t('HOME_CREATE_BUTTON_TEXT')}
-            </Button>
-            <Button
-              type="Default"
-              className="ml-[14px] h-9 w-[105px] !rounded-lg"
-            >
-              {t('HOME_MARKET_BUTTON_TEXT')}
-            </Button>
+            <Link href="/create">
+              <Button type="Primary" className="h-9 w-[105px] !rounded-lg">
+                {t('HOME_CREATE_BUTTON_TEXT')}
+              </Button>
+            </Link>
+            <Link href="/market">
+              <Button
+                type="Default"
+                className="ml-[14px] h-9 w-[105px] !rounded-lg"
+              >
+                {t('HOME_MARKET_BUTTON_TEXT')}
+              </Button>
+            </Link>
           </div>
         </div>
         <ImageSwiper />

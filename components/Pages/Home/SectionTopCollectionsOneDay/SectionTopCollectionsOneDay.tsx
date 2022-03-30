@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 
 import collectionIconImg from '@/assets/images/home/usericon2.png';
 import { Button } from '@/components/Common/Button';
+import { TimeStepSelect } from '@/components/Common/TimeStepSelect';
 import { SectionTitle } from '@/components/SectionTitle';
 import { TopRank } from '@/components/TopRank';
 
@@ -84,7 +85,12 @@ export function SectionTopCollectionsOneDay(
   return (
     <div className={cn(styles.SectionTopCollectionsOneDay, className)}>
       <SectionTitle className="mt-[78px] mb-[45px]">
-        {t('HOME_SECTION_TOP_COLLECTION_1_DAY')}
+        <span>{t('HOME_SECTION_TOP_COLLECTION')}</span>
+        <TimeStepSelect
+          options={[1, 7, 30]}
+          defaultIndex={0}
+          cb={(value: number) => console.log(value)}
+        />
       </SectionTitle>
       <div className="grid grid-cols-1 pl-4 sm:pl-0 lg:grid-cols-2 xl:grid-cols-3">
         {[0, 1, 2].map((_, index) => {
