@@ -26,6 +26,45 @@ const itemData = {
   price: '5flow'
 };
 
+const itemProperties = [
+  {
+    id: 1,
+    type: 'Background',
+    content: 'Gray',
+    remark: '11.7% Rarity'
+  },
+  {
+    id: 2,
+    type: 'Background',
+    content: 'Gray',
+    remark: '11.7% Rarity'
+  },
+  {
+    id: 3,
+    type: 'Background',
+    content: 'Gray',
+    remark: '11.7% Rarity'
+  },
+  {
+    id: 4,
+    type: 'Background',
+    content: 'Gray',
+    remark: '11.7% Rarity'
+  },
+  {
+    id: 5,
+    type: 'Background',
+    content: 'Gray',
+    remark: '11.7% Rarity'
+  },
+  {
+    id: 6,
+    type: 'Background',
+    content: 'Gray',
+    remark: '11.7% Rarity'
+  }
+];
+
 interface itemIdProps {
   className?: string;
 }
@@ -75,13 +114,22 @@ function ItemId(props: itemIdProps) {
           <RoundedContainer
             className={cn('px-[21px] pt-[24px] pb-[47px]', 'lg:mt-[40px]')}
           >
-            <h3>Properties</h3>
-            <div>
-              <div>
-                <div>Background</div>
-                <div>Gray</div>
-                <div>11.7% Rarity</div>
-              </div>
+            <h3 className="mb-[20px] text-[22px]">Properties</h3>
+            <div className="grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-4">
+              {itemProperties.map((item) => (
+                <div
+                  key={item.id}
+                  className="rounded-[10px] border-[1px] border-solid border-[#cccccc] px-[20px] py-[12px]"
+                >
+                  <div className="text-sm text-[#666666]">{item.type}</div>
+                  <div className="mt-[8px] text-xl text-[#333333]">
+                    {item.content}
+                  </div>
+                  <div className="mt-[8px] text-right text-sm text-[#666666]">
+                    {item.remark}
+                  </div>
+                </div>
+              ))}
             </div>
           </RoundedContainer>
         </div>
