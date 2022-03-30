@@ -1,5 +1,7 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
+import { useCallback } from 'react';
 
 import listIconImg from '@/assets/images/collection/list.svg';
 import mintIconImg from '@/assets/images/collection/mint.svg';
@@ -14,7 +16,6 @@ export type ActivityType =
   | 'List'
   | 'Minted'
   | 'Sale'
-  | 'Offer'
   | 'Bids'
   | 'Transfer';
 
@@ -24,8 +25,7 @@ export const ActivityTypeArr = [
   'Minted',
   'Sale',
   'Bids',
-  'Transfer',
-  'Offer'
+  'Transfer'
 ];
 
 export interface IAcitivity {
@@ -49,7 +49,7 @@ const acitivityMockData: IAcitivity[] = [
     time: '1 hour ago'
   },
   {
-    type: 'Offer',
+    type: 'Bids',
     itemName: 'Matrix Land（56，15）',
     price: 1.7,
     quantity: 2,
@@ -111,7 +111,7 @@ function getIconByActivityType(type: ActivityType): any {
     case 'Minted':
       return mintIconImg;
       break;
-    case 'Offer':
+    case 'Bids':
       return offerIconImg;
       break;
     case 'Sale':
@@ -125,6 +125,37 @@ function getIconByActivityType(type: ActivityType): any {
 
 export function CollectionActivityList(props: CollectionActivityListProps) {
   const { className } = props;
+  const { t } = useTranslation('collection');
+
+  const getI18NText = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (value: ActivityType): any => {
+      switch (value) {
+        case 'Transfer':
+          return t('COLLECTION_DETAIL_SALE_TYPE_TRANSFERS');
+          break;
+        case 'List':
+          return t('COLLECTION_DETAIL_SALE_TYPE_LISTING');
+          break;
+        case 'Minted':
+          return t('COLLECTION_DETAIL_SALE_TYPE_MINTED');
+          break;
+        case 'Bids':
+          return t('COLLECTION_DETAIL_SALE_TYPE_BIDS');
+          break;
+        case 'Sale':
+          return t('COLLECTION_DETAIL_SALE_TYPE_SALES');
+          break;
+        case 'All':
+          return t('COLLECTION_DETAIL_SALE_TYPE_ALL');
+          break;
+        default:
+          return t('COLLECTION_DETAIL_SALE_TYPE_TRANSFERS');
+          break;
+      }
+    },
+    [t]
+  );
 
   return (
     <div className={cn(styles.CollectionActivityList, className)}>
@@ -135,22 +166,22 @@ export function CollectionActivityList(props: CollectionActivityListProps) {
             <td className="select-none text-white">no title</td>
           </th>
           <th>
-            <td>items</td>
+            <td>{t('COLLECTION_DETAIL_TABLE_FIELD_ITEMS')}</td>
           </th>
           <th>
-            <td>price</td>
+            <td>{t('COLLECTION_DETAIL_TABLE_FIELD_PRICE')}</td>
           </th>
           <th>
-            <td>quantity</td>
+            <td>{t('COLLECTION_DETAIL_TABLE_FIELD_QUANTITY')}</td>
           </th>
           <th>
-            <td>from</td>
+            <td>{t('COLLECTION_DETAIL_TABLE_FIELD_FROM')}</td>
           </th>
           <th>
-            <td>to</td>
+            <td>{t('COLLECTION_DETAIL_TABLE_FIELD_TO')}</td>
           </th>
           <th>
-            <td>time</td>
+            <td>{t('COLLECTION_DETAIL_TABLE_FIELD_TIME')}</td>
           </th>
         </thead>
         <tbody>
@@ -167,7 +198,7 @@ export function CollectionActivityList(props: CollectionActivityListProps) {
                     height={38}
                   />
                 </div>
-                <span className="mt-6">{item.type}</span>
+                <span className="mt-6">{getI18NText(item.type)}</span>
               </td>
               <td className="align-middle text-sm text-[#333333]">
                 {item.itemName}
@@ -208,11 +239,11 @@ export function CollectionActivityList(props: CollectionActivityListProps) {
               </div>
               <div className="flex flex-row flex-wrap items-center space-x-1">
                 <span>
-                  <span>from</span>{' '}
+                  <span>{t('COLLECTION_DETAIL_TABLE_FIELD_FROM')}</span>{' '}
                   <span className="text-themeGreen">{item.from} </span>
                 </span>
                 <span>
-                  <span>to</span>
+                  <span>{t('COLLECTION_DETAIL_TABLE_FIELD_TO')}</span>
                   <span className="ml-1 text-themeGreen">{item.to}</span>
                 </span>
                 <span>{item.time}</span>

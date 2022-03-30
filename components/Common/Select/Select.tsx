@@ -1,11 +1,9 @@
 import { ChevronDown } from 'baseui/icon';
 import {
   Select as BaseSelect,
-  SelectProps as BaseUISelectProps,
-  Value
+  SelectProps as BaseUISelectProps
 } from 'baseui/select';
 import cn from 'classnames';
-import { uniqueId } from 'lodash';
 import { CSSProperties, FC } from 'react';
 
 import styles from './Select.module.scss';

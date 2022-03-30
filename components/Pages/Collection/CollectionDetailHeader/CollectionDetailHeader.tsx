@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 
 import circleImg from '@/assets/images/collection/circle.png';
 import addressTypeImg from '@/assets/images/collection/ethereum.svg';
@@ -18,6 +19,7 @@ interface CollectionDetailHeaderProps {
 
 export function CollectionDetailHeader(props: CollectionDetailHeaderProps) {
   const { className, data } = props;
+  const { t } = useTranslation('collection');
 
   return (
     <div className={cn(styles.CollectionDetailHeader, className, 'relative')}>
@@ -41,7 +43,9 @@ export function CollectionDetailHeader(props: CollectionDetailHeaderProps) {
           </Button>
         </div>
         <div className="mt-[11px] mb-[5px]">
-          <span className="text-[#666666]">Create by</span>
+          <span className="text-[#666666]">
+            {t('COLLECTION_DETAIL_CREATE_BY')}
+          </span>
           <span className="ml-3 cursor-pointer text-themeGreen">
             {data.createBy}
           </span>
