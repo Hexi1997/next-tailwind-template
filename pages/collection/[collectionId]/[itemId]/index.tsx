@@ -97,9 +97,20 @@ function ItemId(props: itemIdProps) {
           'lg:flex'
         )}
       >
-        <div className="flex-[3_0_0%]">
-          <RoundedContainer className={cn('px-[20px] pt-[30px] pb-[47px]')}>
-            <div className="mb-[20px] flex justify-end">
+        <div className="lg:flex-[3_0_0%]">
+          <RoundedContainer
+            className={cn(
+              'lg:block lg:px-[20px] lg:pt-[30px] lg:pb-[47px]',
+              'flex flex-col p-5'
+            )}
+          >
+            <div
+              className={cn(
+                'mb-[20px] flex',
+                'lg:justify-end',
+                'justify-between'
+              )}
+            >
               <span className="mr-[20px] flex items-center text-[#666666]">
                 <IconFont type="icon-heart" className="pr-[8px] text-[20px]" />
                 {itemData.favorCount}
@@ -109,13 +120,25 @@ function ItemId(props: itemIdProps) {
                 {itemData.watchCount}
               </span>
             </div>
-            <Image src={itemData.image} width="605" height="699" />
+            <Image
+              className={cn('lg:m-0', 'shrink')}
+              src={itemData.image}
+              width="605"
+              height="699"
+            />
           </RoundedContainer>
           <RoundedContainer
-            className={cn('px-[21px] pt-[24px] pb-[47px]', 'lg:mt-[40px]')}
+            className={cn('px-[21px] pt-[24px] pb-[47px]', 'mt-[40px]')}
           >
             <h3 className="mb-[20px] text-[22px]">Properties</h3>
-            <div className="grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-4">
+            <div
+              className={cn(
+                'grid',
+                'lg:grid-cols-3 lg:grid-rows-2 lg:gap-x-2 lg:gap-y-4',
+                'md:grid-cols-2 md:grid-rows-3 md:gap-x-4 md:gap-y-6',
+                'gap-y-6'
+              )}
+            >
               {itemProperties.map((item) => (
                 <div
                   key={item.id}
@@ -133,7 +156,7 @@ function ItemId(props: itemIdProps) {
             </div>
           </RoundedContainer>
         </div>
-        <div className="ml-[65px] w-[563px]">
+        <div className="lg:ml-[65px] lg:w-[563px]">
           <h4 className="mt-[40px] text-base font-medium text-[#03D34A]">
             MatrixWorld LandVoucher
           </h4>
