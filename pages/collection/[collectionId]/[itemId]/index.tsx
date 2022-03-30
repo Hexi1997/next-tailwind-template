@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 
-import collectionListing from '@/assets/images/collection/collectionListing.png';
+import listing from '@/assets/images/collection/list.svg';
 import hotBidsImg1 from '@/assets/images/home/hot_bids_2.png';
 import { Button, RoundedContainer, Tabs } from '@/components';
 import {
@@ -103,9 +103,9 @@ function ItemId(props: itemIdProps) {
             </div>
           </div>
           <RoundedContainer className="mt-[50px] divide-y-[1px] divide-solid divide-[#eeeeee] px-[30px] py-[20px]">
-            <div className="pb-[11px] text-base font-normal text-[#666666]">
-              <Image src={collectionListing} />
-              Listing
+            <div className="flex items-center pb-[11px] text-base font-normal text-[#666666]">
+              <Image src={listing} width={36} height={36} />
+              <span>Listing</span>
             </div>
             <div className="pt-[16px] text-2xl font-semibold">
               {itemData.price}

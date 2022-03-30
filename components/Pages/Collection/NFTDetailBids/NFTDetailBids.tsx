@@ -86,27 +86,35 @@ export function NFTDetailBids(props: NFTDetailBidsProps) {
       <table className="table w-full">
         <thead>
           {columns.map((item) => (
-            <th className="py-[20px] text-base text-[#999999]" key={item}>
+            <th
+              className="pt-[20px] pb-[4px] text-base text-[#999999]"
+              key={item}
+            >
               <td>{item}</td>
             </th>
           ))}
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr className="" key={item.id}>
-              <td className="pb-[32px] align-middle">
+            <tr
+              className={cn(
+                'hover:border-[1px] hover:border-solid hover:border-gray-200 hover:shadow-xl'
+              )}
+              key={item.id}
+            >
+              <td className="py-[16px] align-middle">
                 <div className="text-2xl font-bold">{item.price}</div>
                 <div className="text-sm text-[#333333] opacity-50">
                   {item.priceDollar}
                 </div>
               </td>
-              <td className="pb-[32px] align-middle">
+              <td className="align-middle">
                 <Image src={item.avatar} width={28} height={28} />
-                <p className="ml-[11px] inline-block translate-y-[-25%]">
+                <div className="ml-[11px] inline-block translate-y-[-25%]">
                   {item.by}
-                </p>
+                </div>
               </td>
-              <td className="pb-[32px] align-middle">{item.time}</td>
+              <td className="align-middle">{item.time}</td>
             </tr>
           ))}
         </tbody>
