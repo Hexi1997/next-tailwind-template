@@ -102,9 +102,7 @@ export function NFTDetailActivities(props: NFTDetailActivitiesProps) {
         <tbody>
           {data.map((item) => (
             <tr
-              className={cn(
-                'hover:border-[1px] hover:border-solid hover:border-gray-200 hover:shadow-xl'
-              )}
+              className={cn('hover:rounded-xl hover:shadow-xl')}
               key={item.id}
             >
               <td className="align-middle">

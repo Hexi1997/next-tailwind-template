@@ -97,7 +97,7 @@ function ItemId(props: itemIdProps) {
           'lg:flex'
         )}
       >
-        <div>
+        <div className="flex-[3_0_0%]">
           <RoundedContainer className={cn('px-[20px] pt-[30px] pb-[47px]')}>
             <div className="mb-[20px] flex justify-end">
               <span className="mr-[20px] flex items-center text-[#666666]">
