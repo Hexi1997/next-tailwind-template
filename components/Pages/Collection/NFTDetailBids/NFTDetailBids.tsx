@@ -1,5 +1,8 @@
 import cn from 'classnames';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import userIconImg from '@/assets/images/home/usericon2.png';
 
@@ -9,7 +12,6 @@ interface NFTDetailBidsProps {
   className?: string;
 }
 
-const columns = ['price', 'by', 'time'];
 const data = [
   {
     id: 1,
@@ -79,6 +81,13 @@ const data = [
 
 export function NFTDetailBids(props: NFTDetailBidsProps) {
   const { className } = props;
+  const { t } = useTranslation('collection');
+
+  const columns = [
+    t('COLLECTION_NFT_TAB_TABLE_HEADER_PRICE'),
+    t('COLLECTION_NFT_TAB_TABLE_HEADER_BY'),
+    t('COLLECTION_NFT_TAB_TABLE_HEADER_TIME')
+  ];
 
   return (
     <div className={cn(styles.NFTDetailBids, className)}>

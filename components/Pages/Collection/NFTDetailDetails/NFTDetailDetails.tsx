@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 
 import aboutCollection from '@/assets/images/collection/aboutCollection.svg';
 import aboutNFT from '@/assets/images/collection/aboutNFT.svg';
@@ -17,16 +18,22 @@ interface NFTDetailDetailsProps {
   className?: string;
 }
 
-const othersInfo = [
-  { title: 'Contract Address', content: 'Oxbc4c…F13d' },
-  { title: 'Token ID', content: '6045' },
-  { title: 'Token Standard', content: 'Erc-721' },
-  { title: 'Blockchain', content: 'Ethereum' },
-  { title: 'Metadata', content: 'Forzen' }
-];
-
 export function NFTDetailDetails(props: NFTDetailDetailsProps) {
   const { className } = props;
+  const { t } = useTranslation('collection');
+  const othersInfo = [
+    {
+      title: t('COLLECTION_NFT_TAB_DETAIL_CONTRACT_ADDRESS'),
+      content: 'Oxbc4c…F13d'
+    },
+    { title: t('COLLECTION_NFT_TAB_DETAIL_TOKEN_ID'), content: '6045' },
+    {
+      title: t('COLLECTION_NFT_TAB_DETAIL_TOKEN_STANDARD'),
+      content: 'Erc-721'
+    },
+    { title: t('COLLECTION_NFT_TAB_DETAIL_BLOCKCHAIN'), content: 'Ethereum' },
+    { title: t('COLLECTION_NFT_TAB_DETAIL_METADATA'), content: 'Forzen' }
+  ];
 
   return (
     <div className={cn(styles.NFTDetailDetails, className)}>
@@ -34,7 +41,9 @@ export function NFTDetailDetails(props: NFTDetailDetailsProps) {
         <div className="divide-y-[1px] divide-solid divide-[#dddddd]">
           <h2 className="pb-[10px] text-[#666666]">
             <Image src={aboutNFT} />
-            <span className="pl-[12px]">About The NFT</span>
+            <span className="pl-[12px]">
+              {t('COLLECTION_NFT_TAB_DETAIL_ABOUT_NFT')}
+            </span>
           </h2>
           <p className="pt-[20px] text-sm leading-6 text-[#333333]">
             I&apos;ve worked in book cover design, small press comics, mural
@@ -45,7 +54,9 @@ export function NFTDetailDetails(props: NFTDetailDetailsProps) {
         <div className="mt-[45px] divide-y-[1px] divide-solid divide-[#dddddd]">
           <h2 className="pb-[10px] text-[#666666]">
             <Image src={aboutCollection} />
-            <span className="pl-[12px]">About The Collection</span>
+            <span className="pl-[12px]">
+              {t('COLLECTION_NFT_TAB_DETAIL_ABOUT_COLLECTION')}
+            </span>
           </h2>
           <div>
             <div className="mt-[20px] flex justify-between">
@@ -82,7 +93,9 @@ export function NFTDetailDetails(props: NFTDetailDetailsProps) {
         <div className="mt-[45px] divide-y-[1px] divide-solid divide-[#dddddd]">
           <h2 className="pb-[10px] text-[#666666]">
             <Image src={others} />
-            <span className="pl-[12px]">Others</span>
+            <span className="pl-[12px]">
+              {t('COLLECTION_NFT_TAB_DETAIL_OTHERS')}
+            </span>
           </h2>
           <div className="pt-[12px]">
             {othersInfo.map((item, index) => (

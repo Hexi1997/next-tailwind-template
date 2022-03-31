@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 
 import transfer from '@/assets/images/collection/transfer.svg';
 
@@ -9,7 +10,6 @@ interface NFTDetailActivitiesProps {
   className?: string;
 }
 
-const columns = ['', 'price', 'from', 'to', 'time'];
 const data = [
   {
     id: 1,
@@ -79,6 +79,14 @@ const data = [
 
 export function NFTDetailActivities(props: NFTDetailActivitiesProps) {
   const { className } = props;
+  const { t } = useTranslation('collection');
+  const columns = [
+    '',
+    t('COLLECTION_NFT_TAB_TABLE_HEADER_PRICE'),
+    t('COLLECTION_NFT_TAB_TABLE_HEADER_FROM'),
+    t('COLLECTION_NFT_TAB_TABLE_HEADER_TO'),
+    t('COLLECTION_NFT_TAB_TABLE_HEADER_TIME')
+  ];
 
   return (
     <div className={cn(styles.NFTDetailActivities, className)}>
