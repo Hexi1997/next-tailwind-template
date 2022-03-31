@@ -40,7 +40,10 @@ function Stars(props: starsProps) {
       />
       <div className={cn(styles.stars, className, 'container')}>
         <CollectionsLayout>
-          <CollectionListArea data={shuffle(collectionAllMockData)} />
+          <CollectionListArea
+            className="mb-10"
+            data={shuffle(collectionAllMockData)}
+          />
         </CollectionsLayout>
       </div>
     </>
