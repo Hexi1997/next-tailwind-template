@@ -3,4 +3,6 @@ export { MobileCategoryList } from './CategoryList/MobileCategoryList';
 export { Button } from './Common/Button';
 export { Drawer } from './Common/Drawer';
 export { Select } from './Common/Select';
+export { Tabs } from './Common/Tabs';
 export { ItemCard } from './ItemCard';
+export { RoundedContainer } from './RoundedContainer';

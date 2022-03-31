@@ -73,7 +73,7 @@ const CategoryList: FC<CategoryListProps> = (props) => {
             key={item.label}
             className={cn(
               'h-[28px] rounded-[14px]',
-              isMobile && 'w-3/4',
+              isMobile && 'w-full md:w-3/4',
               categories.length < 5
                 ? index % 2
                   ? 'justify-self-end'
@@ -92,7 +92,9 @@ const CategoryList: FC<CategoryListProps> = (props) => {
             onClick={() => handleSelected(item.label)}
           >
             {item.label}
-            {item.icon && <IconFont className="pl-2" type={item.icon} />}
+            {item.icon && (
+              <IconFont className={cn('pl-1', 'md:pl-2')} type={item.icon} />
+            )}
           </Button>
         ))}
       </div>
