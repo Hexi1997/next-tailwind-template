@@ -3,10 +3,18 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from 'next/image';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
+import { useState } from 'react';
 
 import listing from '@/assets/images/collection/list.svg';
 import hotBidsImg1 from '@/assets/images/home/hot_bids_2.png';
-import { Button, RoundedContainer, Tabs } from '@/components';
+import {
+  Button,
+  Input,
+  Modal,
+  RoundedContainer,
+  Select,
+  Tabs
+} from '@/components';
 import {
   NFTDetailActivities,
   NFTDetailBids,
@@ -84,6 +92,16 @@ export async function getServerSideProps({
 function ItemId(props: itemIdProps) {
   const { className } = props;
   const { IconFont } = useIconFont();
+  const [openBidModal, setOpenBidModal] = useState(false);
+  const [openCompleteModal, setOpenCompleteModal] = useState(false);
+  const [bidCoin, setBidCoin] = useState(null as unknown as string);
+  const [bidCoinUnit, setBidCoinUnit] = useState('Flow');
+  const restCoin = 1; // 用户剩余的钱
+
+  const bidCoinOptions = [
+    { id: 1, label: 'Flow' },
+    { id: 2, label: 'Fusd' }
+  ];
 
   return (
     <>
@@ -100,7 +118,7 @@ function ItemId(props: itemIdProps) {
         <div className="lg:flex-[3_0_0%]">
           {/* 移动端：标题放在图片上方 */}
           <div className={cn('lg:hidden', 'mb-10 px-5')}>
-            <h4 className="mt-[40px] text-base font-medium text-[#03D34A]">
+            <h4 className="mt-[40px] text-base font-medium text-themeGreen">
               MatrixWorld LandVoucher
             </h4>
             <h1 className="mt-[6px] mb-[45px] text-[28px] font-bold text-[#333333]">
@@ -180,7 +198,7 @@ function ItemId(props: itemIdProps) {
         <div className="lg:ml-[65px] lg:w-[563px]">
           {/* PC端：标题和图片并排放 */}
           <div className={cn('lg:block', 'hidden')}>
-            <h4 className="mt-[40px] text-base font-medium text-[#03D34A]">
+            <h4 className="mt-[40px] text-base font-medium text-themeGreen">
               MatrixWorld LandVoucher
             </h4>
             <h1 className="mt-[6px] mb-[45px] text-[28px] font-bold text-[#333333]">
@@ -209,8 +227,18 @@ function ItemId(props: itemIdProps) {
             </div>
           </RoundedContainer>
           <div className="mt-[60px] grid grid-cols-2 grid-rows-1 gap-12">
-            <Button className="h-[39px] rounded-[20px]">Buy</Button>
-            <Button className="h-[39px] rounded-[20px]">Place A Bid</Button>
+            <Button
+              className="h-[39px] rounded-[20px]"
+              onClick={() => setOpenCompleteModal(true)}
+            >
+              Buy
+            </Button>
+            <Button
+              className="h-[39px] rounded-[20px]"
+              onClick={() => setOpenBidModal(true)}
+            >
+              Place A Bid
+            </Button>
           </div>
           <Tabs
             className="mt-[60px]"
@@ -230,6 +258,157 @@ function ItemId(props: itemIdProps) {
             ]}
           />
         </div>
+        {/* 竞标Modal */}
+        <Modal
+          isOpen={openBidModal}
+          onClose={setOpenBidModal}
+          title="Place A Bid"
+        >
+          <div className="mb-[20px] flex w-full">
+            <Input
+              placeholder="Enter Bid"
+              value={bidCoin}
+              onChange={(e) => setBidCoin(e.target.value)}
+              style={{
+                width: '20rem',
+                borderRadius: '18px 0 0 18px',
+                borderRight: 'transparent',
+                font: '700 20px Inter'
+              }}
+            />
+            <Select
+              style={{
+                borderRadius: '0 18px 18px 0',
+                width: '8rem',
+                borderLeft: 'none'
+              }}
+              options={bidCoinOptions}
+            />
+          </div>
+          <div
+            className={cn(
+              'text-sm leading-6 text-[#666666]',
+              bidCoin && bidCoinUnit ? '' : 'px-[43px] text-center'
+            )}
+          >
+            {bidCoin && bidCoinUnit ? (
+              <div>
+                <div className="flex items-center justify-between">
+                  <span>Your Biding Balance</span>
+                  <span>0.234 {bidCoinUnit}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span>Your Balance</span>
+                  <span>0.004 {bidCoinUnit}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span>Service Fee</span>
+                  <span>0.120 {bidCoinUnit}</span>
+                </div>
+                <div className="mt-[8px] flex items-center justify-between">
+                  <span>Total Pay</span>
+                  <span className="text-lg font-bold text-[#333333]">
+                    1.789 {bidCoinUnit}
+                  </span>
+                </div>
+                <div className="text-right">$3675.24</div>
+              </div>
+            ) : (
+              <div>
+                Make sure you have enough money in your wallet to place the bid
+              </div>
+            )}
+          </div>
+          <div className="my-[40px]">
+            <Button
+              type={
+                bidCoin && bidCoinUnit && Number(bidCoin) <= restCoin
+                  ? 'Primary'
+                  : 'None'
+              }
+              shadow={false}
+              className={cn(
+                'h-[40px] w-full rounded-[40px]',
+                bidCoin && bidCoinUnit ? '' : 'bg-[#ededed] text-[#333333]',
+                Number(bidCoin) <= restCoin
+                  ? ''
+                  : 'border-[1px] border-solid border-black'
+              )}
+            >
+              {Number(bidCoin) <= restCoin || !bidCoin
+                ? 'Place A Bid'
+                : 'Add Funds'}
+            </Button>
+            {Number(bidCoin) > restCoin && (
+              <div className="mt-[10px] text-center text-sm font-medium text-[#999999]">
+                Not Enough Founds To Place Bid
+              </div>
+            )}
+          </div>
+        </Modal>
+        {/* 交易完成Modal */}
+        <Modal
+          title="Complete Checkout"
+          isOpen={openCompleteModal}
+          onClose={setOpenCompleteModal}
+        >
+          <div className="flex items-center rounded-2xl border-[1px] border-solid border-[#999999] p-2">
+            <Image
+              src={hotBidsImg1}
+              width={90}
+              height={90}
+              className="rounded-2xl"
+            />
+            <div className="ml-7">
+              <p className="text-sm font-medium text-themeGreen">
+                MatrixWorld LandVoucher
+              </p>
+              <p className="text-xl font-bold text-[#333333]">
+                Depressive Hamsyer Rise Root
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 text-sm leading-6 text-[#666666]">
+            <div className="flex items-center justify-between">
+              <span>Your Biding Balance</span>
+              <span>0.234 {bidCoinUnit}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Your Balance</span>
+              <span>0.004 {bidCoinUnit}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Service Fee</span>
+              <span>0.120 {bidCoinUnit}</span>
+            </div>
+            <div className="mt-[8px] flex items-center justify-between">
+              <span>Total Pay</span>
+              <span className="text-lg font-bold text-[#333333]">
+                1.789 {bidCoinUnit}
+              </span>
+            </div>
+            <div className="text-right">$3675.24</div>
+          </div>
+          <div className="my-[40px] w-full">
+            <Button
+              type={Number(bidCoin) <= restCoin ? 'Primary' : 'None'}
+              className={cn(
+                'h-[40px] w-full rounded-[40px]',
+                Number(bidCoin) <= restCoin
+                  ? ''
+                  : 'border-[1px] border-solid border-black'
+              )}
+              shadow={false}
+            >
+              {Number(bidCoin) <= restCoin ? 'Confirm Checkout' : 'Add Funds'}
+            </Button>
+            {Number(bidCoin) > restCoin && (
+              <div className="mt-[10px] text-center text-sm font-medium text-[#999999]">
+                Not Enough Founds To Place Bid
+              </div>
+            )}
+          </div>
+        </Modal>
       </div>
     </>
   );

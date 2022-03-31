@@ -88,7 +88,7 @@ export function NFTDetailDetails(props: NFTDetailDetailsProps) {
             {othersInfo.map((item, index) => (
               <div key={index} className="flex justify-between py-[8px]">
                 <span className="text-sm text-[#333333]">{item.title}</span>
-                <span className="text-[#03d34a]">{item.content}</span>
+                <span className="text-themeGreen">{item.content}</span>
               </div>
             ))}
           </div>
