@@ -11,10 +11,11 @@ interface ITab {
 interface TabsProps {
   className?: string;
   tabs: ITab[];
+  tabTitleFontSize?: string;
 }
 
 export function Tabs(props: TabsProps) {
-  const { className, tabs } = props;
+  const { className, tabs, tabTitleFontSize } = props;
   const [activeKey, setActiveKey] = useState<string>(tabs[0].title);
 
   return (
@@ -25,6 +26,11 @@ export function Tabs(props: TabsProps) {
         }}
         activeKey={activeKey}
         overrides={{
+          Tab: {
+            style: () => ({
+              fontSize: tabTitleFontSize || '18px'
+            })
+          },
           TabBar: {
             style: () => ({
               backgroundColor: '#ffffff'
@@ -32,7 +38,7 @@ export function Tabs(props: TabsProps) {
           },
           TabContent: {
             style: () => ({
-              padding: '0 10px'
+              padding: '0 0px'
             })
           }
         }}

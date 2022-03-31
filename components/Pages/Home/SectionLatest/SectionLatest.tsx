@@ -26,7 +26,7 @@ export const collectionMockData: ICollectionData[] = [
   {
     img: mockImg1,
     icon: iconImg,
-    link: '/',
+    link: '/collection/1',
     iconLink: '/',
     author: 'by vandalzjdvnd vandalzjdvnd',
     name: 'Heart & Sol Heart & Sol Heart & Sol Heart & Sol',
@@ -35,7 +35,7 @@ export const collectionMockData: ICollectionData[] = [
   {
     img: mockImg2,
     icon: iconImg,
-    link: '/',
+    link: '/collection/1',
     iconLink: '/',
     author: 'by vandalzjdvnd',
     name: 'Heart & Sol',
@@ -44,7 +44,7 @@ export const collectionMockData: ICollectionData[] = [
   {
     img: mockImg3,
     icon: iconImg,
-    link: '/',
+    link: '/collection/1',
     iconLink: '/',
     author: 'by vandalzjdvnd',
     name: 'Heart & Sol',

@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 
 import greenHeart from '@/assets/images/home/green_heart.svg';
 import normalHeart from '@/assets/images/home/line_heart.svg';
@@ -15,6 +16,7 @@ interface ItemCardProps {
 
 export function ItemCard(props: ItemCardProps) {
   const { className, data } = props;
+  const { t } = useTranslation();
 
   return (
     <div
@@ -27,8 +29,8 @@ export function ItemCard(props: ItemCardProps) {
       <Image src={data.img} width="320" height="312" />
       <div
         className={cn(
-          styles.contentArea,
-          'z-10 -translate-y-16 bg-white px-4 py-2 transition-all duration-300 sm:translate-y-0 sm:hover:-translate-y-16'
+          'z-10 -translate-y-16 bg-white px-4 py-2 transition-all duration-300 sm:translate-y-0',
+          styles.contentArea
         )}
       >
         <div className="flex items-center justify-between">
@@ -55,7 +57,9 @@ export function ItemCard(props: ItemCardProps) {
           </div>
           <span className="font-bold">{data.price}</span>
         </div>
-        <Button className="mt-8 h-8 w-full !rounded-full">BUY NOW</Button>
+        <Button className="mt-8 h-8 w-full !rounded-full">
+          {t('COMMON_COMPONENT_BUY_NOW')}
+        </Button>
       </div>
     </div>
   );

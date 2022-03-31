@@ -40,7 +40,10 @@ function Music(props: musicProps) {
       />
       <div className={cn(styles.music, className, 'container')}>
         <CollectionsLayout>
-          <CollectionListArea data={shuffle(collectionAllMockData)} />
+          <CollectionListArea
+            className="mb-10"
+            data={shuffle(collectionAllMockData)}
+          />
         </CollectionsLayout>
       </div>
     </>

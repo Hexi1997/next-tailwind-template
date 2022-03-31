@@ -1,2 +1,7 @@
 .ItemCard {
+  &:hover {
+    .contentArea {
+      transform: translate(0, -64px);
+    }
+  }
 }

@@ -40,7 +40,10 @@ function Movies(props: moviesProps) {
       />
       <div className={cn(styles.movies, className, 'container')}>
         <CollectionsLayout>
-          <CollectionListArea data={shuffle(collectionAllMockData)} />
+          <CollectionListArea
+            className="mb-10"
+            data={shuffle(collectionAllMockData)}
+          />
         </CollectionsLayout>
       </div>
     </>

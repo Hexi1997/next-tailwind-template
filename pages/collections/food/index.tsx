@@ -40,7 +40,10 @@ function Food(props: foodProps) {
       />
       <div className={cn(styles.food, className, 'container')}>
         <CollectionsLayout>
-          <CollectionListArea data={shuffle(collectionAllMockData)} />
+          <CollectionListArea
+            className="mb-10"
+            data={shuffle(collectionAllMockData)}
+          />
         </CollectionsLayout>
       </div>
     </>

@@ -1,9 +1,10 @@
 import cn from 'classnames';
-import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
+import { useCallback, useState } from 'react';
 
 import { Button } from '@/components/Common/Button';
 
-import { ActivityTypeArr } from '../CollectionActivityList';
+import { ActivityType, ActivityTypeArr } from '../CollectionActivityList';
 import styles from './CollectionActivitySelector.module.scss';
 
 interface CollectionActivitySelectorProps {
@@ -15,6 +16,37 @@ export function CollectionActivitySelector(
 ) {
   const { className } = props;
   const [activeKey, setActiveKey] = useState(ActivityTypeArr[0]);
+  const { t } = useTranslation('collection');
+
+  const getI18NText = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (value: ActivityType): any => {
+      switch (value) {
+        case 'Transfer':
+          return t('COLLECTION_DETAIL_SALE_TYPE_TRANSFERS');
+          break;
+        case 'List':
+          return t('COLLECTION_DETAIL_SALE_TYPE_LISTING');
+          break;
+        case 'Minted':
+          return t('COLLECTION_DETAIL_SALE_TYPE_MINTED');
+          break;
+        case 'Bids':
+          return t('COLLECTION_DETAIL_SALE_TYPE_BIDS');
+          break;
+        case 'Sale':
+          return t('COLLECTION_DETAIL_SALE_TYPE_SALES');
+          break;
+        case 'All':
+          return t('COLLECTION_DETAIL_SALE_TYPE_ALL');
+          break;
+        default:
+          return t('COLLECTION_DETAIL_SALE_TYPE_TRANSFERS');
+          break;
+      }
+    },
+    [t]
+  );
 
   return (
     <div
@@ -36,7 +68,7 @@ export function CollectionActivitySelector(
             activeKey === item ? 'bg-themeGreen !text-white' : ''
           )}
         >
-          {item}
+          {getI18NText(item as ActivityType)}
         </Button>
       ))}
     </div>

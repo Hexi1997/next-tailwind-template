@@ -17,7 +17,10 @@ export function TopRank(props: TopRankProps) {
 
   return (
     <div className={cn(styles.TopRank, className)}>
-      <Button type="Default" className="relative h-16 w-[316px] !rounded-full">
+      <Button
+        type="Default"
+        className="relative -z-0 h-16 w-[316px]  !rounded-full"
+      >
         <div className="absolute -left-4 top-1">
           <Image src={data.icon} width="56" height="56" />
           <div className="absolute -left-2 -top-2 h-[73px] w-[73px]">

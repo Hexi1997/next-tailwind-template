@@ -46,7 +46,10 @@ function All(props: allProps) {
       />
       <div className={cn(styles.all, className, 'container')}>
         <CollectionsLayout>
-          <CollectionListArea data={shuffle(collectionAllMockData)} />
+          <CollectionListArea
+            className="mb-10"
+            data={shuffle(collectionAllMockData)}
+          />
         </CollectionsLayout>
       </div>
     </>

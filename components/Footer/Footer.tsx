@@ -1,11 +1,13 @@
 import cn from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 import discord from '@/assets/images/footer/discord.svg';
 import meta from '@/assets/images/footer/meta.svg';
 import twitter from '@/assets/images/footer/twitter.svg';
 
+import globalConfig from '../../assets/i18n/flowmarket-frontend-copywriter/global';
 import styles from './Footer.module.scss';
 
 interface FooterProps {
@@ -14,6 +16,7 @@ interface FooterProps {
 
 export function Footer(props: FooterProps) {
   const { className } = props;
+  const { t } = useTranslation(['common', 'menu']);
 
   return (
     <div
@@ -39,7 +42,7 @@ export function Footer(props: FooterProps) {
             'mr-4'
           )}
         ></div>
-        Flow Market
+        {t('COMMON_MARKET_NAME')}
       </div>
       <div
         className={cn(
@@ -57,9 +60,10 @@ export function Footer(props: FooterProps) {
             'mt-10'
           )}
         >
-          <Link href="/collections">Collections</Link>
-          <Link href="/market">Market</Link>
-          <Link href="/activities">Activities</Link>
+          <Link href="/collections">
+            {t('MENU_COLLECTIONS', { ns: 'menu' })}
+          </Link>
+          <Link href="/market">{t('MENU_MARKET', { ns: 'menu' })}</Link>
         </div>
         <div className={cn('lg:block', 'flex items-center justify-center')}>
           <p
@@ -69,28 +73,40 @@ export function Footer(props: FooterProps) {
               'mr-[32px]'
             )}
           >
-            contact us
+            {t('COMMON_CONTACT_US')}
           </p>
           <div
             className={cn(
               'item-center grid grid-cols-3 grid-rows-1 justify-between gap-x-[32px]'
             )}
           >
-            <Link href="/">
+            <a
+              href={globalConfig.socialLinks.twitter}
+              target="_blank"
+              rel="noreferrer"
+            >
               <div className="flex h-[44px] w-[44px] cursor-pointer justify-center rounded-[16px] bg-white align-middle">
                 <Image src={twitter} />
               </div>
-            </Link>
-            <Link href="/">
+            </a>
+            <a
+              href={globalConfig.socialLinks.medium}
+              target="_blank"
+              rel="noreferrer"
+            >
               <div className="flex h-[44px] w-[44px] cursor-pointer justify-center rounded-[16px] bg-white align-middle">
                 <Image src={meta} />
               </div>
-            </Link>
-            <Link href="/">
+            </a>
+            <a
+              href={globalConfig.socialLinks.discord}
+              target="_blank"
+              rel="noreferrer"
+            >
               <div className="flex h-[44px] w-[44px] cursor-pointer justify-center rounded-[16px] bg-white align-middle">
                 <Image src={discord} />
               </div>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
