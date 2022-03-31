@@ -40,7 +40,7 @@ export function MobileNav(props: MobileNavProps) {
         size={SIZE.full}
       >
         <ul className="px-2 pt-4 pb-14 md:px-4 lg:px-12">
-          <Search className="m-4 block sm:hidden" />
+          <Search className="m-4 block sm:hidden" cb={toggleShowDrawer} />
           <Accordion accordion={true}>
             {menus.map((item) => {
               if (item.sub?.length) {
