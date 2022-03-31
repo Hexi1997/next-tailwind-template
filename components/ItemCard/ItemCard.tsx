@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 
 import greenHeart from '@/assets/images/home/green_heart.svg';
 import normalHeart from '@/assets/images/home/line_heart.svg';
@@ -15,6 +16,7 @@ interface ItemCardProps {
 
 export function ItemCard(props: ItemCardProps) {
   const { className, data } = props;
+  const { t } = useTranslation();
 
   return (
     <div
@@ -55,7 +57,9 @@ export function ItemCard(props: ItemCardProps) {
           </div>
           <span className="font-bold">{data.price}</span>
         </div>
-        <Button className="mt-8 h-8 w-full !rounded-full">BUY NOW</Button>
+        <Button className="mt-8 h-8 w-full !rounded-full">
+          {t('COMMON_COMPONENT_BUY_NOW')}
+        </Button>
       </div>
     </div>
   );

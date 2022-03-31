@@ -142,7 +142,7 @@ export function Search(props: SearchProps) {
             <CloseOutlined className="text-gray-400" />
           </div>
           <div
-            className="absolute top-[36px] left-0 h-[300px] w-full overflow-auto rounded-xl border-[2px] !border-t-0 border-solid border-gray-200 bg-white px-5 py-6 shadow-lg lg:h-[500px] xl:h-auto"
+            className="absolute top-[36px] left-0 z-30 h-[300px] w-full overflow-auto rounded-xl border-[2px] !border-t-0 border-solid border-gray-200 bg-white px-5 py-6 shadow-lg lg:h-[500px] xl:h-auto"
             onClick={() => {
               setIsShowResult(false);
               cb && cb();
@@ -166,9 +166,11 @@ export function Search(props: SearchProps) {
                 title={t('COMMON_SEARCH_RESULT_USERS_TITLE')}
               />
             )}
-            <Button type="Primary" className="w-full !rounded-full py-[10px]">
-              {t('COMMON_SEARCH_CHECK_ALL_RESULTS')}
-            </Button>
+            <Link href={`/result?query=${value}`}>
+              <Button type="Primary" className="w-full !rounded-full py-[10px]">
+                {t('COMMON_SEARCH_CHECK_ALL_RESULTS')}
+              </Button>
+            </Link>
           </div>
         </>
       )}
