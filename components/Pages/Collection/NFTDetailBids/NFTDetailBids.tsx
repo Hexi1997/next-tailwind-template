@@ -83,7 +83,7 @@ export function NFTDetailBids(props: NFTDetailBidsProps) {
   return (
     <div className={cn(styles.NFTDetailBids, className)}>
       {/* PC端：表格 */}
-      <table className="table w-full">
+      <table className={cn('lg:table lg:w-full', 'hidden')}>
         <thead>
           {columns.map((item) => (
             <th
@@ -117,6 +117,8 @@ export function NFTDetailBids(props: NFTDetailBidsProps) {
           ))}
         </tbody>
       </table>
+      {/* 移动端：行排列展示 */}
+      <div className={cn('lg:hidden')}> </div>
     </div>
   );
 }

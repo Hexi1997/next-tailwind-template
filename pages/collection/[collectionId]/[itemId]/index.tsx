@@ -93,11 +93,32 @@ function ItemId(props: itemIdProps) {
           styles.itemId,
           'container',
           className,
-          'pt-[60px] pb-[94px]',
-          'lg:flex'
+          'pb-10',
+          'lg:flex lg:pt-[60px] lg:pb-[94px]'
         )}
       >
         <div className="lg:flex-[3_0_0%]">
+          {/* 移动端：标题放在图片上方 */}
+          <div className={cn('lg:hidden', 'mb-10 px-5')}>
+            <h4 className="mt-[40px] text-base font-medium text-[#03D34A]">
+              MatrixWorld LandVoucher
+            </h4>
+            <h1 className="mt-[6px] mb-[45px] text-[28px] font-bold text-[#333333]">
+              {itemData.name}
+            </h1>
+            <div className="flex divide-x-[1px] divide-solid divide-[#eeeeee]">
+              <div className={cn('flex flex-col pr-[40px] font-normal')}>
+                <span className="text-sm text-[#666666]">Creator</span>
+                <span className="text-xl text-[#333333]">
+                  {itemData.creator}
+                </span>
+              </div>
+              <div className={cn('flex flex-col pl-[40px] font-normal')}>
+                <span className="text-sm text-[#666666]">Owner</span>
+                <span className="text-xl text-[#333333]">{itemData.owner}</span>
+              </div>
+            </div>
+          </div>
           <RoundedContainer
             className={cn(
               'lg:block lg:px-[20px] lg:pt-[30px] lg:pb-[47px]',
@@ -157,20 +178,25 @@ function ItemId(props: itemIdProps) {
           </RoundedContainer>
         </div>
         <div className="lg:ml-[65px] lg:w-[563px]">
-          <h4 className="mt-[40px] text-base font-medium text-[#03D34A]">
-            MatrixWorld LandVoucher
-          </h4>
-          <h1 className="mt-[6px] mb-[45px] text-[28px] font-bold text-[#333333]">
-            {itemData.name}
-          </h1>
-          <div className="flex divide-x-[1px] divide-solid divide-[#eeeeee]">
-            <div className={cn('flex flex-col pr-[40px] font-normal')}>
-              <span className="text-sm text-[#666666]">Creator</span>
-              <span className="text-xl text-[#333333]">{itemData.creator}</span>
-            </div>
-            <div className={cn('flex flex-col pl-[40px] font-normal')}>
-              <span className="text-sm text-[#666666]">Owner</span>
-              <span className="text-xl text-[#333333]">{itemData.owner}</span>
+          {/* PC端：标题和图片并排放 */}
+          <div className={cn('lg:block', 'hidden')}>
+            <h4 className="mt-[40px] text-base font-medium text-[#03D34A]">
+              MatrixWorld LandVoucher
+            </h4>
+            <h1 className="mt-[6px] mb-[45px] text-[28px] font-bold text-[#333333]">
+              {itemData.name}
+            </h1>
+            <div className="flex divide-x-[1px] divide-solid divide-[#eeeeee]">
+              <div className={cn('flex flex-col pr-[40px] font-normal')}>
+                <span className="text-sm text-[#666666]">Creator</span>
+                <span className="text-xl text-[#333333]">
+                  {itemData.creator}
+                </span>
+              </div>
+              <div className={cn('flex flex-col pl-[40px] font-normal')}>
+                <span className="text-sm text-[#666666]">Owner</span>
+                <span className="text-xl text-[#333333]">{itemData.owner}</span>
+              </div>
             </div>
           </div>
           <RoundedContainer className="mt-[50px] divide-y-[1px] divide-solid divide-[#eeeeee] px-[30px] py-[20px]">
