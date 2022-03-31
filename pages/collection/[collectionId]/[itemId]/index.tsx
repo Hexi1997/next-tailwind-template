@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 import { useState } from 'react';
@@ -84,7 +85,11 @@ export async function getServerSideProps({
 > {
   return {
     props: {
-      ...(await serverSideTranslations(locale || '', ['common', 'menu']))
+      ...(await serverSideTranslations(locale || '', [
+        'common',
+        'menu',
+        'collection'
+      ]))
     }
   };
 }
@@ -92,6 +97,7 @@ export async function getServerSideProps({
 function ItemId(props: itemIdProps) {
   const { className } = props;
   const { IconFont } = useIconFont();
+  const { t } = useTranslation('collection');
   const [openBidModal, setOpenBidModal] = useState(false);
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
   const [bidCoin, setBidCoin] = useState(null as unknown as string);
@@ -105,7 +111,10 @@ function ItemId(props: itemIdProps) {
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title={t('COLLECTION_NFT_SEO_TITLE')}
+        description={t('COLLECTION_NFT_SEO_DESC')}
+      />
       <div
         className={cn(
           styles.itemId,
@@ -126,13 +135,17 @@ function ItemId(props: itemIdProps) {
             </h1>
             <div className="flex divide-x-[1px] divide-solid divide-[#eeeeee]">
               <div className={cn('flex flex-col pr-[40px] font-normal')}>
-                <span className="text-sm text-[#666666]">Creator</span>
+                <span className="text-sm text-[#666666]">
+                  {t('COLLECTION_NFT_CREATOR')}
+                </span>
                 <span className="text-xl text-[#333333]">
                   {itemData.creator}
                 </span>
               </div>
               <div className={cn('flex flex-col pl-[40px] font-normal')}>
-                <span className="text-sm text-[#666666]">Owner</span>
+                <span className="text-sm text-[#666666]">
+                  {t('COLLECTION_NFT_OWNER')}
+                </span>
                 <span className="text-xl text-[#333333]">{itemData.owner}</span>
               </div>
             </div>
@@ -169,7 +182,9 @@ function ItemId(props: itemIdProps) {
           <RoundedContainer
             className={cn('px-[21px] pt-[24px] pb-[47px]', 'mt-[40px]')}
           >
-            <h3 className="mb-[20px] text-[22px]">Properties</h3>
+            <h3 className="mb-[20px] text-[22px]">
+              {t('COLLECTION_NFT_PROPERTIES')}
+            </h3>
             <div
               className={cn(
                 'grid',
@@ -206,13 +221,17 @@ function ItemId(props: itemIdProps) {
             </h1>
             <div className="flex divide-x-[1px] divide-solid divide-[#eeeeee]">
               <div className={cn('flex flex-col pr-[40px] font-normal')}>
-                <span className="text-sm text-[#666666]">Creator</span>
+                <span className="text-sm text-[#666666]">
+                  {t('COLLECTION_NFT_CREATOR')}
+                </span>
                 <span className="text-xl text-[#333333]">
                   {itemData.creator}
                 </span>
               </div>
               <div className={cn('flex flex-col pl-[40px] font-normal')}>
-                <span className="text-sm text-[#666666]">Owner</span>
+                <span className="text-sm text-[#666666]">
+                  {t('COLLECTION_NFT_OWNER')}
+                </span>
                 <span className="text-xl text-[#333333]">{itemData.owner}</span>
               </div>
             </div>
@@ -220,7 +239,7 @@ function ItemId(props: itemIdProps) {
           <RoundedContainer className="mt-[50px] divide-y-[1px] divide-solid divide-[#eeeeee] px-[30px] py-[20px]">
             <div className="flex items-center pb-[11px] text-base font-normal text-[#666666]">
               <Image src={listing} width={36} height={36} />
-              <span>Listing</span>
+              <span>{t('COLLECTION_NFT_LISTING')}</span>
             </div>
             <div className="pt-[16px] text-2xl font-semibold">
               {itemData.price}
@@ -228,31 +247,31 @@ function ItemId(props: itemIdProps) {
           </RoundedContainer>
           <div className="mt-[60px] grid grid-cols-2 grid-rows-1 gap-12">
             <Button
-              className="h-[39px] rounded-[20px]"
+              className="h-[39px] rounded-[39px]"
               onClick={() => setOpenCompleteModal(true)}
             >
-              Buy
+              {t('COLLECTION_NFT_BUTTON_BUY')}
             </Button>
             <Button
-              className="h-[39px] rounded-[20px]"
+              className="h-[39px] rounded-[39px]"
               onClick={() => setOpenBidModal(true)}
             >
-              Place A Bid
+              {t('COLLECTION_NFT_BUTTON_PLACE_BID')}
             </Button>
           </div>
           <Tabs
             className="mt-[60px]"
             tabs={[
               {
-                title: 'Bids',
+                title: t('COLLECTION_NFT_TAB_BIDS'),
                 element: <NFTDetailBids />
               },
               {
-                title: 'Activities',
+                title: t('COLLECTION_NFT_TAB_ACTIVITIES'),
                 element: <NFTDetailActivities />
               },
               {
-                title: 'Details',
+                title: t('COLLECTION_NFT_TAB_DETAILS'),
                 element: <NFTDetailDetails />
               }
             ]}
@@ -262,11 +281,11 @@ function ItemId(props: itemIdProps) {
         <Modal
           isOpen={openBidModal}
           onClose={setOpenBidModal}
-          title="Place A Bid"
+          title={t('COLLECTION_NFT_MODAL_BID_TITLE')}
         >
           <div className="mb-[20px] flex w-full">
             <Input
-              placeholder="Enter Bid"
+              placeholder={t('COLLECTION_NFT_MODAL_BID_PLACEHOLDER')}
               value={bidCoin}
               onChange={(e) => setBidCoin(e.target.value)}
               style={{
@@ -294,19 +313,19 @@ function ItemId(props: itemIdProps) {
             {bidCoin && bidCoinUnit ? (
               <div>
                 <div className="flex items-center justify-between">
-                  <span>Your Biding Balance</span>
+                  <span>{t('COLLECTION_NFT_MODAL_BIDING_BALANCE')}</span>
                   <span>0.234 {bidCoinUnit}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span>Your Balance</span>
+                  <span>{t('COLLECTION_NFT_MODAL_BALANCE')}</span>
                   <span>0.004 {bidCoinUnit}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span>Service Fee</span>
+                  <span>{t('COLLECTION_NFT_MODAL_SERVICE_FEE')}</span>
                   <span>0.120 {bidCoinUnit}</span>
                 </div>
                 <div className="mt-[8px] flex items-center justify-between">
-                  <span>Total Pay</span>
+                  <span>{t('COLLECTION_NFT_MODAL_TOTAL_PAY')}</span>
                   <span className="text-lg font-bold text-[#333333]">
                     1.789 {bidCoinUnit}
                   </span>
@@ -314,9 +333,7 @@ function ItemId(props: itemIdProps) {
                 <div className="text-right">$3675.24</div>
               </div>
             ) : (
-              <div>
-                Make sure you have enough money in your wallet to place the bid
-              </div>
+              <div>{t('COLLECTION_NFT_MODAL_NOTIFICATION')}</div>
             )}
           </div>
           <div className="my-[40px]">
@@ -336,19 +353,19 @@ function ItemId(props: itemIdProps) {
               )}
             >
               {Number(bidCoin) <= restCoin || !bidCoin
-                ? 'Place A Bid'
-                : 'Add Funds'}
+                ? t('COLLECTION_NFT_MODAL_BUTTON_BID')
+                : t('COLLECTION_NFT_MODAL_BUTTON_ADD_FUND')}
             </Button>
             {Number(bidCoin) > restCoin && (
               <div className="mt-[10px] text-center text-sm font-medium text-[#999999]">
-                Not Enough Founds To Place Bid
+                {t('COLLECTION_NFT_MODAL_WARNING')}
               </div>
             )}
           </div>
         </Modal>
         {/* 交易完成Modal */}
         <Modal
-          title="Complete Checkout"
+          title={t('COLLECTION_NFT_MODAL_CHECKOUT_TITLE')}
           isOpen={openCompleteModal}
           onClose={setOpenCompleteModal}
         >
@@ -370,19 +387,19 @@ function ItemId(props: itemIdProps) {
           </div>
           <div className="mt-6 text-sm leading-6 text-[#666666]">
             <div className="flex items-center justify-between">
-              <span>Your Biding Balance</span>
+              <span>{t('COLLECTION_NFT_MODAL_BIDING_BALANCE')}</span>
               <span>0.234 {bidCoinUnit}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Your Balance</span>
+              <span>{t('COLLECTION_NFT_MODAL_BALANCE')}</span>
               <span>0.004 {bidCoinUnit}</span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Service Fee</span>
+              <span>{t('COLLECTION_NFT_MODAL_SERVICE_FEE')}</span>
               <span>0.120 {bidCoinUnit}</span>
             </div>
             <div className="mt-[8px] flex items-center justify-between">
-              <span>Total Pay</span>
+              <span>{t('COLLECTION_NFT_MODAL_TOTAL_PAY')}</span>
               <span className="text-lg font-bold text-[#333333]">
                 1.789 {bidCoinUnit}
               </span>
@@ -400,11 +417,13 @@ function ItemId(props: itemIdProps) {
               )}
               shadow={false}
             >
-              {Number(bidCoin) <= restCoin ? 'Confirm Checkout' : 'Add Funds'}
+              {Number(bidCoin) <= restCoin
+                ? t('COLLECTION_NFT_MODAL_BUTTON_CONFIRM')
+                : t('COLLECTION_NFT_MODAL_BUTTON_ADD_FUND')}
             </Button>
             {Number(bidCoin) > restCoin && (
               <div className="mt-[10px] text-center text-sm font-medium text-[#999999]">
-                Not Enough Founds To Place Bid
+                {t('COLLECTION_NFT_MODAL_WARNING')}
               </div>
             )}
           </div>
