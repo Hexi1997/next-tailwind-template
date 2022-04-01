@@ -162,8 +162,31 @@ function Create(props: createProps) {
               cb={(value: IProperty[]) => setProperties(value)}
             />
           </FormField>
-          <FormField title={t('CREATE_PAGE_FORM_FIELD_ROYALTIES')}>
-            111
+          <FormField
+            title={t('CREATE_PAGE_FORM_FIELD_ROYALTIES')}
+            subTitle={t('CREATE_PAGE_FROM_FIELD_ROYALTIES_TIP')}
+          >
+            <div>
+              <input
+                type="text"
+                value={royaltiesOwner}
+                onChange={(e) => setRoyaltiesOwner(e.target.value)}
+                className="h-9 w-full max-w-[540px] rounded-lg border-2 border-solid border-[#ccc] pl-2 text-[#999]"
+                placeholder={t('CREATE_PAGE_FROM_FIELD_ROYALTIES_PLACEHOLDER')}
+              />
+            </div>
+            <div className="mt-2 flex items-center">
+              <input
+                type="number"
+                value={String(royalties)}
+                onChange={(e) => setRoyalties(Number(e.target.value))}
+                className="h-9 w-[calc(100%_-_20px)] max-w-[520px] rounded-lg border-2 border-solid border-[#ccc] pl-2 text-[#999]"
+                placeholder={t(
+                  'CREATE_PAGE_FROM_FIELD_ROYALTIES_PERCENTAGE_PLACEHOLDER'
+                )}
+              />
+              <span className="mx-1 w-5">%</span>
+            </div>
           </FormField>
           <FormSubmitButton
             className="my-10 sm:my-20 "
