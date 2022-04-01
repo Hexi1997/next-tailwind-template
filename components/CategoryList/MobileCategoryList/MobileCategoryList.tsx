@@ -1,5 +1,6 @@
 import { ANCHOR, Drawer } from 'baseui/drawer';
 import cn from 'classnames';
+import { useTranslation } from 'next-i18next';
 import { FC, ReactNode } from 'react';
 
 import { Button } from '@/components';
@@ -14,6 +15,7 @@ interface MobileCategoryListProps {
 
 const MobileCategoryList: FC<MobileCategoryListProps> = (props) => {
   const { className, children, visible, onClose } = props;
+  const { t } = useTranslation('selection');
 
   return (
     <div className={cn(styles.MobileCategoryList, className)}>
@@ -35,7 +37,9 @@ const MobileCategoryList: FC<MobileCategoryListProps> = (props) => {
           }
         }}
       >
-        <div className="text-center text-[1rem] font-[500]">Filter</div>
+        <div className="text-center text-[1rem] font-[500]">
+          {t('SELECT_MOBILE_FILTER')}
+        </div>
         {children}
         <Button
           type="None"
@@ -44,7 +48,7 @@ const MobileCategoryList: FC<MobileCategoryListProps> = (props) => {
             'md:w-[10rem]'
           )}
         >
-          Restart
+          {t('SELECT_MOBILE_RESTART')}
         </Button>
         <Button
           className={cn(
@@ -53,7 +57,7 @@ const MobileCategoryList: FC<MobileCategoryListProps> = (props) => {
           )}
           onClick={onClose}
         >
-          Finished
+          {t('SELECT_MOBILE_FINISH')}
         </Button>
       </Drawer>
     </div>
