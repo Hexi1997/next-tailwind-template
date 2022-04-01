@@ -24,6 +24,7 @@ export function Button(props: ButtonProps) {
   return (
     <button
       onClick={onClick}
+      type="button"
       className={cn(
         styles.Button,
         type === 'Primary' ? 'bg-themeGreen text-white hover:bg-green-500' : '',

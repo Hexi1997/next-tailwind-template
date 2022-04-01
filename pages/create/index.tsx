@@ -9,6 +9,7 @@ import { FormField } from '@/components/Common/Form/FormField';
 import { FormSubmitButton } from '@/components/Common/Form/FormSubmitButton';
 import { FormTitle } from '@/components/Common/Form/FormTitle';
 import { CollectionSelector } from '@/components/Pages/Create/CollectionSelector';
+import { ProperityAdd } from '@/components/Pages/Create/ProperityAdd';
 import { UploadArea } from '@/components/Pages/Create/UploadArea';
 
 import {
@@ -33,9 +34,9 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   };
 }
 
-interface IProperty {
-  type: string;
-  name: string;
+export interface IProperty {
+  type?: string;
+  name?: string;
 }
 
 function Create(props: createProps) {
@@ -156,7 +157,10 @@ function Create(props: createProps) {
             title={t('CREATE_PAGE_FORM_FIELD_PROPERTIES')}
             subTitle={t('CREATE_PAGE_FORM_FIELD_PROPERTIES_SUBTITLE')}
           >
-            111
+            <ProperityAdd
+              properties={properties}
+              cb={(value: IProperty[]) => setProperties(value)}
+            />
           </FormField>
           <FormField title={t('CREATE_PAGE_FORM_FIELD_ROYALTIES')}>
             111
