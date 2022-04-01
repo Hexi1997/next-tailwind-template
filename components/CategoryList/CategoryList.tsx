@@ -85,7 +85,7 @@ const CategoryList: FC<CategoryListProps> = (props) => {
               categories.length > 4 && index % 3 === 2
                 ? 'justify-self-end'
                 : '',
-              'lg:mr-5 lg:h-[36px] lg:rounded-[18px] lg:py-4 lg:px-2.5'
+              'lg:mr-5 lg:h-[36px] lg:rounded-[18px] lg:px-4 lg:py-2.5'
             )}
             type={item.label === selected ? 'Primary' : 'Border'}
             shadow={false}

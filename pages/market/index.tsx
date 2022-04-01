@@ -246,7 +246,7 @@ function Market(props: marketProps) {
 
         <div className="mb-[115px] grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
           {hotBidsData.map((item) => (
-            <ItemCard className={styles.marketItem} key={item.id} data={item} />
+            <ItemCard key={item.id} data={item} />
           ))}
         </div>
       </div>
