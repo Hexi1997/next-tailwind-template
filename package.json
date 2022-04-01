@@ -58,9 +58,6 @@
     "typescript": "4.6.2",
     "yarn": "^1.22.18"
   },
-  "sideEffects": [
-    "./next-i18next.config.js"
-  ],
   "eslintConfig": {
     "extends": [
       "react-app",
