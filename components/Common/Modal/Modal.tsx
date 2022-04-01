@@ -1,13 +1,5 @@
-import {
-  Modal as BaseModal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader
-} from 'baseui/modal';
-import cn from 'classnames';
+import { Modal as BaseModal, ModalBody } from 'baseui/modal';
 import { FC, ReactNode } from 'react';
-
-import styles from './Modal.module.scss';
 
 interface ModalProps {
   className?: string;
@@ -18,14 +10,10 @@ interface ModalProps {
 }
 
 const Modal: FC<ModalProps> = (props: ModalProps) => {
-  const { className, isOpen, onClose, children, title } = props;
+  const { isOpen, onClose, children, title } = props;
 
   return (
-    <BaseModal
-      className={cn(styles.Modal, className, 'test33333')}
-      isOpen={isOpen}
-      onClose={() => onClose && onClose(false)}
-    >
+    <BaseModal isOpen={isOpen} onClose={() => onClose && onClose(false)}>
       <ModalBody>
         {title && (
           <div className="mb-[20px] text-[22px] font-bold text-[#333333]">

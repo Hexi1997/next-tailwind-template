@@ -287,7 +287,8 @@ function ItemId(props: itemIdProps) {
             <Input
               placeholder={t('COLLECTION_NFT_MODAL_BID_PLACEHOLDER')}
               value={bidCoin}
-              onChange={(e) => setBidCoin(e.target.value)}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              onChange={(e: any) => setBidCoin(e.target.value)}
               style={{
                 width: '20rem',
                 borderRadius: '18px 0 0 18px',
