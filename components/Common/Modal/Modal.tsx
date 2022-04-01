@@ -22,7 +22,8 @@ const Modal: FC<ModalProps> = (props: ModalProps) => {
 
   return (
     <BaseModal
-      className={cn(styles.Modal, className, 'test222')}
+      c={1}
+      className={cn(styles.Modal, className, 'test33333')}
       isOpen={isOpen}
       onClose={() => onClose && onClose(false)}
     >
