@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
 import discord from '@/assets/images/footer/discord.svg';
-import meta from '@/assets/images/footer/meta.svg';
+import medium from '@/assets/images/footer/medium.svg';
 import twitter from '@/assets/images/footer/twitter.svg';
 
 import globalConfig from '../../assets/i18n/flowmarket-frontend-copywriter/global';
@@ -95,7 +95,7 @@ export function Footer(props: FooterProps) {
               rel="noreferrer"
             >
               <div className="flex h-[44px] w-[44px] cursor-pointer justify-center rounded-[16px] bg-white align-middle">
-                <Image src={meta} />
+                <Image src={medium} />
               </div>
             </a>
             <a

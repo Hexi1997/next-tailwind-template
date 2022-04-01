@@ -8,15 +8,9 @@ import { CSSProperties, FC } from 'react';
 
 import styles from './Select.module.scss';
 
-type SelectOptions = {
-  label: string;
-  id: string | number;
-};
-
 interface SelectProps extends BaseUISelectProps {
   className?: string;
   style?: CSSProperties;
-  options?: SelectOptions[];
 }
 
 const Select: FC<SelectProps> = (props) => {
@@ -32,7 +26,7 @@ const Select: FC<SelectProps> = (props) => {
           Root: {
             style: () => ({
               outline: 'none',
-              height: '2.25rem',
+              height: '36px',
               padding: '0',
               border: '1px solid #999',
               borderRadius: '18px',
@@ -44,7 +38,7 @@ const Select: FC<SelectProps> = (props) => {
             style: () => ({
               backgroundColor: 'white',
               border: 'none',
-              height: '2.25rem',
+              height: '36px',
               font: '400 .875rem Inter'
             })
           },
