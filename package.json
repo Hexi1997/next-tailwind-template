@@ -8,7 +8,7 @@
     "start": "next start",
     "prepare": "husky install",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "lint": "eslint -c ./.eslintrc.js --ext .ts,.tsx,.js,.jsx",
+    "lint": "eslint -c ./.eslintrc.js --ext .ts,.tsx,.js,.jsx ./pages ./components ./services",
     "pre-commit": "lint-staged",
     "submodule": "git submodule update --force --recursive --init --remote && git submodule update --remote --merge"
   },
