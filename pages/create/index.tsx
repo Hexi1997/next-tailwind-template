@@ -3,11 +3,14 @@ import { GetStaticPropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
+import { useState } from 'react';
 
 import { FormField } from '@/components/Common/Form/FormField';
 import { FormSubmitButton } from '@/components/Common/Form/FormSubmitButton';
 import { FormTitle } from '@/components/Common/Form/FormTitle';
+import { UploadArea } from '@/components/Pages/Create/UploadArea';
 
+import { isImg } from '../../components/Pages/Create/UploadArea/UploadArea';
 import styles from './_index.module.scss';
 
 interface createProps {
@@ -26,9 +29,24 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   };
 }
 
+interface IProperty {
+  type: string;
+  name: string;
+}
+
 function Create(props: createProps) {
   const { className } = props;
   const { t } = useTranslation('create');
+  const [uploadFilePath, setFilePath] = useState('');
+  const [isUploadingFile, setIsUploadingFile] = useState(false);
+  const [isUploadFileImg, setIsUploadFileImage] = useState(false);
+
+  const [coverFilePath, setCoverFilePath] = useState('');
+  const [name, setName] = useState('');
+  const [desc, setDesc] = useState('');
+  const [properties, setProperties] = useState<IProperty[]>([]);
+  const [royalties, setRoyalties] = useState<number | null>(null);
+  const [royaltiesOwner, setRoyaltiesOwner] = useState('');
 
   return (
     <>
@@ -45,7 +63,23 @@ function Create(props: createProps) {
           }}
         >
           <FormField title={t('CREATE_PAGE_FORM_FIELD_UPLOAD_FILE')}>
-            111
+            <UploadArea
+              uploadSusImgUrl={isUploadFileImg ? uploadFilePath : ''}
+              isUploading={isUploadingFile}
+              cb={(value: FileList | null) => {
+                if (value && value.length) {
+                  setIsUploadingFile(true);
+                  setIsUploadFileImage(isImg(value[0].type));
+                  setTimeout(() => {
+                    setIsUploadingFile(false);
+                    setFilePath(
+                      'https://lh3.googleusercontent.com/3bZ0o78gCK12W8a1gsy6fFSgVshx88sFdOmV55uZg4_RSxPminN7jsTiRVBgH6DSsMg5okU1PFqp0ttrqc7PI1Ra9i_qWWzH-H85=w600'
+                    );
+                  }, 5000);
+                }
+              }}
+              tip={t('CREATE_PAGE_FORM_FIELD_UPLOAD_FILE_PLACEHOLDER')}
+            />
           </FormField>
           <FormField
             title={t('CREATE_PAGE_FORM_FIELD_COVER')}
