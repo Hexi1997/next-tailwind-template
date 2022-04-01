@@ -21,7 +21,11 @@ const Modal: FC<ModalProps> = (props: ModalProps) => {
   const { className, isOpen, onClose, children, title } = props;
 
   return (
-    <BaseModal isOpen={isOpen} onClose={() => onClose && onClose(false)}>
+    <BaseModal
+      className={cn(styles.Modal, className)}
+      isOpen={isOpen}
+      onClose={() => onClose && onClose(false)}
+    >
       <ModalBody>
         {title && (
           <div className="mb-[20px] text-[22px] font-bold text-[#333333]">
