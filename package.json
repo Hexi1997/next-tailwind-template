@@ -65,9 +65,9 @@
     ]
   },
   "lint-staged": {
-    "**/*.{less,css,sass,scss}": "stylelint --fix",
+    "**/*.{less,css,sass,scss}": "stylelint",
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn lint --fix"
+      "yarn lint"
     ]
   }
 }
