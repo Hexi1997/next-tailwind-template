@@ -8,9 +8,12 @@ interface UploadAreaProps {
   cb: (value: FileList | null) => void;
   isUploading: boolean;
   uploadSusImgUrl?: string;
+  filePath: string;
   tip: string;
+  accept: string;
 }
-const imgMimes = ['image/png', 'image/gif', 'image/webp'];
+
+export const imgMimes = ['image/png', 'image/gif', 'image/webp'];
 
 export function isImg(type: string) {
   return imgMimes.includes(type);
@@ -21,13 +24,15 @@ export function UploadArea(props: UploadAreaProps) {
     cb,
     tip,
     isUploading = false,
-    uploadSusImgUrl = ''
+    uploadSusImgUrl = '',
+    filePath = '',
+    accept
   } = props;
   const { t } = useTranslation('create');
 
   return (
     <div
-      className="-z-40 flex h-[300px] w-[300px] rounded-lg border-2 border-solid border-[#665e5e] bg-cover bg-center"
+      className="flex h-[300px] w-[300px] rounded-lg border-2 border-solid border-[#ccc] bg-cover bg-center"
       style={
         uploadSusImgUrl
           ? {
@@ -42,6 +47,29 @@ export function UploadArea(props: UploadAreaProps) {
           uploadSusImgUrl ? 'bg-gray-900 bg-opacity-60' : ''
         )}
       >
+        <div className="mb-4 flex w-full items-center justify-center ">
+          {filePath && (
+            <span
+              className={cn(
+                'mr-2',
+                uploadSusImgUrl ? 'text-white' : 'text-[#999]'
+              )}
+            >
+              {t('CREATE_PAGE_ALREADY_UPLOAD')}
+            </span>
+          )}
+          <a
+            href={filePath}
+            target="_blank"
+            className={cn(
+              'flex-1 underline line-clamp-1 hover:text-themeGreen',
+              uploadSusImgUrl ? 'text-white' : 'text-[#999]'
+            )}
+            rel="noreferrer"
+          >
+            {filePath}
+          </a>
+        </div>
         <p
           className={cn(
             'mb-4 font-medium',
@@ -53,7 +81,7 @@ export function UploadArea(props: UploadAreaProps) {
         <div className={cn(styles.UploadArea, className, 'relative')}>
           <input
             title=""
-            accept={`${imgMimes.join(', ')}, audio/mpeg, video/mp4`}
+            accept={accept}
             type="file"
             className={cn(
               'z-10 h-[39px] w-[213px] cursor-pointer opacity-0 outline-none',

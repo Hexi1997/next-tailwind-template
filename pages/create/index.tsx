@@ -8,9 +8,13 @@ import { useState } from 'react';
 import { FormField } from '@/components/Common/Form/FormField';
 import { FormSubmitButton } from '@/components/Common/Form/FormSubmitButton';
 import { FormTitle } from '@/components/Common/Form/FormTitle';
+import { CollectionSelector } from '@/components/Pages/Create/CollectionSelector';
 import { UploadArea } from '@/components/Pages/Create/UploadArea';
 
-import { isImg } from '../../components/Pages/Create/UploadArea/UploadArea';
+import {
+  imgMimes,
+  isImg
+} from '../../components/Pages/Create/UploadArea/UploadArea';
 import styles from './_index.module.scss';
 
 interface createProps {
@@ -36,14 +40,17 @@ interface IProperty {
 
 function Create(props: createProps) {
   const { className } = props;
-  const { t } = useTranslation('create');
+  const { t } = useTranslation(['create', 'common']);
   const [uploadFilePath, setFilePath] = useState('');
   const [isUploadingFile, setIsUploadingFile] = useState(false);
-  const [isUploadFileImg, setIsUploadFileImage] = useState(false);
+  const [isUploadFileImg, setIsUploadFileImage] = useState(true);
 
   const [coverFilePath, setCoverFilePath] = useState('');
+  const [isUploadingCover, setIsUploadCover] = useState(false);
+
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
+  const [collectionId, setCollectionId] = useState('');
   const [properties, setProperties] = useState<IProperty[]>([]);
   const [royalties, setRoyalties] = useState<number | null>(null);
   const [royaltiesOwner, setRoyaltiesOwner] = useState('');
@@ -64,14 +71,17 @@ function Create(props: createProps) {
         >
           <FormField title={t('CREATE_PAGE_FORM_FIELD_UPLOAD_FILE')}>
             <UploadArea
+              accept={`${imgMimes.join(', ')}, audio/mpeg, video/mp4`}
+              filePath={uploadFilePath}
               uploadSusImgUrl={isUploadFileImg ? uploadFilePath : ''}
               isUploading={isUploadingFile}
               cb={(value: FileList | null) => {
                 if (value && value.length) {
+                  setFilePath('');
                   setIsUploadingFile(true);
-                  setIsUploadFileImage(isImg(value[0].type));
                   setTimeout(() => {
                     setIsUploadingFile(false);
+                    setIsUploadFileImage(isImg(value[0].type));
                     setFilePath(
                       'https://lh3.googleusercontent.com/3bZ0o78gCK12W8a1gsy6fFSgVshx88sFdOmV55uZg4_RSxPminN7jsTiRVBgH6DSsMg5okU1PFqp0ttrqc7PI1Ra9i_qWWzH-H85=w600'
                     );
@@ -81,22 +91,66 @@ function Create(props: createProps) {
               tip={t('CREATE_PAGE_FORM_FIELD_UPLOAD_FILE_PLACEHOLDER')}
             />
           </FormField>
-          <FormField
-            title={t('CREATE_PAGE_FORM_FIELD_COVER')}
-            isOptional={true}
-            subTitle={t('CREATE_PAGE_FORM_FIELD_COVER_SUBTITLE')}
-          >
-            111
+          {!isUploadFileImg && (
+            <FormField
+              title={t('CREATE_PAGE_FORM_FIELD_COVER')}
+              subTitle={t('CREATE_PAGE_FORM_FIELD_COVER_SUBTITLE')}
+            >
+              <UploadArea
+                accept={imgMimes.join(', ')}
+                filePath={coverFilePath}
+                uploadSusImgUrl={coverFilePath}
+                isUploading={isUploadingCover}
+                cb={(value: FileList | null) => {
+                  if (value && value.length) {
+                    setCoverFilePath('');
+                    setIsUploadCover(true);
+                    setTimeout(() => {
+                      setIsUploadCover(false);
+                      setCoverFilePath(
+                        'https://lh3.googleusercontent.com/3bZ0o78gCK12W8a1gsy6fFSgVshx88sFdOmV55uZg4_RSxPminN7jsTiRVBgH6DSsMg5okU1PFqp0ttrqc7PI1Ra9i_qWWzH-H85=w600'
+                      );
+                    }, 5000);
+                  }
+                }}
+                tip={t('CREATE_PAGE_FORM_FIELD_COVER_PLACEHOLDER')}
+              />
+            </FormField>
+          )}
+          <FormField title={t('CREATE_PAGE_FORM_FIELD_NAME')}>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="h-9 w-full max-w-[540px] rounded-lg border-2 border-solid border-[#ccc] pl-2 text-[#999]"
+              placeholder={t('COMMON_PLACEHOLDER', {
+                ns: 'common',
+                fieldName: t('CREATE_PAGE_FORM_FIELD_NAME')
+              })}
+            />
           </FormField>
-          <FormField title={t('CREATE_PAGE_FORM_FIELD_NAME')}>111</FormField>
           <FormField title={t('CREATE_PAGE_FORM_FIELD_DESC')} isOptional={true}>
-            111
+            <textarea
+              rows={3}
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+              className="w-full max-w-[540px] rounded-lg border-2 border-solid border-[#ccc] pl-2 text-[#999] outline-none"
+              placeholder={t('COMMON_PLACEHOLDER', {
+                ns: 'common',
+                fieldName: t('CREATE_PAGE_FORM_FIELD_DESC')
+              })}
+            />
           </FormField>
           <FormField
             title={t('CREATE_PAGE_FORM_FIELD_COLLECTION')}
             subTitle={t('CREATE_PAGE_FORM_FIELD_COLLECTION_SUBTITLE')}
           >
-            111
+            <CollectionSelector
+              collectionId={collectionId}
+              cb={(value: string) => {
+                setCollectionId(value);
+              }}
+            />
           </FormField>
           <FormField
             title={t('CREATE_PAGE_FORM_FIELD_PROPERTIES')}
