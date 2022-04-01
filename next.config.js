@@ -1,10 +1,16 @@
-const { i18n } = require('./next-i18next.config');
+const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  target: 'experimental-serverless-trace',
+  target: 'serverless',
   reactStrictMode: true,
-  i18n,
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh'],
+    localePath: path.resolve(
+      './assets/i18n/flowmarket-frontend-copywriter/locales'
+    )
+  },
   async redirects() {
     return [
       {
