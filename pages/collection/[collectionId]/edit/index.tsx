@@ -7,7 +7,11 @@ import React, { useState } from 'react';
 
 import { Button, FormField, FormTitle } from '@/components';
 import { ImageSelector } from '@/components/ImageSelector';
-import { ILinksInput, LinkInput } from '@/components/Pages/Edit/LinkInput';
+import { CollaboratorsAdd } from '@/components/Pages/EditCollection/CollaboratorsAdd';
+import {
+  ILinksInput,
+  LinkInput
+} from '@/components/Pages/EditCollection/LinkInput';
 
 import styles from './_index.module.scss';
 
@@ -25,14 +29,14 @@ export async function getServerSideProps({
       ...(await serverSideTranslations(locale || '', [
         'menu',
         'common',
-        'edit'
+        'editcollection'
       ]))
     }
   };
 }
 function Edit(props: editProps) {
   const { className } = props;
-  const { t } = useTranslation(['edit', 'common']);
+  const { t } = useTranslation(['editcollection', 'common']);
 
   const [logoImg, setLogoImg] = useState('');
   const [featureImg, setFeatureImg] = useState('');
@@ -40,6 +44,7 @@ function Edit(props: editProps) {
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
   const [links, setLinks] = useState<ILinksInput>({});
+  const [collaborators, setCollaborators] = useState<string[]>([]);
 
   return (
     <>
@@ -154,9 +159,12 @@ function Edit(props: editProps) {
             subTitle={t('EDIT_PAGE_FORM_FIELD_COLLABORATORS_SUBTITLE')}
             className="mb-5"
           >
-            <Button className="h-[40px] w-[289px] rounded-full !bg-[#333] text-white hover:!bg-[#222]">
-              {t('EDIT_PAGE_FORM_FIELD_COLLABORATORS_TITLE')}
-            </Button>
+            <CollaboratorsAdd
+              data={collaborators}
+              cb={(value: string[]) => {
+                setCollaborators(value);
+              }}
+            />
           </FormField>
         </form>
       </div>

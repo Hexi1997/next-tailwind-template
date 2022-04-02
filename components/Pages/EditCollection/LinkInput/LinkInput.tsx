@@ -24,19 +24,28 @@ export interface ILinksInput {
 
 export function LinkInput(props: LinkInputProps) {
   const { className, cb, links } = props;
-  const { t } = useTranslation(['common', 'edit']);
+  const { t } = useTranslation(['common', 'editcollection']);
 
   return (
     <div className={cn(styles.LinkInput, className)}>
       <div className="w-full rounded-lg border-2 border-solid border-[#ccc]">
         <div className="flex h-20 w-full items-center border-b-2 border-solid border-[#ccc] px-[27px]">
           <div className="mt-2 flex-shrink-0">
-            <Image src={websiteImg} width={30} height={24} />
+            <Image
+              src={websiteImg}
+              width={30}
+              height={24}
+              title={t('EDIT_PAGE_FORM_FIELD_LINK_WEBSITE', {
+                ns: 'editcollection'
+              })}
+            />
           </div>
           <div className="ml-4 mr-4 h-8 w-[2px] flex-shrink-0 bg-black bg-opacity-20 sm:ml-6"></div>
           <input
             placeholder={t('COMMON_PLACEHOLDER', {
-              fieldName: t('EDIT_PAGE_FORM_FIELD_LINK_WEBSITE', { ns: 'edit' })
+              fieldName: t('EDIT_PAGE_FORM_FIELD_LINK_WEBSITE', {
+                ns: 'editcollection'
+              })
             })}
             value={links.website}
             onChange={(e) => {
@@ -49,13 +58,20 @@ export function LinkInput(props: LinkInputProps) {
         </div>
         <div className="flex h-20 w-full items-center border-b-2 border-solid border-[#ccc] px-[27px]">
           <div className="mt-1 flex-shrink-0">
-            <Image src={insImg} width={27} height={27} />
+            <Image
+              src={insImg}
+              width={27}
+              height={27}
+              title={t('EDIT_PAGE_FORM_FIELD_LINK_INSTAGRAM', {
+                ns: 'editcollection'
+              })}
+            />
           </div>
           <div className="ml-4 mr-4 h-8 w-[2px] flex-shrink-0 bg-black bg-opacity-20 sm:ml-6"></div>
           <input
             placeholder={t('COMMON_PLACEHOLDER', {
               fieldName: t('EDIT_PAGE_FORM_FIELD_LINK_INSTAGRAM', {
-                ns: 'edit'
+                ns: 'editcollection'
               })
             })}
             value={links.ins}
@@ -69,12 +85,21 @@ export function LinkInput(props: LinkInputProps) {
         </div>
         <div className="flex h-20 w-full items-center border-b-2 border-solid border-[#ccc] px-[27px]">
           <div className="mt-1 flex-shrink-0">
-            <Image src={twitterImg} width={28} height={26} />
+            <Image
+              src={twitterImg}
+              width={28}
+              height={26}
+              title={t('EDIT_PAGE_FORM_FIELD_LINK_TWITTER', {
+                ns: 'editcollection'
+              })}
+            />
           </div>
           <div className="ml-4 mr-4 h-8 w-[2px] flex-shrink-0 bg-black bg-opacity-20 sm:ml-6"></div>
           <input
             placeholder={t('COMMON_PLACEHOLDER', {
-              fieldName: t('EDIT_PAGE_FORM_FIELD_LINK_TWITTER', { ns: 'edit' })
+              fieldName: t('EDIT_PAGE_FORM_FIELD_LINK_TWITTER', {
+                ns: 'editcollection'
+              })
             })}
             value={links.twitter}
             onChange={(e) => {
@@ -87,12 +112,21 @@ export function LinkInput(props: LinkInputProps) {
         </div>
         <div className="flex h-20 w-full items-center px-[27px]">
           <div className="flex-shrink-1 mt-[5px]">
-            <Image src={discordImg} width={32} height={24} />
+            <Image
+              src={discordImg}
+              width={32}
+              height={24}
+              title={t('EDIT_PAGE_FORM_FIELD_LINK_DISCORD', {
+                ns: 'editcollection'
+              })}
+            />
           </div>
           <div className="ml-4 mr-4 h-8 w-[2px] flex-shrink-0 bg-black bg-opacity-20 sm:ml-6"></div>
           <input
             placeholder={t('COMMON_PLACEHOLDER', {
-              fieldName: t('EDIT_PAGE_FORM_FIELD_LINK_DISCORD', { ns: 'edit' })
+              fieldName: t('EDIT_PAGE_FORM_FIELD_LINK_DISCORD', {
+                ns: 'editcollection'
+              })
             })}
             value={links.discord}
             onChange={(e) => {

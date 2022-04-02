@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import selectImg from '@/assets/images/common/selectImg.svg';
 import selectImgWhite from '@/assets/images/common/selectImgWhite.svg';
 
+import { imgMimes } from '../Pages/Create/UploadArea/UploadArea';
 import styles from './ImageSelector.module.scss';
 interface ImageSelectorProps {
   className?: string;
@@ -13,7 +14,6 @@ interface ImageSelectorProps {
   imgUrl: string;
   cb: (value: File) => Promise<string>;
 }
-
 export function ImageSelector(props: ImageSelectorProps) {
   const { className, type, imgUrl, cb } = props;
   const [isUploading, setIsUploading] = useState(false);
@@ -55,6 +55,7 @@ export function ImageSelector(props: ImageSelectorProps) {
         </div>
         <input
           type="file"
+          accept={imgMimes.join(', ')}
           onChange={(e) => {
             if (e.target.files && e.target.files.length) {
               setIsUploading(true);
