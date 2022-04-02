@@ -10,6 +10,7 @@ import listing from '@/assets/images/collection/list.svg';
 import hotBidsImg1 from '@/assets/images/home/hot_bids_2.png';
 import {
   Button,
+  Collapse,
   Input,
   Modal,
   RoundedContainer,
@@ -21,6 +22,7 @@ import {
   NFTDetailBids,
   NFTDetailDetails
 } from '@/components/Pages';
+import { ellipseAddress } from '@/utils/common';
 import { useIconFont } from '@/utils/hooks/useIconFont';
 
 import styles from './_index.module.scss';
@@ -31,7 +33,7 @@ const itemData = {
   watchCount: 1357,
   name: 'Matrix Land(12,57)',
   creator: 'Matrixlabs',
-  owner: '0xa9eac9ffc…E0d1',
+  owner: '0x48cc4d3db0b0c0fd60c8a1be73fa96da92fd9009',
   price: '5flow'
 };
 
@@ -120,49 +122,19 @@ function ItemId(props: itemIdProps) {
           styles.itemId,
           'container',
           className,
-          'pb-10',
+          'pb-7',
           'lg:flex lg:pt-[60px] lg:pb-[94px]'
         )}
       >
         <div className="lg:flex-[3_0_0%]">
-          {/* 移动端：标题放在图片上方 */}
-          <div className={cn('lg:hidden', 'mb-10 px-5')}>
-            <h4 className="mt-[40px] text-base font-medium text-themeGreen">
-              MatrixWorld LandVoucher
-            </h4>
-            <h1 className="mt-[6px] mb-[45px] text-[28px] font-bold text-[#333333]">
-              {itemData.name}
-            </h1>
-            <div className="flex divide-x-[1px] divide-solid divide-[#eeeeee]">
-              <div className={cn('flex flex-col pr-[40px] font-normal')}>
-                <span className="text-sm text-[#666666]">
-                  {t('COLLECTION_NFT_CREATOR')}
-                </span>
-                <span className="text-xl text-[#333333]">
-                  {itemData.creator}
-                </span>
-              </div>
-              <div className={cn('flex flex-col pl-[40px] font-normal')}>
-                <span className="text-sm text-[#666666]">
-                  {t('COLLECTION_NFT_OWNER')}
-                </span>
-                <span className="text-xl text-[#333333]">{itemData.owner}</span>
-              </div>
-            </div>
-          </div>
+          {/* PC端：左右布局，图片在左侧 */}
           <RoundedContainer
             className={cn(
               'lg:block lg:px-[20px] lg:pt-[30px] lg:pb-[47px]',
-              'flex flex-col p-5'
+              'hidden'
             )}
           >
-            <div
-              className={cn(
-                'mb-[20px] flex',
-                'lg:justify-end',
-                'justify-between'
-              )}
-            >
+            <div className="mb-[20px] flex justify-end">
               <span className="mr-[20px] flex items-center text-[#666666]">
                 <IconFont type="icon-heart" className="pr-[8px] text-[20px]" />
                 {itemData.favorCount}
@@ -173,14 +145,17 @@ function ItemId(props: itemIdProps) {
               </span>
             </div>
             <Image
-              className={cn('lg:m-0', 'shrink')}
+              className="m-0"
               src={itemData.image}
               width="605"
               height="699"
             />
           </RoundedContainer>
           <RoundedContainer
-            className={cn('px-[21px] pt-[24px] pb-[47px]', 'mt-[40px]')}
+            className={cn(
+              'lg:mt-[40px] lg:block lg:px-[21px] lg:pt-[24px] lg:pb-[47px]',
+              'hidden'
+            )}
           >
             <h3 className="mb-[20px] text-[22px]">
               {t('COLLECTION_NFT_PROPERTIES')}
@@ -188,9 +163,8 @@ function ItemId(props: itemIdProps) {
             <div
               className={cn(
                 'grid',
-                'lg:grid-cols-3 lg:grid-rows-2 lg:gap-x-2 lg:gap-y-4',
-                'md:grid-cols-2 md:grid-rows-3 md:gap-x-4 md:gap-y-6',
-                'gap-y-6'
+                'xl:grid-cols-3 xl:grid-rows-2 xl:gap-x-2 xl:gap-y-4',
+                'lg:grid-cols-2 lg:grid-rows-3 lg:gap-x-4 lg:gap-y-6'
               )}
             >
               {itemProperties.map((item) => (
@@ -211,41 +185,95 @@ function ItemId(props: itemIdProps) {
           </RoundedContainer>
         </div>
         <div className="lg:ml-[65px] lg:w-[563px]">
-          {/* PC端：标题和图片并排放 */}
-          <div className={cn('lg:block', 'hidden')}>
-            <h4 className="mt-[40px] text-base font-medium text-themeGreen">
-              MatrixWorld LandVoucher
-            </h4>
-            <h1 className="mt-[6px] mb-[45px] text-[28px] font-bold text-[#333333]">
-              {itemData.name}
-            </h1>
-            <div className="flex divide-x-[1px] divide-solid divide-[#eeeeee]">
-              <div className={cn('flex flex-col pr-[40px] font-normal')}>
-                <span className="text-sm text-[#666666]">
-                  {t('COLLECTION_NFT_CREATOR')}
-                </span>
-                <span className="text-xl text-[#333333]">
-                  {itemData.creator}
-                </span>
-              </div>
-              <div className={cn('flex flex-col pl-[40px] font-normal')}>
-                <span className="text-sm text-[#666666]">
-                  {t('COLLECTION_NFT_OWNER')}
-                </span>
-                <span className="text-xl text-[#333333]">{itemData.owner}</span>
-              </div>
+          <h4
+            className={cn(
+              'font-medium text-themeGreen',
+              'lg:mt-[40px] lg:text-base',
+              'mt-[18px] text-sm'
+            )}
+          >
+            MatrixWorld LandVoucher
+          </h4>
+          <h1
+            className={cn(
+              'font-bold text-[#333333]',
+              'lg:mt-[6px] lg:mb-[45px] lg:text-[28px]',
+              'mt-[5px] text-lg'
+            )}
+          >
+            {itemData.name}
+          </h1>
+          {/* 移动端：图片在标题和介绍中间 */}
+          <RoundedContainer
+            className={cn('lg:hidden', 'mt-4 block w-full p-3')}
+          >
+            <div className="mb-5 flex justify-end">
+              <span className="mr-5 flex items-center text-[#cccccc]">
+                <IconFont type="icon-heart" className="pr-2 text-xl" />
+                {itemData.favorCount}
+              </span>
+              <span className="flex items-center text-[#cccccc]">
+                <IconFont type="icon-eye" className="pr-2 text-xl" />
+                {itemData.watchCount}
+              </span>
+            </div>
+            <Image src={itemData.image} />
+          </RoundedContainer>
+          <div
+            className={cn(
+              'flex divide-x-[1px] divide-solid divide-[#eeeeee]',
+              'lg:mt-0',
+              'mt-5'
+            )}
+          >
+            <div className={cn('flex flex-col pr-[40px] font-normal')}>
+              <span className="text-sm text-[#666666]">
+                {t('COLLECTION_NFT_CREATOR')}
+              </span>
+              <span className="text-xl text-[#333333]">{itemData.creator}</span>
+            </div>
+            <div className={cn('flex flex-col pl-[40px] font-normal')}>
+              <span className="text-sm text-[#666666]">
+                {t('COLLECTION_NFT_OWNER')}
+              </span>
+              <span className="text-xl text-[#333333]">
+                {ellipseAddress(itemData.owner)}
+              </span>
             </div>
           </div>
-          <RoundedContainer className="mt-[50px] divide-y-[1px] divide-solid divide-[#eeeeee] px-[30px] py-[20px]">
-            <div className="flex items-center pb-[11px] text-base font-normal text-[#666666]">
-              <Image src={listing} width={36} height={36} />
+          <RoundedContainer
+            className={cn(
+              'divide-y-[1px] divide-solid divide-[#eeeeee]',
+              'lg:mt-[50px] lg:px-[30px] lg:py-5',
+              'mt-4 px-8 py-3'
+            )}
+          >
+            <div
+              className={cn(
+                'flex items-center pb-3 font-normal text-[#666666]',
+                'lg:text-base',
+                'text-sm'
+              )}
+            >
+              <div className={cn('lg:h-9 lg:w-9', 'h-6 w-6')}>
+                <Image src={listing} />
+              </div>
+
               <span>{t('COLLECTION_NFT_LISTING')}</span>
             </div>
-            <div className="pt-[16px] text-2xl font-semibold">
+            <div
+              className={cn('pt-4 font-semibold', 'lg:text-2xl', 'text-base')}
+            >
               {itemData.price}
             </div>
           </RoundedContainer>
-          <div className="mt-[60px] grid grid-cols-2 grid-rows-1 gap-12">
+          <div
+            className={cn(
+              'grid grid-cols-2 grid-rows-1 gap-12',
+              'lg:mt-[60px]',
+              'mt-5'
+            )}
+          >
             <Button
               className="h-[39px] rounded-[39px]"
               onClick={() => setOpenCompleteModal(true)}
@@ -259,8 +287,9 @@ function ItemId(props: itemIdProps) {
               {t('COLLECTION_NFT_BUTTON_PLACE_BID')}
             </Button>
           </div>
+          {/* PC端：tab切换 */}
           <Tabs
-            className="mt-[60px]"
+            className={cn('hidden', 'lg:mt-[60px] lg:block')}
             tabs={[
               {
                 title: t('COLLECTION_NFT_TAB_BIDS'),
@@ -276,6 +305,16 @@ function ItemId(props: itemIdProps) {
               }
             ]}
           />
+          {/* 移动端：若干个展开收缩模块展示 */}
+          <Collapse className={cn('lg:hidden', 'mt-2')} title="Properties">
+            Properties
+          </Collapse>
+          <Collapse className={cn('lg:hidden', 'mt-2')} title="Details">
+            Details
+          </Collapse>
+          <Collapse className={cn('lg:hidden', 'mt-2')} title="Activities">
+            Activities
+          </Collapse>
         </div>
         {/* 竞标Modal */}
         <Modal
