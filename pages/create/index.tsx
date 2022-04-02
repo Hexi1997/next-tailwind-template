@@ -3,7 +3,7 @@ import { GetStaticPropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { FormField } from '@/components/Common/Form/FormField';
 import { FormSubmitButton } from '@/components/Common/Form/FormSubmitButton';
@@ -56,6 +56,34 @@ function Create(props: createProps) {
   const [royalties, setRoyalties] = useState<number | null>(null);
   const [royaltiesOwner, setRoyaltiesOwner] = useState('');
 
+  const [submitButtonEnable, setSubmitButtonEnable] = useState(false);
+
+  useEffect(() => {
+    if (
+      !uploadFilePath ||
+      (!isUploadFileImg && !coverFilePath) ||
+      !name ||
+      !collectionId ||
+      properties.filter((item) => item.name && item.type).length !==
+        properties.length ||
+      royalties === null ||
+      !royaltiesOwner
+    ) {
+      setSubmitButtonEnable(false);
+    } else {
+      setSubmitButtonEnable(true);
+    }
+  }, [
+    collectionId,
+    coverFilePath,
+    isUploadFileImg,
+    name,
+    properties,
+    royalties,
+    royaltiesOwner,
+    uploadFilePath
+  ]);
+
   return (
     <>
       <NextSeo
@@ -86,7 +114,7 @@ function Create(props: createProps) {
                     setFilePath(
                       'https://lh3.googleusercontent.com/3bZ0o78gCK12W8a1gsy6fFSgVshx88sFdOmV55uZg4_RSxPminN7jsTiRVBgH6DSsMg5okU1PFqp0ttrqc7PI1Ra9i_qWWzH-H85=w600'
                     );
-                  }, 5000);
+                  }, 3000);
                 }
               }}
               tip={t('CREATE_PAGE_FORM_FIELD_UPLOAD_FILE_PLACEHOLDER')}
@@ -111,7 +139,7 @@ function Create(props: createProps) {
                       setCoverFilePath(
                         'https://lh3.googleusercontent.com/3bZ0o78gCK12W8a1gsy6fFSgVshx88sFdOmV55uZg4_RSxPminN7jsTiRVBgH6DSsMg5okU1PFqp0ttrqc7PI1Ra9i_qWWzH-H85=w600'
                       );
-                    }, 5000);
+                    }, 3000);
                   }
                 }}
                 tip={t('CREATE_PAGE_FORM_FIELD_COVER_PLACEHOLDER')}
@@ -190,7 +218,7 @@ function Create(props: createProps) {
           </FormField>
           <FormSubmitButton
             className="my-10 sm:my-20 "
-            isEnable={true}
+            isEnable={submitButtonEnable}
           ></FormSubmitButton>
         </form>
       </div>

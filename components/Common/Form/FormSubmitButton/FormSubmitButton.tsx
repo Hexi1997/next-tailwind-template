@@ -20,7 +20,7 @@ export function FormSubmitButton(props: FormSubmitButtonProps) {
         type="submit"
         className={cn(
           'mx-auto flex h-9 w-[264px] items-center justify-center rounded-lg text-white',
-          isEnable ? 'bg-themeGreen' : 'bg-gray-500'
+          isEnable ? 'cursor-not-allowed bg-themeGreen' : 'bg-gray-500'
         )}
       >
         {text || t('COMMON_SUBMIT_TEXT')}
