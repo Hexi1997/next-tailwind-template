@@ -22,39 +22,6 @@ import { useIconFont } from '@/utils/hooks/useIconFont';
 
 import styles from './_index.module.scss';
 
-const Category1Data = {
-  title: 'Category',
-  categories: [
-    { label: 'All' },
-    { label: 'Food' },
-    { label: 'Minted' },
-    { label: 'Stars' },
-    { label: 'Music' },
-    { label: 'Sports' },
-    { label: 'Movies' },
-    { label: 'Art' },
-    { label: 'Photography' }
-  ]
-};
-const Category2Data = {
-  title: 'Sale Type',
-  categories: [
-    { label: 'All' },
-    { label: 'Listings' },
-    { label: 'Minted' },
-    { label: 'Sales' },
-    { label: 'Bids' },
-    { label: 'Transfers' }
-  ]
-};
-const Category3Data = {
-  title: 'Sort',
-  categories: [
-    { label: 'Price:High To Low', icon: 'icon-sort-asc' },
-    { label: 'Price:Low To High', icon: 'icon-sort-desc' },
-    { label: 'Recently Listed' }
-  ]
-};
 const hotBidsData = [
   {
     id: 1,
@@ -118,31 +85,6 @@ const hotBidsData = [
   }
 ];
 
-const selectOptions1 = [
-  {
-    label: 'Price-Highest',
-    id: 1
-  },
-  {
-    label: 'Price-Lowest',
-    id: 2
-  },
-  {
-    label: 'Time-Newest',
-    id: 3
-  }
-];
-const selectOptions2 = [
-  {
-    label: 'Add Time Newest',
-    id: 1
-  },
-  {
-    label: 'Add Time Oldest',
-    id: 2
-  }
-];
-
 interface marketProps {
   className?: string;
 }
@@ -153,7 +95,9 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
       ...(await serverSideTranslations(locale || '', [
         'menu',
         'common',
-        'market'
+        'market',
+        'category',
+        'selection'
       ]))
     }
   };
@@ -161,10 +105,78 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 
 function Market(props: marketProps) {
   const { className } = props;
-  const { t } = useTranslation('market');
+  const { t } = useTranslation(['market', 'category', 'selection']);
   const [showFilter, setShowFilter] = useState(false);
-  const [category, setCategory] = useState('All');
-  const [saleType, setSaleType] = useState('All');
+  const [category, setCategory] = useState(
+    t('CATEGORY_TAG_ALL', { ns: 'category' }) as unknown as string
+  );
+  const [saleType, setSaleType] = useState(
+    t('CATEGORY_TAG_ALL', { ns: 'category' }) as unknown as string
+  );
+
+  const Category1 = {
+    title: t('CATEGORY_TITLE_CATEGORY', { ns: 'category' }),
+    categories: [
+      { label: t('CATEGORY_TAG_ALL', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_FOOD', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MINTED', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_STARS', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MUSIC', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_SPORTS', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MOVIES', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_ART', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_PHOTOGRAPHY', { ns: 'category' }) }
+    ]
+  };
+  const Category2 = {
+    title: t('CATEGORY_TITLE_SALE_TYPE', { ns: 'category' }),
+    categories: [
+      { label: t('CATEGORY_TAG_ALL', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_LISTINGS', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MINTED', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_SALES', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_BIDS', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_TRANSFERS', { ns: 'category' }) }
+    ]
+  };
+  const Category3Data = {
+    title: t('CATEGORY_TITLE_SORT', { ns: 'category' }),
+    categories: [
+      {
+        label: t('CATEGORY_TAG_PRICE_DESC', { ns: 'category' }),
+        icon: 'icon-sort-asc'
+      },
+      {
+        label: t('CATEGORY_TAG_PRICE_ASC', { ns: 'category' }),
+        icon: 'icon-sort-desc'
+      },
+      { label: t('CATEGORY_TAG_RECENTLY_LISTED', { ns: 'category' }) }
+    ]
+  };
+  const selectOptions1 = [
+    {
+      label: t('SELECT_OPTION_PRICE_HIGHEST', { ns: 'selection' }),
+      id: 1
+    },
+    {
+      label: t('SELECT_OPTION_PRICE_LOWEST', { ns: 'selection' }),
+      id: 2
+    },
+    {
+      label: t('SELECT_OPTION_TIME_NEWEST', { ns: 'selection' }),
+      id: 3
+    }
+  ];
+  const selectOptions2 = [
+    {
+      label: t('SELECT_OPTION_ADD_TIME_NEWEST', { ns: 'selection' }),
+      id: 1
+    },
+    {
+      label: t('SELECT_OPTION_ADD_TIME_OLDEST', { ns: 'selection' }),
+      id: 2
+    }
+  ];
 
   const toggleFilter = (visible: boolean) => {
     setShowFilter(visible);
@@ -175,24 +187,24 @@ function Market(props: marketProps) {
   return (
     <>
       <NextSeo
-        title={t('MARKET_PAGE_SEO_TITLE')}
-        description={t('MARKET_PAGE_SEO_DESC')}
+        title={t('MARKET_PAGE_SEO_TITLE', { ns: 'market' })}
+        description={t('MARKET_PAGE_SEO_DESC', { ns: 'market' })}
       />
       <div className={cn(styles.market, className, 'container')}>
         <div className="my-10 text-[28px] font-bold">
-          Explore all collections
+          {t('MARKET_TITLE', { ns: 'market' })}
         </div>
         <CategoryList
           className="hidden"
-          title={Category1Data.title}
-          categories={Category1Data.categories}
+          title={Category1.title}
+          categories={Category1.categories}
           value={category}
           onSelected={setCategory}
         />
         <CategoryList
           className="hidden"
-          title={Category2Data.title}
-          categories={Category2Data.categories}
+          title={Category2.title}
+          categories={Category2.categories}
           value={saleType}
           onSelected={setSaleType}
         />
@@ -212,7 +224,7 @@ function Market(props: marketProps) {
           )}
           onClick={() => toggleFilter(true)}
         >
-          Filter
+          {t('SELECT_MOBILE_FILTER', { ns: 'selection' })}
           <IconFont
             className="h-[24px] w-[16px] text-[28px]"
             type="icon-filter"
@@ -223,15 +235,15 @@ function Market(props: marketProps) {
           onClose={() => toggleFilter(false)}
         >
           <CategoryList
-            title={Category1Data.title}
-            categories={Category1Data.categories}
+            title={Category1.title}
+            categories={Category1.categories}
             isMobile={true}
             value={category}
             onSelected={setCategory}
           />
           <CategoryList
-            title={Category2Data.title}
-            categories={Category2Data.categories}
+            title={Category2.title}
+            categories={Category2.categories}
             isMobile={true}
             value={saleType}
             onSelected={setSaleType}
@@ -246,7 +258,7 @@ function Market(props: marketProps) {
 
         <div className="mb-[115px] grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
           {hotBidsData.map((item) => (
-            <ItemCard className={styles.marketItem} key={item.id} data={item} />
+            <ItemCard key={item.id} data={item} />
           ))}
         </div>
       </div>

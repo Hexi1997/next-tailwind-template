@@ -1,13 +1,22 @@
 import cn from 'classnames';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 
 import circleImg from '@/assets/images/collection/circle.png';
 import collectionIcon from '@/assets/images/collection/collectionIcon.png';
 import addressTypeImg from '@/assets/images/collection/ethereum.svg';
+import hotBidsImg1 from '@/assets/images/home/hot_bids_2.png';
+import hotBidsImg2 from '@/assets/images/home/hot_bids_3.png';
+import hotBidsImg3 from '@/assets/images/home/hot_bids_4.png';
+import hotBidsImg4 from '@/assets/images/home/hot_bids_5.png';
+import hotBidsImg5 from '@/assets/images/home/hot_bids_6.png';
+import userIconImg from '@/assets/images/home/usericon2.png';
+import editIcon from '@/assets/images/profile/edit.svg';
 import { Button, Tabs } from '@/components';
+import { ProfileList } from '@/components/Pages';
 import { ellipseAddress } from '@/utils/common';
 
 import styles from './_index.module.scss';
@@ -23,7 +32,13 @@ export async function getServerSideProps({
 > {
   return {
     props: {
-      ...(await serverSideTranslations(locale || '', ['menu', 'common']))
+      ...(await serverSideTranslations(locale || '', [
+        'menu',
+        'common',
+        'selection',
+        'category',
+        'profile'
+      ]))
     }
   };
 }
@@ -36,17 +51,92 @@ const profileData = {
   name: 'Unnamed'
 };
 
+const profileListData = [
+  {
+    id: 1,
+    img: hotBidsImg1,
+    name: 'Matrix Land（140，15）Long name long name',
+    userName: 'Heart & Sol',
+    userIcon: userIconImg,
+    starCount: 16,
+    isLikeByYou: true,
+    price: '1.00 FLOW'
+  },
+  {
+    id: 2,
+    img: hotBidsImg2,
+    name: 'Matrix Land（140，15）',
+    userName: 'Heart & Sol',
+    userIcon: userIconImg,
+    starCount: 26,
+    isLikeByYou: false,
+    price: '1.00 FLOW'
+  },
+  {
+    id: 3,
+    img: hotBidsImg3,
+    name: 'Matrix Land（140，15）',
+    userName: 'Heart & Sol',
+    userIcon: userIconImg,
+    starCount: 0,
+    isLikeByYou: true,
+    price: '1.00 FLOW'
+  },
+  {
+    id: 4,
+    img: hotBidsImg4,
+    name: 'Matrix Land（140，15）',
+    userName: 'Heart & Sol',
+    userIcon: userIconImg,
+    starCount: 1000,
+    isLikeByYou: true,
+    price: '10000.00 FLOW'
+  },
+  {
+    id: 5,
+    img: hotBidsImg5,
+    name: 'Matrix Land（140，15）',
+    userName: 'Heart & Sol',
+    userIcon: userIconImg,
+    starCount: 120,
+    isLikeByYou: true,
+    price: '10.00 FLOW'
+  },
+  {
+    id: 6,
+    img: hotBidsImg1,
+    name: 'Matrix Land（140，15）',
+    userName: 'Heart & Sol',
+    userIcon: userIconImg,
+    starCount: 3,
+    isLikeByYou: false,
+    price: '2.00 FLOW'
+  }
+];
+
 function AccountId(props: accountIdProps) {
   const { className } = props;
+  const { t } = useTranslation('profile');
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title={t('PROFILE_SEO_TITLE')}
+        description={t('PROFILE_SEO_DESC')}
+      />
       <div className={cn(styles.accountId, className)}>
         <div
-          className="h-[220px] w-full bg-cover bg-center"
+          className="relative h-[220px] w-full bg-cover bg-center"
           style={{ backgroundImage: `url('${profileData.background}')` }}
-        ></div>
+        >
+          <Button
+            type="Default"
+            className="absolute top-[28px] right-[75px] py-[10px] px-[25px]"
+          >
+            <Image src={editIcon} />
+            <span className="pl-[6px]">{t('PROFILE_BUTTON_EDIT')}</span>
+          </Button>
+        </div>
         <div className="container relative top-[-40px]">
           <div className="relative rounded-full">
             <Image src={circleImg} width={80} height={80} />
@@ -71,8 +161,24 @@ function AccountId(props: accountIdProps) {
             <Tabs
               tabs={[
                 {
-                  title: 'test1',
-                  element: <div>test1</div>
+                  title: t('PROFILE_TAB_ONSALE'),
+                  element: <ProfileList data={[]} />
+                },
+                {
+                  title: t('PROFILE_TAB_OWNED'),
+                  element: <ProfileList data={profileListData} />
+                },
+                {
+                  title: t('PROFILE_TAB_CREATED'),
+                  element: <ProfileList data={[]} />
+                },
+                {
+                  title: t('PROFILE_TAB_FAVORITED'),
+                  element: <ProfileList data={[]} />
+                },
+                {
+                  title: t('PROFILE_TAB_ACTIVITIES'),
+                  element: <ProfileList data={[]} />
                 }
               ]}
             />

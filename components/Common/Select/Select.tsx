@@ -4,6 +4,7 @@ import {
   SelectProps as BaseUISelectProps
 } from 'baseui/select';
 import cn from 'classnames';
+import { useTranslation } from 'next-i18next';
 import { CSSProperties, FC } from 'react';
 
 import styles from './Select.module.scss';
@@ -15,12 +16,14 @@ interface SelectProps extends BaseUISelectProps {
 
 const Select: FC<SelectProps> = (props) => {
   const { style, options, className, ...rest } = props;
+  const { t } = useTranslation('selection');
 
   return (
     <div className={cn(styles.Select, className)}>
       <BaseSelect
         options={options}
         searchable={false}
+        placeholder={t('SELECT_PLACEHOLDER')}
         {...rest}
         overrides={{
           Root: {
