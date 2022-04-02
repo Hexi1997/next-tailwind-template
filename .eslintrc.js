@@ -4,7 +4,6 @@ module.exports = {
   parserOptions: {
     project: require.resolve('./tsconfig.json')
   },
-
   rules: {
     'unicorn/filename-case': 'off',
     'import/order': 'off',

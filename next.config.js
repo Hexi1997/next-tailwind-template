@@ -1,8 +1,12 @@
-const { i18n } = require('./next-i18next.config');
+const { i18n } = require('./next-i18next.config.js');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  target: 'experimental-serverless-trace',
   reactStrictMode: true,
+  // images: {
+  //   domains: ['lh3.googleusercontent.com']
+  // },
   i18n,
   async redirects() {
     return [
