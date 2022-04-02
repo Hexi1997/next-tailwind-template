@@ -263,14 +263,17 @@ function ItemId(props: itemIdProps) {
             className="mt-[60px]"
             tabs={[
               {
+                key: 'bids',
                 title: t('COLLECTION_NFT_TAB_BIDS'),
                 element: <NFTDetailBids />
               },
               {
+                key: 'activities',
                 title: t('COLLECTION_NFT_TAB_ACTIVITIES'),
                 element: <NFTDetailActivities />
               },
               {
+                key: 'details',
                 title: t('COLLECTION_NFT_TAB_DETAILS'),
                 element: <NFTDetailDetails />
               }

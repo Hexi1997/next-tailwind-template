@@ -95,7 +95,6 @@ const collectionDetailMockData: ICollectionDetail = {
 
 function CollectionId(props: collectionIdProps) {
   const { className } = props;
-  const router = useRouter();
   const { t } = useTranslation('collection');
 
   return (
@@ -115,10 +114,12 @@ function CollectionId(props: collectionIdProps) {
             className="xl:mt-18 mt-2 sm:mt-4 lg:mt-6"
             tabs={[
               {
+                key: 'items',
                 title: t('COLLECTION_DETAIL_TAB_ITEMS'),
                 element: <CollectionDetailItems />
               },
               {
+                key: 'activities',
                 title: t('COLLECTION_DETAIL_TAB_ACTIVITIES'),
                 element: <CollectionDetailActivities />
               }
