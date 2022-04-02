@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { useTranslation } from 'next-i18next';
 
 import { CategoryList, ItemCard, Select } from '@/components';
 
@@ -21,45 +22,51 @@ interface ProfileListProps {
 
 export function ProfileList(props: ProfileListProps) {
   const { className, data } = props;
+  const { t } = useTranslation(['selection', 'category', 'profile']);
+
   const categories = [
-    { label: 'All' },
-    { label: 'Food' },
-    { label: 'Minted' },
-    { label: 'Stars' },
-    { label: 'Music' },
-    { label: 'Sports' },
-    { label: 'Movies' },
-    { label: 'Art' },
-    { label: 'Photography' }
+    { label: t('CATEGORY_TAG_ALL', { ns: 'category' }) },
+    { label: t('CATEGORY_TAG_FOOD', { ns: 'category' }) },
+    { label: t('CATEGORY_TAG_MINTED', { ns: 'category' }) },
+    { label: t('CATEGORY_TAG_STARS', { ns: 'category' }) },
+    { label: t('CATEGORY_TAG_MUSIC', { ns: 'category' }) },
+    { label: t('CATEGORY_TAG_SPORTS', { ns: 'category' }) },
+    { label: t('CATEGORY_TAG_MOVIES', { ns: 'category' }) },
+    { label: t('CATEGORY_TAG_ART', { ns: 'category' }) },
+    { label: t('CATEGORY_TAG_PHOTOGRAPHY', { ns: 'category' }) }
   ];
   const selectOptions1 = [
     {
-      label: 'Price-Highest',
+      label: t('SELECT_OPTION_PRICE_HIGHEST', { ns: 'selection' }),
       id: 1
     },
     {
-      label: 'Price-Lowest',
+      label: t('SELECT_OPTION_PRICE_LOWEST', { ns: 'selection' }),
       id: 2
     },
     {
-      label: 'Time-Newest',
+      label: t('SELECT_OPTION_TIME_NEWEST', { ns: 'selection' }),
       id: 3
     }
   ];
   const selectOptions2 = [
     {
-      label: 'Add Time Newest',
+      label: t('SELECT_OPTION_ADD_TIME_NEWEST', { ns: 'selection' }),
       id: 1
     },
     {
-      label: 'Add Time Oldest',
+      label: t('SELECT_OPTION_ADD_TIME_OLDEST', { ns: 'selection' }),
       id: 2
     }
   ];
 
   return (
     <div className={cn(styles.ProfileList, className, 'pt-[34px]')}>
-      <CategoryList title="Category" categories={categories} value={'All'} />
+      <CategoryList
+        title={t('CATEGORY_TITLE_CATEGORY', { ns: 'category' })}
+        categories={categories}
+        value={t('CATEGORY_TAG_ALL', { ns: 'category' }) as unknown as string}
+      />
       <div className={cn('mt-[45px] hidden', 'lg:flex')}>
         <Select
           style={{ width: '200px', marginRight: '36px' }}
@@ -81,9 +88,11 @@ export function ProfileList(props: ProfileListProps) {
         </div>
       ) : (
         <div className="py-[132px] text-center">
-          <p className="font-medium text-[#333333]">No Nft Here</p>
+          <p className="font-medium text-[#333333]">
+            {t('PROFILE_LIST_EMPTY_TITLE', { ns: 'profile' })}
+          </p>
           <p className="mt-4 text-sm text-[#999999]">
-            You can go to the market to find something interesting
+            {t('PROFILE_LIST_EMPTY_SUBTITLE', { ns: 'profile' })}
           </p>
         </div>
       )}

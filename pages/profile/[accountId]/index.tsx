@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
 
@@ -31,7 +32,13 @@ export async function getServerSideProps({
 > {
   return {
     props: {
-      ...(await serverSideTranslations(locale || '', ['menu', 'common']))
+      ...(await serverSideTranslations(locale || '', [
+        'menu',
+        'common',
+        'selection',
+        'category',
+        'profile'
+      ]))
     }
   };
 }
@@ -109,10 +116,14 @@ const profileListData = [
 
 function AccountId(props: accountIdProps) {
   const { className } = props;
+  const { t } = useTranslation('profile');
 
   return (
     <>
-      <NextSeo title="seo title" description="seo description" />
+      <NextSeo
+        title={t('PROFILE_SEO_TITLE')}
+        description={t('PROFILE_SEO_DESC')}
+      />
       <div className={cn(styles.accountId, className)}>
         <div
           className="relative h-[220px] w-full bg-cover bg-center"
@@ -123,7 +134,7 @@ function AccountId(props: accountIdProps) {
             className="absolute top-[28px] right-[75px] py-[10px] px-[25px]"
           >
             <Image src={editIcon} />
-            <span className="pl-[6px]">Edit</span>
+            <span className="pl-[6px]">{t('PROFILE_BUTTON_EDIT')}</span>
           </Button>
         </div>
         <div className="container relative top-[-40px]">
@@ -150,12 +161,24 @@ function AccountId(props: accountIdProps) {
             <Tabs
               tabs={[
                 {
-                  title: 'On Sale',
+                  title: t('PROFILE_TAB_ONSALE'),
                   element: <ProfileList data={[]} />
                 },
                 {
-                  title: 'Owned',
+                  title: t('PROFILE_TAB_OWNED'),
                   element: <ProfileList data={profileListData} />
+                },
+                {
+                  title: t('PROFILE_TAB_CREATED'),
+                  element: <ProfileList data={[]} />
+                },
+                {
+                  title: t('PROFILE_TAB_FAVORITED'),
+                  element: <ProfileList data={[]} />
+                },
+                {
+                  title: t('PROFILE_TAB_ACTIVITIES'),
+                  element: <ProfileList data={[]} />
                 }
               ]}
             />
