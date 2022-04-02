@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
@@ -117,6 +118,7 @@ const profileListData = [
 function AccountId(props: accountIdProps) {
   const { className } = props;
   const { t } = useTranslation('profile');
+  const router = useRouter();
 
   return (
     <>
@@ -132,6 +134,7 @@ function AccountId(props: accountIdProps) {
           <Button
             type="Default"
             className="absolute top-[28px] right-[75px] py-[10px] px-[25px]"
+            onClick={() => router.push('/profile/setting')}
           >
             <Image src={editIcon} />
             <span className="pl-[6px]">{t('PROFILE_BUTTON_EDIT')}</span>
