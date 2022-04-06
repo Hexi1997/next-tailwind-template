@@ -12,15 +12,15 @@ import { SectionHotCollections } from '@/components/Pages/Home/SectionHotCollect
 import { SectionLatest } from '@/components/Pages/Home/SectionLatest';
 import { SectionTopCollectionsOneDay } from '@/components/Pages/Home/SectionTopCollectionsOneDay';
 
-import { getData } from '../../services/request';
+// import { getData } from '../../services/request';
 import styles from './_index.module.scss';
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  console.log(
-    // await getData('https://reqbin.com/echo/get/json').catch(console.error)
-    await axios.get('https://reqbin.com/echo/get/json').catch(console.error)
-    // await fetch('https://reqbin.com/echo/get/json').then((r) => r.json())
-  );
+  // console.log(
+  //   // await getData('https://reqbin.com/echo/get/json').catch(console.error)
+  //   await axios.get('https://reqbin.com/echo/get/json').catch(console.error)
+  //   // await fetch('https://reqbin.com/echo/get/json').then((r) => r.json())
+  // );
   return {
     props: {
       ...(await serverSideTranslations(locale || '', [
