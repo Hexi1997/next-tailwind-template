@@ -151,6 +151,7 @@ function ItemId(props: itemIdProps) {
               height="699"
             />
           </RoundedContainer>
+          {/* PC端图片（分割线） */}
           <RoundedContainer
             className={cn(
               'lg:mt-[40px] lg:block lg:px-[21px] lg:pt-[24px] lg:pb-[47px]',
@@ -219,6 +220,7 @@ function ItemId(props: itemIdProps) {
             </div>
             <Image src={itemData.image} />
           </RoundedContainer>
+          {/* 移动端图片（分割线） */}
           <div
             className={cn(
               'flex divide-x-[1px] divide-solid divide-[#eeeeee]',
@@ -308,15 +310,49 @@ function ItemId(props: itemIdProps) {
               }
             ]}
           />
-          {/* 移动端：若干个展开收缩模块展示 */}
-          <Collapse className={cn('lg:hidden', 'mt-2')} title="Properties">
-            Properties
+          {/* 移动端：竞标展开，其他为若干个展开收缩模块展示 */}
+          <RoundedContainer className={cn('lg:hidden', 'mt-4')}>
+            <NFTDetailBids />
+          </RoundedContainer>
+          <Collapse
+            className={cn('lg:hidden', 'mt-6')}
+            title={t('COLLECTION_NFT_PROPERTIES')}
+          >
+            <div
+              className={cn(
+                'grid grid-cols-2 grid-rows-2 gap-4',
+                'sm:grid-cols-3',
+                'md:grid-cols-4'
+              )}
+            >
+              {itemProperties.map((item) => (
+                <div
+                  key={item.id}
+                  className="rounded-[10px] border-[1px] border-solid border-[#cccccc] px-[20px] py-[12px]"
+                >
+                  <div className="text-xs text-[#666666]">{item.type}</div>
+                  <div className="mt-2 text-sm text-[#333333]">
+                    {item.content}
+                  </div>
+                  <div className="mt-2 text-xs text-[#666666]">
+                    {item.remark}
+                  </div>
+                </div>
+              ))}
+            </div>
           </Collapse>
-          <Collapse className={cn('lg:hidden', 'mt-2')} title="Details">
-            Details
+          <Collapse
+            className={cn('lg:hidden', 'mt-2')}
+            title={t('COLLECTION_NFT_TAB_DETAILS')}
+          >
+            <NFTDetailDetails />
           </Collapse>
-          <Collapse className={cn('lg:hidden', 'mt-2')} title="Activities">
-            Activities
+          <Collapse
+            className={cn('lg:hidden', 'mt-2')}
+            title={t('COLLECTION_NFT_TAB_ACTIVITIES')}
+            contentStyle={{ paddingTop: 0 }}
+          >
+            <NFTDetailActivities />
           </Collapse>
         </div>
         {/* 竞标Modal */}
@@ -327,21 +363,21 @@ function ItemId(props: itemIdProps) {
         >
           <div className="mb-[20px] flex w-full">
             <Input
+              className="w-[70%]"
               placeholder={t('COLLECTION_NFT_MODAL_BID_PLACEHOLDER')}
               value={bidCoin}
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               onChange={(e: any) => setBidCoin(e.target.value)}
               style={{
-                width: '20rem',
                 borderRadius: '18px 0 0 18px',
                 borderRight: 'transparent',
                 font: '700 20px Inter'
               }}
             />
             <Select
+              className="w-[30%]"
               style={{
                 borderRadius: '0 18px 18px 0',
-                width: '8rem',
                 borderLeft: 'none'
               }}
               options={bidCoinOptions}
@@ -379,7 +415,7 @@ function ItemId(props: itemIdProps) {
               <div>{t('COLLECTION_NFT_MODAL_NOTIFICATION')}</div>
             )}
           </div>
-          <div className="my-[40px]">
+          <div className="my-10">
             <Button
               type={
                 bidCoin && bidCoinUnit && Number(bidCoin) <= restCoin
@@ -388,7 +424,7 @@ function ItemId(props: itemIdProps) {
               }
               shadow={false}
               className={cn(
-                'h-[40px] w-full rounded-[40px]',
+                'rounded-10 h-10 w-full',
                 bidCoin && bidCoinUnit ? '' : 'bg-[#ededed] text-[#333333]',
                 Number(bidCoin) <= restCoin
                   ? ''
