@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import userIconImg from '@/assets/images/home/usericon2.png';
+import { ellipseAddress } from '@/utils/common';
 
 import styles from './NFTDetailBids.module.scss';
 
@@ -17,7 +18,7 @@ const data = [
     id: 1,
     price: '1.42flow',
     priceDollar: '$53332',
-    by: '0xa9ea9ffc…E0d1',
+    by: '0x48cc4d3db0b0c0fd60c8a1be73fa96da92fd9009',
     time: '1 hour ago',
     avatar: userIconImg
   },
@@ -25,7 +26,7 @@ const data = [
     id: 2,
     price: '1.42flow',
     priceDollar: '$53332',
-    by: '0xa9ea9ffc…E0d1',
+    by: '0x48cc4d3db0b0c0fd60c8a1be73fa96da92fd9009',
     time: '1 hour ago',
     avatar: userIconImg
   },
@@ -33,7 +34,7 @@ const data = [
     id: 3,
     price: '1.42flow',
     priceDollar: '$53332',
-    by: '0xa9ea9ffc…E0d1',
+    by: '0x48cc4d3db0b0c0fd60c8a1be73fa96da92fd9009',
     time: '1 hour ago',
     avatar: userIconImg
   },
@@ -41,7 +42,7 @@ const data = [
     id: 4,
     price: '1.42flow',
     priceDollar: '$53332',
-    by: '0xa9ea9ffc…E0d1',
+    by: '0x48cc4d3db0b0c0fd60c8a1be73fa96da92fd9009',
     time: '1 hour ago',
     avatar: userIconImg
   },
@@ -49,7 +50,7 @@ const data = [
     id: 5,
     price: '1.42flow',
     priceDollar: '$53332',
-    by: '0xa9ea9ffc…E0d1',
+    by: '0x48cc4d3db0b0c0fd60c8a1be73fa96da92fd9009',
     time: '1 hour ago',
     avatar: userIconImg
   },
@@ -57,7 +58,7 @@ const data = [
     id: 6,
     price: '1.42flow',
     priceDollar: '$53332',
-    by: '0xa9ea9ffc…E0d1',
+    by: '0x48cc4d3db0b0c0fd60c8a1be73fa96da92fd9009',
     time: '1 hour ago',
     avatar: userIconImg
   },
@@ -65,7 +66,7 @@ const data = [
     id: 7,
     price: '1.42flow',
     priceDollar: '$53332',
-    by: '0xa9ea9ffc…E0d1',
+    by: '0x48cc4d3db0b0c0fd60c8a1be73fa96da92fd9009',
     time: '1 hour ago',
     avatar: userIconImg
   },
@@ -73,7 +74,7 @@ const data = [
     id: 8,
     price: '1.42flow',
     priceDollar: '$53332',
-    by: '0xa9ea9ffc…E0d1',
+    by: '0x48cc4d3db0b0c0fd60c8a1be73fa96da92fd9009',
     time: '1 hour ago',
     avatar: userIconImg
   }
@@ -90,13 +91,22 @@ export function NFTDetailBids(props: NFTDetailBidsProps) {
   ];
 
   return (
-    <div className={cn(styles.NFTDetailBids, className)}>
-      {/* PC端：表格 */}
-      <table className={cn('lg:table lg:w-full', 'hidden')}>
+    <div className={cn(styles.NFTDetailBids, className, 'lg:p-0', 'py-6 px-5')}>
+      {/* 移动端：展示标题 */}
+      <div
+        className={cn('lg:hidden', 'text-base font-semibold text-[#333333]')}
+      >
+        {t('COLLECTION_NFT_TAB_BIDS')}
+      </div>
+      <table className="table w-full">
         <thead>
           {columns.map((item) => (
             <th
-              className="pt-[20px] pb-[4px] text-base text-[#999999]"
+              className={cn(
+                'text-[#999999]',
+                'lg:pt-5 lg:pb-1 lg:text-base',
+                'pt-2'
+              )}
               key={item}
             >
               <td>{item}</td>
@@ -109,16 +119,40 @@ export function NFTDetailBids(props: NFTDetailBidsProps) {
               className={cn('hover:rounded-xl hover:shadow-xl')}
               key={item.id}
             >
-              <td className="py-[16px] align-middle">
-                <div className="text-2xl font-bold">{item.price}</div>
-                <div className="text-sm text-[#333333] opacity-50">
+              <td className="py-4 align-middle">
+                <div
+                  className={cn(
+                    'lg:text-2xl lg:font-bold',
+                    'text-sm font-normal'
+                  )}
+                >
+                  {item.price}
+                </div>
+                {/* 移动端：不展示其他币种价格 */}
+                <div
+                  className={cn(
+                    'lg:block lg:text-sm lg:text-[#333333] lg:opacity-50',
+                    'hidden'
+                  )}
+                >
                   {item.priceDollar}
                 </div>
               </td>
               <td className="align-middle">
-                <Image src={item.avatar} width={28} height={28} />
-                <div className="ml-[11px] inline-block translate-y-[-25%]">
-                  {item.by}
+                <div className={cn('lg:inline-block', 'hidden')}>
+                  <Image src={item.avatar} width={28} height={28} />
+                </div>
+                <div className={cn('lg:hidden', 'inline-block')}>
+                  <Image src={item.avatar} width={16} height={16} />
+                </div>
+                <div
+                  className={cn(
+                    'inline-block',
+                    'lg:ml-3 lg:translate-y-[-25%]',
+                    'ml-2'
+                  )}
+                >
+                  {ellipseAddress(item.by, 4)}
                 </div>
               </td>
               <td className="align-middle">{item.time}</td>
@@ -126,8 +160,6 @@ export function NFTDetailBids(props: NFTDetailBidsProps) {
           ))}
         </tbody>
       </table>
-      {/* 移动端：行排列展示 */}
-      <div className={cn('lg:hidden')}> </div>
     </div>
   );
 }

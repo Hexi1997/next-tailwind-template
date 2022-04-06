@@ -1,6 +1,7 @@
 export { CategoryList } from './CategoryList';
 export { MobileCategoryList } from './CategoryList/MobileCategoryList';
 export { Button } from './Common/Button';
+export { Collapse } from './Common/Collapse';
 export { Drawer } from './Common/Drawer';
 export { FormField } from './Common/Form/FormField';
 export { FormSubmitButton } from './Common/Form/FormSubmitButton';
