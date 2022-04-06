@@ -1,17 +1,19 @@
+import { Option } from 'baseui/select';
 import cn from 'classnames';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import { Button, FormField, FormTitle } from '@/components';
+import { FormField, FormSubmitButton, FormTitle, Select } from '@/components';
 import { ImageSelector } from '@/components/ImageSelector';
 import { CollaboratorsAdd } from '@/components/Pages/EditCollection/CollaboratorsAdd';
 import {
   ILinksInput,
   LinkInput
 } from '@/components/Pages/EditCollection/LinkInput';
+import { useSize } from '@/utils/hooks/useSize';
 
 import styles from './_index.module.scss';
 
@@ -36,15 +38,85 @@ export async function getServerSideProps({
 }
 function Edit(props: editProps) {
   const { className } = props;
-  const { t } = useTranslation(['editcollection', 'common']);
+  const { t } = useTranslation(['editcollection', 'common', 'menu']);
 
   const [logoImg, setLogoImg] = useState('');
   const [featureImg, setFeatureImg] = useState('');
   const [bannerImg, setBannerImg] = useState('');
   const [name, setName] = useState('');
   const [desc, setDesc] = useState('');
+  const [category, setCategory] = useState<Option[]>([]);
   const [links, setLinks] = useState<ILinksInput>({});
   const [collaborators, setCollaborators] = useState<string[]>([]);
+
+  const [showSubmitButton, setShowSubmitButton] = useState(false);
+  const { isMIN } = useSize();
+
+  useEffect(() => {
+    if (
+      logoImg &&
+      featureImg &&
+      bannerImg &&
+      name &&
+      desc &&
+      category.length &&
+      links.discord &&
+      links.ins &&
+      links.twitter &&
+      links.website &&
+      collaborators.length &&
+      collaborators.find((item) => item.trim() === '') === undefined
+    ) {
+      setShowSubmitButton(true);
+    } else {
+      setShowSubmitButton(false);
+    }
+  }, [
+    bannerImg,
+    category.length,
+    collaborators,
+    desc,
+    featureImg,
+    links.discord,
+    links.ins,
+    links.twitter,
+    links.website,
+    logoImg,
+    name
+  ]);
+
+  const categoryOptions = useMemo(() => {
+    return [
+      {
+        label: t('MENU_COLLECTIONS_ART', { ns: 'menu' }),
+        id: 'art'
+      },
+      {
+        label: t('MENU_COLLECTIONS_SPORTS', { ns: 'menu' }),
+        id: 'sports'
+      },
+      {
+        label: t('MENU_COLLECTIONS_MUSIC', { ns: 'menu' }),
+        id: 'music'
+      },
+      {
+        label: t('MENU_COLLECTIONS_MOVIES', { ns: 'menu' }),
+        id: 'movies'
+      },
+      {
+        label: t('MENU_COLLECTIONS_PHOTOGRAPHY', { ns: 'menu' }),
+        id: 'photography'
+      },
+      {
+        label: t('MENU_COLLECTIONS_FOOD', { ns: 'menu' }),
+        id: 'food'
+      },
+      {
+        label: t('MENU_COLLECTIONS_STARS', { ns: 'menu' }),
+        id: 'stars'
+      }
+    ];
+  }, [t]);
 
   return (
     <>
@@ -142,9 +214,16 @@ function Edit(props: editProps) {
             title={t('EDIT_PAGE_FORM_FIELD_CATEGORY_TITLE')}
             subTitle={t('EDIT_PAGE_FORM_FIELD_CATEGORY_SUBTITLE')}
           >
-            <Button className="h-[40px] w-[289px] rounded-full !bg-[#333] text-white hover:!bg-[#222]">
-              {t('EDIT_PAGE_FORM_FIELD_CATEGORY_BUTTON_ADD_TEXT')}
-            </Button>
+            <Select
+              value={category}
+              placeholder={t('EDIT_PAGE_FORM_FIELD_CATEGORY_CHOOSE')}
+              options={categoryOptions}
+              onChange={(e) => setCategory(e.value as Option[])}
+              mode="square"
+              style={{
+                width: isMIN ? '' : '280px'
+              }}
+            />
           </FormField>
           <FormField title={t('EDIT_PAGE_FORM_FIELD_LINKS_TITLE')}>
             <LinkInput
@@ -166,6 +245,10 @@ function Edit(props: editProps) {
               }}
             />
           </FormField>
+          <FormSubmitButton
+            className="my-10 sm:my-20"
+            isEnable={showSubmitButton}
+          />
         </form>
       </div>
     </>

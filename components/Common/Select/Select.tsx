@@ -12,10 +12,11 @@ import styles from './Select.module.scss';
 interface SelectProps extends BaseUISelectProps {
   className?: string;
   style?: CSSProperties;
+  mode?: 'rounded' | 'square';
 }
 
 const Select: FC<SelectProps> = (props) => {
-  const { style, options, className, ...rest } = props;
+  const { style, options, className, mode = 'rounded', ...rest } = props;
   const { t } = useTranslation('selection');
 
   return (
@@ -29,10 +30,12 @@ const Select: FC<SelectProps> = (props) => {
           Root: {
             style: () => ({
               outline: 'none',
-              height: '36px',
+              height: '40px',
               padding: '0',
-              border: '1px solid #999',
-              borderRadius: '18px',
+              display: 'flex',
+              alignItems: 'center',
+              border: mode === 'rounded' ? '1px solid #999' : '2px solid #ccc',
+              borderRadius: mode === 'rounded' ? '20px' : '8px',
               overflow: 'hidden',
               ...style
             })
@@ -41,14 +44,19 @@ const Select: FC<SelectProps> = (props) => {
             style: () => ({
               backgroundColor: 'white',
               border: 'none',
-              height: '36px',
+              height: '40px',
               font: '400 .875rem Inter'
             })
           },
           SelectArrow: {
             props: {
               overrides: {
-                Svg: () => <ChevronDown size={30} color="#999999" />
+                Svg: () => (
+                  <ChevronDown
+                    size={30}
+                    color={mode === 'rounded' ? '#999999' : '#cccccc'}
+                  />
+                )
               }
             }
           }

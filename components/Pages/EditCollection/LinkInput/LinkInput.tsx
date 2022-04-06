@@ -30,7 +30,7 @@ export function LinkInput(props: LinkInputProps) {
     <div className={cn(styles.LinkInput, className)}>
       <div className="w-full rounded-lg border-2 border-solid border-[#ccc]">
         <div className="flex h-20 w-full items-center border-b-2 border-solid border-[#ccc] px-[27px]">
-          <div className="mt-2 flex-shrink-0">
+          <div className="mt-2 flex-shrink-0 cursor-pointer">
             <Image
               src={websiteImg}
               width={30}
@@ -57,7 +57,7 @@ export function LinkInput(props: LinkInputProps) {
           />
         </div>
         <div className="flex h-20 w-full items-center border-b-2 border-solid border-[#ccc] px-[27px]">
-          <div className="mt-1 flex-shrink-0">
+          <div className="mt-1 flex-shrink-0 cursor-pointer">
             <Image
               src={insImg}
               width={27}
@@ -84,7 +84,7 @@ export function LinkInput(props: LinkInputProps) {
           />
         </div>
         <div className="flex h-20 w-full items-center border-b-2 border-solid border-[#ccc] px-[27px]">
-          <div className="mt-1 flex-shrink-0">
+          <div className="mt-1 flex-shrink-0 cursor-pointer">
             <Image
               src={twitterImg}
               width={28}
@@ -111,7 +111,7 @@ export function LinkInput(props: LinkInputProps) {
           />
         </div>
         <div className="flex h-20 w-full items-center px-[27px]">
-          <div className="flex-shrink-1 mt-[5px]">
+          <div className="flex-shrink-1 mt-[5px] cursor-pointer">
             <Image
               src={discordImg}
               width={32}

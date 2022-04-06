@@ -217,7 +217,7 @@ function Create(props: createProps) {
             </div>
           </FormField>
           <FormSubmitButton
-            className="my-10 sm:my-20 "
+            className="my-10 sm:my-20"
             isEnable={submitButtonEnable}
           ></FormSubmitButton>
         </form>
