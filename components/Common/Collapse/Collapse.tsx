@@ -1,4 +1,4 @@
-import ChevronDown from 'baseui/icon/chevron-down';
+import { ChevronDown } from 'baseui/icon';
 import cn from 'classnames';
 import { CSSProperties, FC, ReactNode, useState } from 'react';
 
