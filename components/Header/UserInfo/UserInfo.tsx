@@ -30,7 +30,7 @@ const links = [
     icon: profileImg,
     icon_white: profileWhiteImg,
     title: 'MENU_USER_PROFILE',
-    link: '/profile'
+    link: '/profile/1'
   },
   {
     icon: collectionsImg,
