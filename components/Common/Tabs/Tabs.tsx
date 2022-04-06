@@ -1,10 +1,12 @@
 import { Tab, Tabs as BaseUiTabs } from 'baseui/tabs';
 import cn from 'classnames';
-import { ReactNode, useState } from 'react';
+import { useRouter } from 'next/router';
+import { ReactNode, useEffect, useState } from 'react';
 
 import styles from './Tabs.module.scss';
 
 interface ITab {
+  key: string;
   title: string;
   element: ReactNode;
 }
@@ -16,13 +18,34 @@ interface TabsProps {
 
 export function Tabs(props: TabsProps) {
   const { className, tabs, tabTitleFontSize } = props;
-  const [activeKey, setActiveKey] = useState<string>(tabs[0].title);
+  const router = useRouter();
+  const [activeKey, setActiveKey] = useState<string>(tabs[0].key);
+
+  useEffect(() => {
+    if (router.query.tab) {
+      setActiveKey(router.query.tab as string);
+    } else {
+      setActiveKey(tabs[0].key);
+    }
+  }, [router.query.tab, tabs]);
 
   return (
     <div className={cn(styles.Tabs, className)}>
       <BaseUiTabs
         onChange={({ activeKey }) => {
-          setActiveKey(activeKey as string);
+          router
+            .push(
+              {
+                pathname: router.pathname,
+                query: {
+                  ...router.query,
+                  tab: activeKey
+                }
+              },
+              undefined,
+              { shallow: true }
+            )
+            .catch(console.error);
         }}
         activeKey={activeKey}
         overrides={{
@@ -44,8 +67,8 @@ export function Tabs(props: TabsProps) {
         }}
       >
         {tabs.map((item) => (
-          <Tab key={item.title} title={item.title}>
-            {tabs.find((titem) => titem.title === item.title)?.element}
+          <Tab key={item.key} title={item.title}>
+            {tabs.find((titem) => titem.key === item.key)?.element}
           </Tab>
         ))}
       </BaseUiTabs>

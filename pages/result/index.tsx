@@ -105,6 +105,7 @@ function Result(props: resultProps) {
           tabTitleFontSize="22px"
           tabs={[
             {
+              key: 'collections',
               title: t('COMMON_SEARCH_RESULT_COLLECTIONS_TITLE'),
               element: (
                 <CollectionListArea
@@ -114,6 +115,7 @@ function Result(props: resultProps) {
               )
             },
             {
+              key: 'items',
               title: t('COMMON_SEARCH_RESULT_ITEMS_TITLE'),
               element: (
                 <div className="my-10 grid grid-cols-1 gap-y-8 lg:grid-cols-2 xl:grid-cols-3">
@@ -124,6 +126,7 @@ function Result(props: resultProps) {
               )
             },
             {
+              key: 'users',
               title: t('COMMON_SEARCH_RESULT_USERS_TITLE'),
               element: isShowNoData ? (
                 <NoData

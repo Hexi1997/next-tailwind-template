@@ -164,22 +164,27 @@ function AccountId(props: accountIdProps) {
             <Tabs
               tabs={[
                 {
+                  key: 'onsale',
                   title: t('PROFILE_TAB_ONSALE'),
                   element: <ProfileList data={[]} />
                 },
                 {
+                  key: 'owned',
                   title: t('PROFILE_TAB_OWNED'),
                   element: <ProfileList data={profileListData} />
                 },
                 {
+                  key: 'created',
                   title: t('PROFILE_TAB_CREATED'),
                   element: <ProfileList data={[]} />
                 },
                 {
+                  key: 'favorited',
                   title: t('PROFILE_TAB_FAVORITED'),
                   element: <ProfileList data={[]} />
                 },
                 {
+                  key: 'activities',
                   title: t('PROFILE_TAB_ACTIVITIES'),
                   element: <ProfileList data={[]} />
                 }
