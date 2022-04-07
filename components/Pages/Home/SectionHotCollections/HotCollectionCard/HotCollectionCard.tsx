@@ -17,7 +17,7 @@ export function HotCollectionCard(props: HotCollectionCardProps) {
       className={cn(
         styles.HotCollectionCard,
         className,
-        'relative mx-auto mb-8 h-[263px] w-[232px] cursor-pointer rounded-[16px] shadow-lg hover:shadow-2xl'
+        'relative mx-auto mb-8 h-[263px] w-[232px] cursor-pointer rounded-[16px] shadow-lg transition-all duration-300 hover:shadow-2xl'
       )}
     >
       <Image src={data.img} width="232" height="167" />

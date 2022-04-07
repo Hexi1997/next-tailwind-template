@@ -1,3 +1,4 @@
+import { OnChangeParams } from 'baseui/select';
 import cn from 'classnames';
 import { GetStaticPropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
@@ -106,13 +107,6 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 function Market(props: marketProps) {
   const { className } = props;
   const { t } = useTranslation(['market', 'category', 'selection']);
-  const [showFilter, setShowFilter] = useState(false);
-  const [category, setCategory] = useState(
-    t('CATEGORY_TAG_ALL', { ns: 'category' }) as unknown as string
-  );
-  const [saleType, setSaleType] = useState(
-    t('CATEGORY_TAG_ALL', { ns: 'category' }) as unknown as string
-  );
 
   const Category1 = {
     title: t('CATEGORY_TITLE_CATEGORY', { ns: 'category' }),
@@ -178,8 +172,19 @@ function Market(props: marketProps) {
     }
   ];
 
+  const [showFilter, setShowFilter] = useState(false);
+  const [category, setCategory] = useState(Category1.categories[0].label);
+  const [saleType, setSaleType] = useState(Category2.categories[0].label);
+  const [order1, setOrder1] = useState([]);
+  const [order2, setOrder2] = useState([]);
+
   const toggleFilter = (visible: boolean) => {
     setShowFilter(visible);
+  };
+
+  const handleReset = () => {
+    setCategory(Category1.categories[0].label);
+    setSaleType(Category2.categories[0].label);
   };
 
   const { IconFont } = useIconFont();
@@ -213,50 +218,61 @@ function Market(props: marketProps) {
           <Select
             style={{ width: '200px', marginRight: '36px' }}
             options={selectOptions1}
+            value={order1}
+            onChange={(e: OnChangeParams) => setOrder1(e.value)}
+            clearable={false}
           />
-          <Select style={{ width: '200px' }} options={selectOptions2} />
+          <Select
+            style={{ width: '200px' }}
+            options={selectOptions2}
+            value={order2}
+            onChange={(e: OnChangeParams) => setOrder2(e.value)}
+            clearable={false}
+          />
         </div>
 
         <Button
           className={cn(
-            'font-[14px] fixed bottom-9 right-5 z-10 h-[40px] w-[110px] rounded-[23px] bg-[#333333]',
+            'fixed bottom-9 right-5 z-10 h-[40px] w-[110px] rounded-[23px] bg-[#333333] text-sm',
             'lg:hidden'
           )}
           onClick={() => toggleFilter(true)}
         >
           {t('SELECT_MOBILE_FILTER', { ns: 'selection' })}
-          <IconFont
-            className="h-[24px] w-[16px] text-[28px]"
-            type="icon-filter"
-          />
+          <IconFont className="h-6 w-4 text-[28px]" type="icon-filter" />
         </Button>
         <MobileCategoryList
           visible={showFilter}
           onClose={() => toggleFilter(false)}
+          onReset={handleReset}
         >
           <CategoryList
             title={Category1.title}
             categories={Category1.categories}
-            isMobile={true}
             value={category}
             onSelected={setCategory}
           />
           <CategoryList
             title={Category2.title}
             categories={Category2.categories}
-            isMobile={true}
             value={saleType}
             onSelected={setSaleType}
           />
           <CategoryList
             title={Category3Data.title}
             categories={Category3Data.categories}
-            isMobile={true}
             value={''}
           />
         </MobileCategoryList>
 
-        <div className="mb-[115px] grid grid-cols-1 grid-rows-3 gap-x-44 gap-y-8 lg:grid-cols-2 lg:grid-rows-2 xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44">
+        <div
+          className={cn(
+            'mb-[115px] grid',
+            'lg:grid-cols-2 lg:grid-rows-2',
+            'xl:grid-cols-3 xl:grid-rows-1 xl:gap-x-44',
+            'grid-cols-1 grid-rows-3 gap-x-44 gap-y-8'
+          )}
+        >
           {hotBidsData.map((item) => (
             <ItemCard key={item.id} data={item} />
           ))}

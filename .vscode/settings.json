@@ -31,5 +31,6 @@
   },
   "blueprint.templatesPath": [
     ".vscode/blueprint-templates",
-  ]
+  ],
+  "files.eol": "\n"
 }

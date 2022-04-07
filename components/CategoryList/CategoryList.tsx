@@ -1,5 +1,6 @@
 import cn from 'classnames';
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
+import { useWindowSize } from 'react-use';
 
 import { Button } from '@/components';
 import { useIconFont } from '@/utils/hooks/useIconFont';
@@ -16,19 +17,11 @@ interface CategoryListProps {
   categories: CategoryItem[];
   value: string | number;
   onSelected?: (item: string) => void;
-  isMobile?: boolean; // 是否移动端
 }
 
 // 多于5个就一行3个，否则一行2个
 const CategoryList: FC<CategoryListProps> = (props) => {
-  const {
-    className,
-    title,
-    categories,
-    value = null,
-    isMobile,
-    onSelected
-  } = props;
+  const { className, title, categories, value = null, onSelected } = props;
 
   const [selected, setSelected] = useState(value);
 
@@ -38,6 +31,10 @@ const CategoryList: FC<CategoryListProps> = (props) => {
   };
 
   const { IconFont } = useIconFont();
+  const { width } = useWindowSize();
+  const isMobile = useMemo(() => {
+    return width < 1024;
+  }, [width]);
 
   return (
     <div
@@ -51,8 +48,8 @@ const CategoryList: FC<CategoryListProps> = (props) => {
       {title && (
         <div
           className={cn(
-            'whitespace-nowrap text-[16px] text-[#666666]',
-            isMobile && 'mb-[16px]',
+            'whitespace-nowrap text-base text-[#666666]',
+            isMobile && 'mb-4',
             'lg:mr-[27px] lg:w-[100px] lg:border-r-[1px] lg:border-solid lg:border-neutral-300 lg:pr-6'
           )}
         >

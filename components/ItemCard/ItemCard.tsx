@@ -23,7 +23,7 @@ export function ItemCard(props: ItemCardProps) {
       className={cn(
         styles.ItemCard,
         className,
-        'mx-auto h-[420px] w-[320px] cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl'
+        'mx-auto h-[420px] w-[320px] cursor-pointer overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl'
       )}
     >
       <Image src={data.img} width="320" height="312" />

@@ -11,10 +11,11 @@ interface MobileCategoryListProps {
   children?: ReactNode;
   visible: boolean;
   onClose?: () => void;
+  onReset?: () => void;
 }
 
 const MobileCategoryList: FC<MobileCategoryListProps> = (props) => {
-  const { className, children, visible, onClose } = props;
+  const { className, children, visible, onClose, onReset } = props;
   const { t } = useTranslation('selection');
 
   return (
@@ -47,6 +48,7 @@ const MobileCategoryList: FC<MobileCategoryListProps> = (props) => {
             'absolute bottom-4 left-8 h-[2.25rem] w-[8rem] rounded-[1.125rem] bg-[#666666] text-white',
             'md:w-[10rem]'
           )}
+          onClick={() => onReset && onReset()}
         >
           {t('SELECT_MOBILE_RESTART')}
         </Button>
@@ -55,7 +57,7 @@ const MobileCategoryList: FC<MobileCategoryListProps> = (props) => {
             'absolute bottom-4 right-8 h-[2.25rem] w-[8rem] rounded-[1.125rem]',
             'md:w-[10rem]'
           )}
-          onClick={onClose}
+          onClick={() => onClose && onClose()}
         >
           {t('SELECT_MOBILE_FINISH')}
         </Button>
