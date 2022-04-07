@@ -80,10 +80,6 @@ export const menus: IMenu[] = [
     name: 'MENU_COLLECTIONS',
     link: '/collections',
     sub: collectionSubMenus
-  },
-  {
-    name: 'MENU_CREATE',
-    link: '/create'
   }
 ];
 
@@ -116,19 +112,16 @@ export function Nav(props: NavProps) {
               <Link href={item.link}>
                 <a
                   className={cn(
-                    'flex h-16 items-center text-sm text-neutral-700'
+                    'flex h-16 items-center text-sm text-neutral-700',
+                    focusMenuItem?.name === item.name
+                      ? 'relative after:absolute after:left-0 after:bottom-0 after:h-[6px] after:w-full after:rounded-t-md after:bg-themeGreen'
+                      : ''
                   )}
                 >
-                  <span
-                    className={cn(
-                      'px-4 py-2',
-                      focusMenuItem?.name === item.name
+                  {/* focusMenuItem?.name === item.name
                         ? 'rounded-full bg-themeGreen text-white'
-                        : ''
-                    )}
-                  >
-                    {t(item.name)}
-                  </span>
+                        : '' */}
+                  <span className="px-4 py-2">{t(item.name)}</span>
                 </a>
               </Link>
               {item.sub && item.sub.length > 0 && hoverMenuName === item.name && (
@@ -157,6 +150,23 @@ export function Nav(props: NavProps) {
               )}
             </li>
           ))}
+          <li className="relative">
+            <Link href="/create">
+              <a
+                className={cn(
+                  'flex h-16 items-center text-sm text-neutral-700'
+                )}
+              >
+                <span
+                  className={cn(
+                    'rounded-full bg-themeGreen px-4 py-2 text-white'
+                  )}
+                >
+                  {t('MENU_CREATE')}
+                </span>
+              </a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>
