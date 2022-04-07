@@ -153,7 +153,7 @@ export function Footer(props: FooterProps) {
           'bg-white py-1 text-center text-xs text-[#29a654]'
         )}
       >
-        Copyright 2022 Matrix Labs Design &amp; Development
+        {t('COMMON_COPYRIGHT')}
       </div>
     </div>
   );
