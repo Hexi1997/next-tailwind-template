@@ -3,6 +3,7 @@
     div[data-baseweb='tabs'] {
       div[role='tablist'] {
         position: relative !important;
+
         &::after {
           position: absolute;
           bottom: -1px;
@@ -13,13 +14,16 @@
           width: calc(100% - 40px);
           background: rgba(0, 0, 0, 0.1);
         }
+
         div[role='tab'] {
           color: rgba(51, 51, 51, 0.5) !important;
         }
+
         div[aria-selected='true'] {
           border-bottom: none !important;
           position: relative;
           color: #333333 !important;
+
           &::after {
             position: absolute;
             content: '';
@@ -28,7 +32,6 @@
             height: 4px;
             bottom: -2px;
             left: 0;
-            z-index: 1;
             border-radius: 2px;
             background: linear-gradient(
               89.87deg,

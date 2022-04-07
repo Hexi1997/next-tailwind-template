@@ -13,18 +13,19 @@ const Input: FC<InputProps> = (props) => {
   const { className, style, ...restProps } = props;
 
   return (
-    <div className={cn(styles.Input, className, '')}>
+    <div className={cn(styles.Input, className)}>
       <BaseInput
         {...restProps}
         overrides={{
           Root: {
             style: () => ({
               outline: 'none',
-              height: '36px',
+              height: '40px',
               padding: '0',
               border: '1px solid #999999',
-              borderRadius: '18px',
+              borderRadius: '20px',
               overflow: 'hidden',
+              backgroundColor: 'white',
               ...style
             })
           },

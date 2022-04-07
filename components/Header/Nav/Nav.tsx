@@ -118,9 +118,6 @@ export function Nav(props: NavProps) {
                       : ''
                   )}
                 >
-                  {/* focusMenuItem?.name === item.name
-                        ? 'rounded-full bg-themeGreen text-white'
-                        : '' */}
                   <span className="px-4 py-2">{t(item.name)}</span>
                 </a>
               </Link>
