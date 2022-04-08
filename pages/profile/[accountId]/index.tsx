@@ -1,3 +1,4 @@
+import { Option } from 'baseui/select';
 import cn from 'classnames';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from 'next/image';
@@ -5,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
+import { useState } from 'react';
 
 import circleImg from '@/assets/images/collection/circle.png';
 import collectionIcon from '@/assets/images/collection/collectionIcon.png';
@@ -16,7 +18,7 @@ import hotBidsImg4 from '@/assets/images/home/hot_bids_5.png';
 import hotBidsImg5 from '@/assets/images/home/hot_bids_6.png';
 import userIconImg from '@/assets/images/home/usericon2.png';
 import editIcon from '@/assets/images/profile/edit.svg';
-import { Button, Tabs } from '@/components';
+import { Button, ItemCard, MobileCategoryList, Tabs } from '@/components';
 import { ProfileList } from '@/components/Pages';
 import { ellipseAddress } from '@/utils/common';
 
@@ -117,8 +119,60 @@ const profileListData = [
 
 function AccountId(props: accountIdProps) {
   const { className } = props;
-  const { t } = useTranslation('profile');
+  const { t } = useTranslation(['profile', 'category']);
   const router = useRouter();
+  const [showFilter, setShowFilter] = useState(false);
+
+  const CategoryType = {
+    title: t('CATEGORY_TITLE_TYPE', { ns: 'category' }),
+    categories: [
+      { label: t('CATEGORY_TAG_ONSALE', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_OWNED', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_CREATED', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_FAVORITED', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_ACTIVITIES', { ns: 'category' }) }
+    ]
+  };
+  const CategoryCategory = {
+    title: t('CATEGORY_TITLE_CATEGORY', { ns: 'category' }),
+    categories: [
+      { label: t('CATEGORY_TAG_ALL', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_FOOD', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MINTED', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_STARS', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MUSIC', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_SPORTS', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MOVIES', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_ART', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_PHOTOGRAPHY', { ns: 'category' }) }
+    ]
+  };
+  const CategorySort = {
+    title: t('CATEGORY_TITLE_SORT', { ns: 'category' }),
+    categories: [
+      {
+        label: t('CATEGORY_TAG_PRICE_DESC', { ns: 'category' }),
+        icon: 'icon-sort-desc'
+      },
+      {
+        label: t('CATEGORY_TAG_PRICE_ASC', { ns: 'category' }),
+        icon: 'icon-sort-asc'
+      },
+      {
+        label: t('CATEGORY_TAG_TIME_DESC', { ns: 'category' }),
+        icon: 'icon-sort-desc'
+      },
+      {
+        label: t('CATEGORY_TAG_TIME_ASC', { ns: 'category' }),
+        icon: 'icon-sort-asc'
+      }
+    ]
+  };
+  const [category, setCategory] = useState(
+    CategoryCategory.categories[0].label
+  );
+  const [type, setType] = useState(CategoryType.categories[0].label);
+  const [sort, setSort] = useState(CategorySort.categories[0].label);
 
   return (
     <>
@@ -131,17 +185,28 @@ function AccountId(props: accountIdProps) {
           className="relative h-[220px] w-full bg-cover bg-center"
           style={{ backgroundImage: `url('${profileData.background}')` }}
         >
+          {/* PC端：编辑按钮在右上角 */}
           <Button
             type="Default"
-            className="absolute top-[28px] right-[75px] py-[10px] px-[25px]"
+            className={cn(
+              'absolute top-7 right-[75px] py-[10px] px-6',
+              'lg:block',
+              'hidden'
+            )}
             onClick={() => router.push('/profile/setting')}
           >
             <Image src={editIcon} />
             <span className="pl-[6px]">{t('PROFILE_BUTTON_EDIT')}</span>
           </Button>
         </div>
-        <div className="container relative top-[-40px]">
-          <div className="relative rounded-full">
+        <div className="container relative -top-10">
+          <div
+            className={cn(
+              'relative rounded-full',
+              'lg:mx-0 lg:w-full',
+              'mx-[auto] w-20'
+            )}
+          >
             <Image src={circleImg} width={80} height={80} />
             <div className="absolute top-[5px] left-[5px]">
               <Image src={profileData.avatar} width={70} height={70} />
@@ -159,8 +224,16 @@ function AccountId(props: accountIdProps) {
                 </span>
               </div>
             </Button>
+            <div
+              className={cn('lg:hidden', 'mt-2 py-2 text-[#666666]')}
+              onClick={() => router.push('/profile/setting')}
+            >
+              <Image src={editIcon} />
+              <span className="pl-[6px]">{t('PROFILE_BUTTON_EDIT')}</span>
+            </div>
           </div>
-          <div className="mt-[70px]">
+          {/* PC端：用tab切换并筛选 */}
+          <div className={cn('hidden', 'lg:mt-[70px] lg:block')}>
             <Tabs
               tabs={[
                 {
@@ -190,6 +263,26 @@ function AccountId(props: accountIdProps) {
                 }
               ]}
             />
+          </div>
+          {/* 移动端：Filter筛选 */}
+          <MobileCategoryList
+            visible={showFilter}
+            toggleVisible={setShowFilter}
+            categories={[CategoryType, CategoryCategory, CategorySort]}
+            values={[type, category, sort]}
+            onSelected={[setType, setCategory, setSort]}
+          />
+          <div
+            className={cn(
+              'grid gap-x-32 gap-y-8',
+              'lg:hidden',
+              'md:grid-cols-2',
+              'grid-cols-1'
+            )}
+          >
+            {profileListData.map((item) => (
+              <ItemCard key={item.id} data={item} />
+            ))}
           </div>
         </div>
       </div>

@@ -106,7 +106,7 @@ function Market(props: marketProps) {
   const { className } = props;
   const { t } = useTranslation(['market', 'category', 'selection']);
 
-  const Category1 = {
+  const CategoryCategory = {
     title: t('CATEGORY_TITLE_CATEGORY', { ns: 'category' }),
     categories: [
       { label: t('CATEGORY_TAG_ALL', { ns: 'category' }) },
@@ -120,7 +120,7 @@ function Market(props: marketProps) {
       { label: t('CATEGORY_TAG_PHOTOGRAPHY', { ns: 'category' }) }
     ]
   };
-  const Category2 = {
+  const CategorySaleType = {
     title: t('CATEGORY_TITLE_SALE_TYPE', { ns: 'category' }),
     categories: [
       { label: t('CATEGORY_TAG_ALL', { ns: 'category' }) },
@@ -131,18 +131,25 @@ function Market(props: marketProps) {
       { label: t('CATEGORY_TAG_TRANSFERS', { ns: 'category' }) }
     ]
   };
-  const Category3Data = {
+  const CategorySort = {
     title: t('CATEGORY_TITLE_SORT', { ns: 'category' }),
     categories: [
       {
         label: t('CATEGORY_TAG_PRICE_DESC', { ns: 'category' }),
-        icon: 'icon-sort-asc'
+        icon: 'icon-sort-desc'
       },
       {
         label: t('CATEGORY_TAG_PRICE_ASC', { ns: 'category' }),
+        icon: 'icon-sort-asc'
+      },
+      {
+        label: t('CATEGORY_TAG_TIME_DESC', { ns: 'category' }),
         icon: 'icon-sort-desc'
       },
-      { label: t('CATEGORY_TAG_RECENTLY_LISTED', { ns: 'category' }) }
+      {
+        label: t('CATEGORY_TAG_TIME_ASC', { ns: 'category' }),
+        icon: 'icon-sort-asc'
+      }
     ]
   };
   const selectOptions1 = [
@@ -171,11 +178,15 @@ function Market(props: marketProps) {
   ];
 
   const [showFilter, setShowFilter] = useState(false);
-  const [category, setCategory] = useState(Category1.categories[0].label);
-  const [saleType, setSaleType] = useState(Category2.categories[0].label);
+  const [category, setCategory] = useState(
+    CategoryCategory.categories[0].label
+  );
+  const [saleType, setSaleType] = useState(
+    CategorySaleType.categories[0].label
+  );
   const [order1, setOrder1] = useState([selectOptions1[0]] as Option[]);
   const [order2, setOrder2] = useState([selectOptions2[0]] as Option[]);
-  const [sort, setSort] = useState(Category3Data.categories[0].label);
+  const [sort, setSort] = useState(CategorySort.categories[0].label);
 
   const toggleFilter = (visible: boolean) => {
     setShowFilter(visible);
@@ -193,13 +204,13 @@ function Market(props: marketProps) {
         </div>
         <CategoryList
           className="hidden"
-          category={Category1}
+          category={CategoryCategory}
           value={category}
           onSelected={setCategory}
         />
         <CategoryList
           className="hidden"
-          category={Category2}
+          category={CategorySaleType}
           value={saleType}
           onSelected={setSaleType}
         />
@@ -224,7 +235,7 @@ function Market(props: marketProps) {
         <MobileCategoryList
           visible={showFilter}
           toggleVisible={toggleFilter}
-          categories={[Category1, Category2, Category3Data]}
+          categories={[CategoryCategory, CategorySaleType, CategorySort]}
           values={[category, saleType, sort]}
           onSelected={[setCategory, setSaleType, setSort]}
         />
