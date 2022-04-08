@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { FC, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useWindowSize } from 'react-use';
 
 import { Button } from '@/components';
@@ -8,22 +8,28 @@ import { useIconFont } from '@/utils/hooks/useIconFont';
 import styles from './CategoryList.module.scss';
 
 type CategoryItem = {
-  icon?: string;
-  label: string;
+  title?: string;
+  categories: Array<{
+    icon?: string;
+    label: string;
+  }>;
 };
 interface CategoryListProps {
   className?: string;
-  title?: string;
-  categories: CategoryItem[];
+  category: CategoryItem;
   value: string | number;
   onSelected?: (item: string) => void;
 }
 
 // 多于5个就一行3个，否则一行2个
 const CategoryList: FC<CategoryListProps> = (props) => {
-  const { className, title, categories, value = null, onSelected } = props;
+  const { className, category, value = null, onSelected } = props;
 
   const [selected, setSelected] = useState(value);
+
+  useEffect(() => {
+    console.log('select changed', selected);
+  }, [selected]);
 
   const handleSelected = (item: string) => {
     onSelected && onSelected(item);
@@ -45,7 +51,7 @@ const CategoryList: FC<CategoryListProps> = (props) => {
         'lg:mb-[25px] lg:flex lg:items-center'
       )}
     >
-      {title && (
+      {category.title && (
         <div
           className={cn(
             'whitespace-nowrap text-base text-[#666666]',
@@ -53,39 +59,40 @@ const CategoryList: FC<CategoryListProps> = (props) => {
             'lg:mr-[27px] lg:w-[100px] lg:border-r-[1px] lg:border-solid lg:border-neutral-300 lg:pr-6'
           )}
         >
-          {title}
+          {category.title}
         </div>
       )}
       <div
         className={cn(
           'grid gap-y-4 gap-x-4',
           'lg:flex lg:flex-wrap',
-          categories.length > 4
+          category.categories.length > 4
             ? 'grid-cols-3 grid-rows-1'
             : 'grid-cols-2 grid-rows-2'
         )}
       >
-        {categories.map((item, index) => (
+        {category.categories.map((item, index) => (
           <Button
             key={item.label}
             className={cn(
               'h-[28px] rounded-[14px]',
               isMobile && 'w-full md:w-3/4',
-              categories.length < 5
+              category.categories.length < 5
                 ? index % 2
                   ? 'justify-self-end'
                   : 'justify-self-start'
                 : '',
-              categories.length > 4 && index % 3 === 1
+              category.categories.length > 4 && index % 3 === 1
                 ? 'justify-self-center'
                 : '',
-              categories.length > 4 && index % 3 === 2
+              category.categories.length > 4 && index % 3 === 2
                 ? 'justify-self-end'
                 : '',
               'lg:mr-5 lg:h-[36px] lg:rounded-[18px] lg:px-4 lg:py-2.5'
             )}
             type={item.label === selected ? 'Primary' : 'Border'}
             shadow={false}
+            transition={false}
             onClick={() => handleSelected(item.label)}
           >
             {item.label}

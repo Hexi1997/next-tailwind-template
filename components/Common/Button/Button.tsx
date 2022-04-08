@@ -10,6 +10,7 @@ interface ButtonProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick?: any;
   shadow?: boolean;
+  transition?: boolean;
 }
 
 export function Button(props: ButtonProps) {
@@ -18,7 +19,8 @@ export function Button(props: ButtonProps) {
     children,
     onClick,
     type = 'Primary',
-    shadow = true
+    shadow = true,
+    transition = true
   } = props;
 
   return (
@@ -34,7 +36,8 @@ export function Button(props: ButtonProps) {
           ? `bg-white text-[#333333] hover:bg-gray-50 ${styles.ButtonBorder}`
           : '',
         shadow ? 'shadow-lg hover:shadow-xl' : '',
-        'flex items-center justify-center rounded-lg transition-all duration-300 hover:font-bold',
+        'flex items-center justify-center rounded-lg',
+        transition ? 'transition-all duration-300 hover:font-bold' : '',
         className
       )}
     >

@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -11,6 +12,8 @@ import discordIcon from '@/assets/images/collection/discord.svg';
 import insIcon from '@/assets/images/collection/ins.svg';
 import twitterIcon from '@/assets/images/collection/twitter.svg';
 import websiteIcon from '@/assets/images/collection/website.svg';
+import editIcon from '@/assets/images/profile/edit.svg';
+import { Button } from '@/components';
 import { Tabs } from '@/components/Common/Tabs';
 import { CollectionDetailActivities } from '@/components/Pages/Collection/CollectionDetailActivities';
 import { CollectionDetailHeader } from '@/components/Pages/Collection/CollectionDetailHeader';
@@ -96,6 +99,7 @@ const collectionDetailMockData: ICollectionDetail = {
 function CollectionId(props: collectionIdProps) {
   const { className } = props;
   const { t } = useTranslation('collection');
+  const router = useRouter();
 
   return (
     <>

@@ -24,17 +24,20 @@ export function ProfileList(props: ProfileListProps) {
   const { className, data } = props;
   const { t } = useTranslation(['selection', 'category', 'profile']);
 
-  const categories = [
-    { label: t('CATEGORY_TAG_ALL', { ns: 'category' }) },
-    { label: t('CATEGORY_TAG_FOOD', { ns: 'category' }) },
-    { label: t('CATEGORY_TAG_MINTED', { ns: 'category' }) },
-    { label: t('CATEGORY_TAG_STARS', { ns: 'category' }) },
-    { label: t('CATEGORY_TAG_MUSIC', { ns: 'category' }) },
-    { label: t('CATEGORY_TAG_SPORTS', { ns: 'category' }) },
-    { label: t('CATEGORY_TAG_MOVIES', { ns: 'category' }) },
-    { label: t('CATEGORY_TAG_ART', { ns: 'category' }) },
-    { label: t('CATEGORY_TAG_PHOTOGRAPHY', { ns: 'category' }) }
-  ];
+  const Category = {
+    title: t('CATEGORY_TITLE_CATEGORY', { ns: 'category' }),
+    categories: [
+      { label: t('CATEGORY_TAG_ALL', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_FOOD', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MINTED', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_STARS', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MUSIC', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_SPORTS', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_MOVIES', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_ART', { ns: 'category' }) },
+      { label: t('CATEGORY_TAG_PHOTOGRAPHY', { ns: 'category' }) }
+    ]
+  };
   const selectOptions1 = [
     {
       label: t('SELECT_OPTION_PRICE_HIGHEST', { ns: 'selection' }),
@@ -63,8 +66,7 @@ export function ProfileList(props: ProfileListProps) {
   return (
     <div className={cn(styles.ProfileList, className, 'pt-[34px]')}>
       <CategoryList
-        title={t('CATEGORY_TITLE_CATEGORY', { ns: 'category' })}
-        categories={categories}
+        category={Category}
         value={t('CATEGORY_TAG_ALL', { ns: 'category' }) as unknown as string}
       />
       <div className={cn('mt-[45px] hidden', 'lg:flex')}>

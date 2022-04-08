@@ -87,6 +87,14 @@ export function MobileNav(props: MobileNavProps) {
                 );
               }
             })}
+            <Link href="/create">
+              <a
+                className="flex h-[52px] w-full cursor-pointer items-center border-b-[1px] border-solid border-gray-200 px-5 text-[16px]"
+                onClick={toggleShowDrawer}
+              >
+                {t('MENU_CREATE')}
+              </a>
+            </Link>
           </Accordion>
         </ul>
         <MobileLanguageToggle />

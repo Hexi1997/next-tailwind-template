@@ -1,9 +1,11 @@
 import cn from 'classnames';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 
 import circleImg from '@/assets/images/collection/circle.png';
 import addressTypeImg from '@/assets/images/collection/ethereum.svg';
+import editIcon from '@/assets/images/profile/edit.svg';
 import { Button } from '@/components/Common/Button';
 import { ICollectionDetail } from '@/pages/collection/[collectionId]';
 import { ellipseAddress } from '@/utils/common';
@@ -20,9 +22,18 @@ interface CollectionDetailHeaderProps {
 export function CollectionDetailHeader(props: CollectionDetailHeaderProps) {
   const { className, data } = props;
   const { t } = useTranslation('collection');
+  const router = useRouter();
 
   return (
     <div className={cn(styles.CollectionDetailHeader, className, 'relative')}>
+      <Button
+        type="Default"
+        className="absolute -top-[150px] right-0 py-[10px] px-[25px]"
+        onClick={() => router.push(`${router.asPath}/edit`)}
+      >
+        <Image src={editIcon} />
+        <span className="pl-[6px]">{t('COLLECTION_DETAIL_BUTTON_EDIT')}</span>
+      </Button>
       {/* collection icon区域 */}
       <div className="relative ml-[calc((100vw_-_360px)_/_2)] -mt-10 flex w-[320px] flex-col items-center justify-center sm:ml-[calc((100vw_-_600px)_/_2)] sm:w-[600px] lg:left-0 lg:ml-0 lg:block lg:w-auto">
         <div className="relative h-20 w-20 rounded-full bg-red-400">

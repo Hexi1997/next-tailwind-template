@@ -1,4 +1,4 @@
-import { OnChangeParams } from 'baseui/select';
+import { OnChangeParams, Option } from 'baseui/select';
 import cn from 'classnames';
 import { GetStaticPropsContext } from 'next';
 import { useTranslation } from 'next-i18next';
@@ -13,13 +13,11 @@ import hotBidsImg4 from '@/assets/images/home/hot_bids_5.png';
 import hotBidsImg5 from '@/assets/images/home/hot_bids_6.png';
 import userIconImg from '@/assets/images/home/usericon2.png';
 import {
-  Button,
   CategoryList,
   ItemCard,
   MobileCategoryList,
   Select
 } from '@/components';
-import { useIconFont } from '@/utils/hooks/useIconFont';
 
 import styles from './_index.module.scss';
 
@@ -175,19 +173,20 @@ function Market(props: marketProps) {
   const [showFilter, setShowFilter] = useState(false);
   const [category, setCategory] = useState(Category1.categories[0].label);
   const [saleType, setSaleType] = useState(Category2.categories[0].label);
-  const [order1, setOrder1] = useState([]);
-  const [order2, setOrder2] = useState([]);
+  const [order1, setOrder1] = useState([selectOptions1[0]] as Option[]);
+  const [order2, setOrder2] = useState([selectOptions2[0]] as Option[]);
+  const [sort, setSort] = useState(Category3Data.categories[0].label);
 
   const toggleFilter = (visible: boolean) => {
     setShowFilter(visible);
   };
 
   const handleReset = () => {
+    console.log('reet');
     setCategory(Category1.categories[0].label);
     setSaleType(Category2.categories[0].label);
+    setSort(Category3Data.categories[0].label);
   };
-
-  const { IconFont } = useIconFont();
 
   return (
     <>
@@ -201,15 +200,13 @@ function Market(props: marketProps) {
         </div>
         <CategoryList
           className="hidden"
-          title={Category1.title}
-          categories={Category1.categories}
+          category={Category1}
           value={category}
           onSelected={setCategory}
         />
         <CategoryList
           className="hidden"
-          title={Category2.title}
-          categories={Category2.categories}
+          category={Category2}
           value={saleType}
           onSelected={setSaleType}
         />
@@ -219,51 +216,25 @@ function Market(props: marketProps) {
             style={{ width: '200px', marginRight: '36px' }}
             options={selectOptions1}
             value={order1}
-            onChange={(e: OnChangeParams) => setOrder1(e.value)}
+            onChange={(e: OnChangeParams) => setOrder1(e.value as Option[])}
             clearable={false}
           />
           <Select
             style={{ width: '200px' }}
             options={selectOptions2}
             value={order2}
-            onChange={(e: OnChangeParams) => setOrder2(e.value)}
+            onChange={(e: OnChangeParams) => setOrder2(e.value as Option[])}
             clearable={false}
           />
         </div>
 
-        <Button
-          className={cn(
-            'fixed bottom-9 right-5 z-10 h-[40px] w-[110px] rounded-[23px] bg-[#333333] text-sm',
-            'lg:hidden'
-          )}
-          onClick={() => toggleFilter(true)}
-        >
-          {t('SELECT_MOBILE_FILTER', { ns: 'selection' })}
-          <IconFont className="h-6 w-4 text-[28px]" type="icon-filter" />
-        </Button>
         <MobileCategoryList
           visible={showFilter}
-          onClose={() => toggleFilter(false)}
-          onReset={handleReset}
-        >
-          <CategoryList
-            title={Category1.title}
-            categories={Category1.categories}
-            value={category}
-            onSelected={setCategory}
-          />
-          <CategoryList
-            title={Category2.title}
-            categories={Category2.categories}
-            value={saleType}
-            onSelected={setSaleType}
-          />
-          <CategoryList
-            title={Category3Data.title}
-            categories={Category3Data.categories}
-            value={''}
-          />
-        </MobileCategoryList>
+          toggleVisible={toggleFilter}
+          categories={[Category1, Category2, Category3Data]}
+          values={[category, saleType, sort]}
+          onSelected={[setCategory, setSaleType, setSort]}
+        />
 
         <div
           className={cn(
