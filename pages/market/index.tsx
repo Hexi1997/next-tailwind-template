@@ -181,13 +181,6 @@ function Market(props: marketProps) {
     setShowFilter(visible);
   };
 
-  const handleReset = () => {
-    console.log('reet');
-    setCategory(Category1.categories[0].label);
-    setSaleType(Category2.categories[0].label);
-    setSort(Category3Data.categories[0].label);
-  };
-
   return (
     <>
       <NextSeo

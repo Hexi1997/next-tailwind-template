@@ -1,13 +1,17 @@
+import { OnChangeParams, Option } from 'baseui/select';
 import cn from 'classnames';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { NextSeo } from 'next-seo';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useWindowSize } from 'react-use';
 
 import listing from '@/assets/images/collection/list.svg';
+import greenHeart from '@/assets/images/home/green_heart.svg';
 import hotBidsImg1 from '@/assets/images/home/hot_bids_2.png';
+import normalHeart from '@/assets/images/home/line_heart.svg';
 import {
   Button,
   Collapse,
@@ -96,6 +100,11 @@ export async function getServerSideProps({
   };
 }
 
+const bidCoinOptions = [
+  { id: 1, label: 'Flow' },
+  { id: 2, label: 'Fusd' }
+];
+
 function ItemId(props: itemIdProps) {
   const { className } = props;
   const { IconFont } = useIconFont();
@@ -103,13 +112,16 @@ function ItemId(props: itemIdProps) {
   const [openBidModal, setOpenBidModal] = useState(false);
   const [openCompleteModal, setOpenCompleteModal] = useState(false);
   const [bidCoin, setBidCoin] = useState(null as unknown as string);
-  const [bidCoinUnit, setBidCoinUnit] = useState('Flow');
+  const [bidCoinUnit, setBidCoinUnit] = useState([
+    bidCoinOptions[0]
+  ] as Option[]);
+  const [isLike, setIsLike] = useState(false);
   const restCoin = 1; // 用户剩余的钱
 
-  const bidCoinOptions = [
-    { id: 1, label: 'Flow' },
-    { id: 2, label: 'Fusd' }
-  ];
+  const { width } = useWindowSize();
+  const isMobile = useMemo(() => {
+    return width < 1024;
+  }, [width]);
 
   return (
     <>
@@ -134,13 +146,19 @@ function ItemId(props: itemIdProps) {
               'hidden'
             )}
           >
-            <div className="mb-[20px] flex justify-end">
-              <span className="mr-[20px] flex items-center text-[#666666]">
-                <IconFont type="icon-heart" className="pr-[8px] text-[20px]" />
-                {itemData.favorCount}
+            <div className="mb-5 flex justify-end">
+              <span className="mr-5 flex items-center text-[#666666]">
+                <Image
+                  src={isLike ? greenHeart : normalHeart}
+                  width={20}
+                  height={20}
+                  className="cursor-pointer hover:opacity-70"
+                  onClick={() => setIsLike(!isLike)}
+                />
+                <span className="pl-2">{itemData.favorCount}</span>
               </span>
               <span className="flex items-center text-[#666666]">
-                <IconFont type="icon-eye" className="pr-[8px] text-[20px]" />
+                <IconFont type="icon-eye" className="pr-2 text-[22px]" />
                 {itemData.watchCount}
               </span>
             </div>
@@ -154,11 +172,11 @@ function ItemId(props: itemIdProps) {
           {/* PC端图片（分割线） */}
           <RoundedContainer
             className={cn(
-              'lg:mt-[40px] lg:block lg:px-[21px] lg:pt-[24px] lg:pb-[47px]',
+              'lg:mt-10 lg:block lg:px-5 lg:pt-6 lg:pb-12',
               'hidden'
             )}
           >
-            <h3 className="mb-[20px] text-[22px]">
+            <h3 className="mb-5 text-[22px]">
               {t('COLLECTION_NFT_PROPERTIES')}
             </h3>
             <div
@@ -174,10 +192,10 @@ function ItemId(props: itemIdProps) {
                   className="rounded-[10px] border-[1px] border-solid border-[#cccccc] px-[20px] py-[12px]"
                 >
                   <div className="text-sm text-[#666666]">{item.type}</div>
-                  <div className="mt-[8px] text-xl text-[#333333]">
+                  <div className="mt-2 text-xl text-[#333333]">
                     {item.content}
                   </div>
-                  <div className="mt-[8px] text-right text-sm text-[#666666]">
+                  <div className="mt-2 text-right text-sm text-[#666666]">
                     {item.remark}
                   </div>
                 </div>
@@ -189,7 +207,7 @@ function ItemId(props: itemIdProps) {
           <h4
             className={cn(
               'font-medium text-themeGreen',
-              'lg:mt-[40px] lg:text-base',
+              'lg:mt-10 lg:text-base',
               'mt-[18px] text-sm'
             )}
           >
@@ -209,11 +227,17 @@ function ItemId(props: itemIdProps) {
             className={cn('lg:hidden', 'mt-4 block w-full p-3')}
           >
             <div className="mb-5 flex justify-end">
-              <span className="mr-5 flex items-center text-[#cccccc]">
-                <IconFont type="icon-heart" className="pr-2 text-xl" />
-                {itemData.favorCount}
+              <span className="mr-5 flex items-center text-[#666666]">
+                <Image
+                  src={isLike ? greenHeart : normalHeart}
+                  width={16}
+                  height={16}
+                  className="cursor-pointer hover:opacity-70"
+                  onClick={() => setIsLike(!isLike)}
+                />
+                <span className="pl-2">{itemData.favorCount}</span>
               </span>
-              <span className="flex items-center text-[#cccccc]">
+              <span className="flex items-center text-[#666666]">
                 <IconFont type="icon-eye" className="pr-2 text-xl" />
                 {itemData.watchCount}
               </span>
@@ -283,6 +307,7 @@ function ItemId(props: itemIdProps) {
               {t('COLLECTION_NFT_BUTTON_BUY')}
             </Button>
             <Button
+              type={isMobile ? 'Border' : 'Primary'}
               className="h-[39px] rounded-[39px]"
               onClick={() => setOpenBidModal(true)}
             >
@@ -381,32 +406,37 @@ function ItemId(props: itemIdProps) {
                 borderLeft: 'none'
               }}
               options={bidCoinOptions}
+              value={bidCoinUnit}
+              clearable={false}
+              onChange={(e: OnChangeParams) =>
+                setBidCoinUnit(e.value as Option[])
+              }
             />
           </div>
           <div
             className={cn(
               'text-sm leading-6 text-[#666666]',
-              bidCoin && bidCoinUnit ? '' : 'px-[43px] text-center'
+              bidCoin && bidCoinUnit.length ? '' : 'px-[43px] text-center'
             )}
           >
-            {bidCoin && bidCoinUnit ? (
+            {bidCoin && bidCoinUnit.length ? (
               <div>
                 <div className="flex items-center justify-between">
                   <span>{t('COLLECTION_NFT_MODAL_BIDING_BALANCE')}</span>
-                  <span>0.234 {bidCoinUnit}</span>
+                  <span>0.234 {bidCoinUnit[0].label}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>{t('COLLECTION_NFT_MODAL_BALANCE')}</span>
-                  <span>0.004 {bidCoinUnit}</span>
+                  <span>0.004 {bidCoinUnit[0].label}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span>{t('COLLECTION_NFT_MODAL_SERVICE_FEE')}</span>
-                  <span>0.120 {bidCoinUnit}</span>
+                  <span>0.120 {bidCoinUnit[0].label}</span>
                 </div>
                 <div className="mt-[8px] flex items-center justify-between">
                   <span>{t('COLLECTION_NFT_MODAL_TOTAL_PAY')}</span>
                   <span className="text-lg font-bold text-[#333333]">
-                    1.789 {bidCoinUnit}
+                    1.789 {bidCoinUnit[0].label}
                   </span>
                 </div>
                 <div className="text-right">$3675.24</div>
@@ -418,14 +448,16 @@ function ItemId(props: itemIdProps) {
           <div className="my-10">
             <Button
               type={
-                bidCoin && bidCoinUnit && Number(bidCoin) <= restCoin
+                bidCoin && bidCoinUnit.length && Number(bidCoin) <= restCoin
                   ? 'Primary'
                   : 'None'
               }
               shadow={false}
               className={cn(
                 'rounded-10 h-10 w-full',
-                bidCoin && bidCoinUnit ? '' : 'bg-[#ededed] text-[#333333]',
+                bidCoin && bidCoinUnit.length
+                  ? ''
+                  : 'bg-[#ededed] text-[#333333]',
                 Number(bidCoin) <= restCoin
                   ? ''
                   : 'border-[1px] border-solid border-black'
@@ -467,20 +499,20 @@ function ItemId(props: itemIdProps) {
           <div className="mt-6 text-sm leading-6 text-[#666666]">
             <div className="flex items-center justify-between">
               <span>{t('COLLECTION_NFT_MODAL_BIDING_BALANCE')}</span>
-              <span>0.234 {bidCoinUnit}</span>
+              <span>0.234 {bidCoinUnit[0].label}</span>
             </div>
             <div className="flex items-center justify-between">
               <span>{t('COLLECTION_NFT_MODAL_BALANCE')}</span>
-              <span>0.004 {bidCoinUnit}</span>
+              <span>0.004 {bidCoinUnit[0].label}</span>
             </div>
             <div className="flex items-center justify-between">
               <span>{t('COLLECTION_NFT_MODAL_SERVICE_FEE')}</span>
-              <span>0.120 {bidCoinUnit}</span>
+              <span>0.120 {bidCoinUnit[0].label}</span>
             </div>
             <div className="mt-[8px] flex items-center justify-between">
               <span>{t('COLLECTION_NFT_MODAL_TOTAL_PAY')}</span>
               <span className="text-lg font-bold text-[#333333]">
-                1.789 {bidCoinUnit}
+                1.789 {bidCoinUnit[0].label}
               </span>
             </div>
             <div className="text-right">$3675.24</div>
