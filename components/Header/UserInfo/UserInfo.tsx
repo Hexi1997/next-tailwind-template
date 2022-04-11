@@ -1,4 +1,7 @@
+import { CopyOutlined } from '@ant-design/icons';
+import { toaster } from 'baseui/toast';
 import cn from 'classnames';
+import copy from 'copy-to-clipboard';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
@@ -18,6 +21,7 @@ import signOutImg from '@/assets/images/header/signout.svg';
 import signOutWhiteImg from '@/assets/images/header/signout_white.svg';
 import { Button } from '@/components/Common/Button';
 import { RoundedContainer } from '@/components/RoundedContainer';
+import { ellipseAddress } from '@/utils/common';
 
 import styles from './UserInfo.module.scss';
 
@@ -58,7 +62,6 @@ export function UserInfo(props: UserInfoProps) {
   const [isShowUserInfo, setIsShowUserInfo] = useState(false);
   const [isHoverSignOut, setIsHoverSignOut] = useState(false);
   const { width } = useWindowSize();
-  // useTranslation可以引入多个namespace，然后t方法调用的时候设置ns参数指定namespace,如果不传，默认指向第一个
   const { t } = useTranslation(['menu', 'common']);
 
   return (
@@ -79,8 +82,27 @@ export function UserInfo(props: UserInfoProps) {
       >
         <Image src={infoImg} />
         {isShowUserInfo && (
-          <RoundedContainer className="absolute top-16 -left-40 flex flex-col text-base">
-            <span className="px-[18px] pt-6 pb-2">0x88b4b153184...7c1bd</span>
+          <RoundedContainer className="absolute top-16 -left-44 flex flex-col text-base">
+            <div
+              className="flex items-center space-x-2 px-[18px] pt-6 pb-2 hover:opacity-75"
+              title={t('COMMON_COPY_TITLE', {
+                ns: 'common'
+              })}
+              onClick={() => {
+                if (copy('0xC623848bcc9764cF26F7392D5FF1277596C9E75F')) {
+                  toaster.positive(t('COMMON_COPY_SUS', { ns: 'common' }), {});
+                }
+              }}
+            >
+              <span>
+                {ellipseAddress(
+                  '0xC623848bcc9764cF26F7392D5FF1277596C9E75F',
+                  8,
+                  8
+                )}
+              </span>
+              <CopyOutlined />
+            </div>
             <div className="mx-[18px] flex flex-col space-y-2 rounded-lg p-5 pb-3 shadow-xl">
               <span className="font-medium">
                 {t('COMMON_BALANCE', { ns: 'common' })}

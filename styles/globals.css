@@ -12,6 +12,10 @@ body div[data-baseweb='drawer'] {
   z-index: 100 !important;
 }
 
+body div[data-baseweb='toast'] {
+  z-index: 1000 !important;
+}
+
 .container {
   margin: 0 auto;
   max-width: min(1280px, 100% - 40px);

@@ -3,6 +3,7 @@ import '../styles/fonts.css';
 import '../styles/globals.css';
 
 import { BaseProvider } from 'baseui';
+import { PLACEMENT, ToasterContainer } from 'baseui/toast';
 import type { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
 import { ThemeProvider } from 'next-themes';
@@ -25,6 +26,10 @@ function MyApp({ Component, pageProps }: AppProps) {
             <LoadingBar
               isRouteChanging={state.isRouteChanging}
               key={state.loadingKey}
+            />
+            <ToasterContainer
+              placement={PLACEMENT.bottomRight}
+              autoHideDuration={3000}
             />
             <Component {...pageProps} />
           </Layout>

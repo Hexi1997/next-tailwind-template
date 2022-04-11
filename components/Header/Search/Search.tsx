@@ -123,7 +123,7 @@ export function Search(props: SearchProps) {
         type="text"
         value={value}
         onChange={(e) => {
-          setValue(e.target.value.trim());
+          setValue(e.target.value.slice(0, 1000));
         }}
         placeholder={t('COMMON_SEARCH_PLACEHOLDER')}
         className="h-9 w-full rounded-full border-2 px-12 text-sm text-stone-500 focus:outline-none"
