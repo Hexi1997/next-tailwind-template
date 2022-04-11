@@ -35,7 +35,7 @@ export function TopRank(props: TopRankProps) {
             {data.name}
           </span>
           <span className="text-sm text-[#66666699] line-clamp-1">
-            {data.sales}
+            ${data.sales}
           </span>
         </div>
       </Button>

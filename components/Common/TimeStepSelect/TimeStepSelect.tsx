@@ -16,7 +16,7 @@ interface TimeStepSelectProps {
 export function TimeStepSelect(props: TimeStepSelectProps) {
   const { className, options, defaultIndex, cb } = props;
   const [value, setValue] = useState(options[defaultIndex]);
-  const { t } = useTranslation('home');
+  const { t, i18n } = useTranslation('home');
   const [showSelect, toggleShowSelect] = useToggle(false);
   const ref = useRef<HTMLDivElement | null>(null);
   useClickAway(ref, () => {
@@ -27,18 +27,20 @@ export function TimeStepSelect(props: TimeStepSelectProps) {
     <div className={cn(styles.TimeStepSelect, className, 'ml-1 sm:ml-2')}>
       <div
         ref={ref}
-        className="relative z-10 mt-1 flex cursor-pointer items-center justify-center bg-white text-[18px] sm:mt-0 sm:text-[28px]"
+        className="relative z-10 -mt-10 mb-10 flex cursor-pointer items-center justify-center bg-white text-[28px] sm:mt-0 sm:mb-0"
         onClick={toggleShowSelect}
       >
         <span className="text-themeGreen">{value}</span>
         <span className="ml-1 text-themeGreen sm:ml-2">
-          {t('HOME_SECTION_TOP_COLLECTION_DAY')}
+          {`${t('HOME_SECTION_TOP_COLLECTION_DAY')}${
+            i18n.language === 'en' && value > 1 ? 's' : ''
+          }`}
         </span>
         <div>
           <ChevronDown size={34} color="#03D34A" />
         </div>
         {showSelect && (
-          <div className="absolute top-12 right-4 w-40 overflow-hidden rounded-lg border-[1px] border-solid border-gray-100 bg-white shadow-md">
+          <div className="absolute top-12 w-40 overflow-hidden rounded-lg border-[1px] border-solid border-gray-100 bg-white shadow-md sm:right-4">
             {options.map((item, index) => {
               const isLast = index === options.length - 1;
               return (
@@ -54,7 +56,9 @@ export function TimeStepSelect(props: TimeStepSelectProps) {
                   )}
                 >
                   <span>{item}</span>
-                  <span>{t('HOME_SECTION_TOP_COLLECTION_DAY')}</span>
+                  <span>{`${t('HOME_SECTION_TOP_COLLECTION_DAY')}${
+                    i18n.language === 'en' && item > 1 ? 's' : ''
+                  }`}</span>
                 </div>
               );
             })}
