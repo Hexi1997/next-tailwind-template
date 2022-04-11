@@ -152,7 +152,7 @@ function Market(props: marketProps) {
       }
     ]
   };
-  const selectOptions1 = [
+  const selectOptions = [
     {
       label: t('SELECT_OPTION_PRICE_HIGHEST', { ns: 'selection' }),
       id: 1
@@ -162,18 +162,12 @@ function Market(props: marketProps) {
       id: 2
     },
     {
-      label: t('SELECT_OPTION_TIME_NEWEST', { ns: 'selection' }),
-      id: 3
-    }
-  ];
-  const selectOptions2 = [
-    {
       label: t('SELECT_OPTION_ADD_TIME_NEWEST', { ns: 'selection' }),
-      id: 1
+      id: 3
     },
     {
       label: t('SELECT_OPTION_ADD_TIME_OLDEST', { ns: 'selection' }),
-      id: 2
+      id: 4
     }
   ];
 
@@ -184,8 +178,7 @@ function Market(props: marketProps) {
   const [saleType, setSaleType] = useState(
     CategorySaleType.categories[0].label
   );
-  const [order1, setOrder1] = useState([selectOptions1[0]] as Option[]);
-  const [order2, setOrder2] = useState([selectOptions2[0]] as Option[]);
+  const [order1, setOrder1] = useState([selectOptions[0]] as Option[]);
   const [sort, setSort] = useState(CategorySort.categories[0].label);
 
   const toggleFilter = (visible: boolean) => {
@@ -217,17 +210,10 @@ function Market(props: marketProps) {
 
         <div className={cn('mb-10 hidden', 'lg:flex')}>
           <Select
-            style={{ width: '200px', marginRight: '36px' }}
-            options={selectOptions1}
+            style={{ width: '200px' }}
+            options={selectOptions}
             value={order1}
             onChange={(e: OnChangeParams) => setOrder1(e.value as Option[])}
-            clearable={false}
-          />
-          <Select
-            style={{ width: '200px' }}
-            options={selectOptions2}
-            value={order2}
-            onChange={(e: OnChangeParams) => setOrder2(e.value as Option[])}
             clearable={false}
           />
         </div>

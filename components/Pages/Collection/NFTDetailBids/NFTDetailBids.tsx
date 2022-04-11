@@ -115,10 +115,7 @@ export function NFTDetailBids(props: NFTDetailBidsProps) {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr
-              className={cn('hover:rounded-xl hover:shadow-xl')}
-              key={item.id}
-            >
+            <tr key={item.id}>
               <td className="py-4 align-middle">
                 <div
                   className={cn(

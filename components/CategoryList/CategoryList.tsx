@@ -1,8 +1,7 @@
 import cn from 'classnames';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { useWindowSize } from 'react-use';
 
-import { Button } from '@/components';
 import { useIconFont } from '@/utils/hooks/useIconFont';
 
 import styles from './CategoryList.module.scss';
@@ -26,10 +25,6 @@ const CategoryList: FC<CategoryListProps> = (props) => {
   const { className, category, value = null, onSelected } = props;
 
   const [selected, setSelected] = useState(value);
-
-  useEffect(() => {
-    console.log('select changed', selected);
-  }, [selected]);
 
   const handleSelected = (item: string) => {
     onSelected && onSelected(item);
@@ -72,10 +67,10 @@ const CategoryList: FC<CategoryListProps> = (props) => {
         )}
       >
         {category.categories.map((item, index) => (
-          <Button
+          <div
             key={item.label}
             className={cn(
-              'h-[28px] rounded-[14px]',
+              'flex h-7 items-center justify-center rounded-full border-[1px] border-solid hover:cursor-pointer',
               isMobile && 'w-full md:w-3/4',
               category.categories.length < 5
                 ? index % 2
@@ -88,18 +83,18 @@ const CategoryList: FC<CategoryListProps> = (props) => {
               category.categories.length > 4 && index % 3 === 2
                 ? 'justify-self-end'
                 : '',
-              'lg:mr-5 lg:h-[36px] lg:rounded-[18px] lg:px-4 lg:py-2.5'
+              'lg:mr-5 lg:h-9 lg:rounded-full lg:px-4 lg:py-2.5',
+              item.label === selected
+                ? 'bg-themeGreen text-white'
+                : 'border-[#cccccc] bg-white text-black'
             )}
-            type={item.label === selected ? 'Primary' : 'Border'}
-            shadow={false}
-            transition={false}
             onClick={() => handleSelected(item.label)}
           >
             {item.label}
             {item.icon && (
               <IconFont className={cn('pl-1', 'md:pl-2')} type={item.icon} />
             )}
-          </Button>
+          </div>
         ))}
       </div>
     </div>

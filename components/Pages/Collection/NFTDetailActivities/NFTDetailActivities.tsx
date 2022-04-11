@@ -110,10 +110,7 @@ export function NFTDetailActivities(props: NFTDetailActivitiesProps) {
         </thead>
         <tbody>
           {data.map((item) => (
-            <tr
-              className={cn('hover:rounded-xl hover:shadow-xl')}
-              key={item.id}
-            >
+            <tr key={item.id}>
               <td className="align-middle">
                 <Image src={transfer} />
                 <div className="ml-[6px] inline-block translate-y-[-50%]">
