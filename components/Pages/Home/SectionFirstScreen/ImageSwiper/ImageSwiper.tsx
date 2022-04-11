@@ -4,7 +4,6 @@ import { cloneDeep } from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
-import { usePrevious } from 'react-use';
 
 import swiperImg1 from '@/assets/images/home/swiper-1.png';
 import swiperImg2 from '@/assets/images/home/swiper-2.png';
@@ -73,7 +72,7 @@ export function ImageSwiper(props: ImageSwiperProps) {
   }, []);
 
   const handleNext = useCallback(() => {
-    setCurrentImgIndex((prev) => (prev + 1 > imgs.length ? 0 : prev + 1));
+    setCurrentImgIndex((prev) => (prev + 1 >= imgs.length ? 0 : prev + 1));
     const imgsNew = cloneDeep(imgs);
     const first = imgsNew.shift();
     if (first) {
@@ -127,19 +126,18 @@ export function ImageSwiper(props: ImageSwiperProps) {
         >
           <ArrowLeftOutlined className="absolute -left-12 top-4 cursor-pointer text-4xl text-black opacity-75 hover:opacity-95" />
         </div>
-        {/* <div
-          className={`absolute -bottom-4 z-[200] flex w-full items-center justify-center space-x-3`}
+        <div
+          className={`absolute -bottom-[14px] z-[200] flex w-full items-center justify-center space-x-3`}
         >
-          {imgs.map((item, index) => (
+          {imgs.map((_, index) => (
             <div
               key={index}
-              className="box-border h-3 w-3 rounded-full bg-black p-2"
-              onClick={() => {
-                setCurrentImgIndex(item.index);
-              }}
+              className={`box-border h-2 w-2 rounded-full ${
+                currentImageIndex === index ? 'bg-themeGreen' : 'bg-black'
+              } p-1 sm:h-3 sm:w-3`}
             ></div>
           ))}
-        </div> */}
+        </div>
         <div className={styles.cardHolder}>
           {imgs.map((item) => (
             <div
