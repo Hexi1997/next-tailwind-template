@@ -186,10 +186,7 @@ export function CollectionActivityList(props: CollectionActivityListProps) {
         </thead>
         <tbody>
           {acitivityMockData.map((item, index) => (
-            <tr
-              key={index}
-              className="h-[74px] overflow-hidden hover:border-[1px] hover:border-solid hover:border-gray-200 hover:shadow-xl"
-            >
+            <tr key={index} className="h-[74px] overflow-hidden">
               <td className="flex px-4 text-sm text-[#333333]">
                 <div className="mt-4 mr-2">
                   <Image

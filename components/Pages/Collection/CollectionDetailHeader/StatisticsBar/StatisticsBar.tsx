@@ -27,28 +27,28 @@ export function StatisticsBar(props: StatisticsBarProps) {
               {t('COLLECTION_DETAIL_ITEMS')}
             </span>
             <br />
-            <span className="text-[#333333]">{data.items}</span>
+            <span className="font-bold text-[#333333]">{data.items}</span>
           </div>
           <div>
             <span className="text-[#999999]">
               {t('COLLECTION_DETAIL_OWNERS')}
             </span>
             <br />
-            <span className="text-[#333333]">{data.owners}</span>
+            <span className="font-bold text-[#333333]">{data.owners}</span>
           </div>
           <div>
             <span className="text-[#999999]">
               {t('COLLECTION_DETAIL_FLOOR_PRICE')}
             </span>
             <br />
-            <span className="text-[#333333]">{data.floor}</span>
+            <span className="font-bold text-[#333333]">{data.floor}</span>
           </div>
           <div>
             <span className="text-[#999999]">
               {t('COLLECTION_DETAIL_VOLUME_TRADED')}
             </span>
             <br />
-            <span className="text-[#333333]">{data.volume}</span>
+            <span className="font-bold text-[#333333]">{data.volume}</span>
           </div>
         </div>
         <div className="flex flex-row items-center space-x-5">
