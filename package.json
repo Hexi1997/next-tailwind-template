@@ -1,0 +1,56 @@
+{
+  "name": "flowmarket-front-end",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "prepare": "husky install",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "lint": "eslint -c ./.eslintrc.js --ext .ts,.tsx,.js,.jsx",
+    "pre-commit": "lint-staged",
+    "submodule": "git submodule update --force --recursive --init --remote && git submodule update --remote --merge"
+  },
+  "dependencies": {
+    "axios": "^0.26.1",
+    "classnames": "^2.3.1",
+    "next": "12.1.0",
+    "next-i18next": "^10.5.0",
+    "next-seo": "^5.1.0",
+    "next-themes": "^0.1.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.21",
+    "@types/react": "17.0.40",
+    "@white-matrix/eslint-config": "^1.1.1",
+    "@white-matrix/prettier-config": "^1.1.1",
+    "autoprefixer": "^10.4.4",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "12.1.3",
+    "postcss": "^8.4.12",
+    "postcss-sass": "^0.5.0",
+    "postcss-scss": "^4.0.3",
+    "sass": "^1.49.9",
+    "stylelint": "14.2.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-prettier": "^2.0.0",
+    "tailwindcss": "^3.0.23",
+    "typescript": "4.6.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "lint-staged": {
+    "**/*.{less,css,sass,scss}": "stylelint",
+    "**/*.{js,jsx,ts,tsx}": [
+      "yarn lint"
+    ]
+  }
+}

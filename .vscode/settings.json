@@ -1,0 +1,32 @@
+{
+  "cSpell.words": [
+    "FUSD",
+    "classname",
+    "flowmarket",
+    "mycollections",
+    "myfavorites",
+    "semibold",
+    "stylelint",
+    "submodule",
+    "tailwindcss"
+  ],
+  "prettier.configPath": ".prettierrc.js",
+  "stylelint.enable": true,
+  "[scss]": {
+    "editor.formatOnSave": true,
+  },
+  "[sass]": {
+    "editor.formatOnSave": true,
+  },
+  "editor.codeActionsOnSave": {
+    ​"source.fixAll.eslint": true,
+    ​"source.fixAll.tslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "eslint.options": {
+    ​"extensions": [".js", ".jsx", ".vue", ".ts", ".tsx"]
+  },
+  "blueprint.templatesPath": [
+    ".vscode/blueprint-templates",
+  ]
+}
