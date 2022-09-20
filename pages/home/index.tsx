@@ -34,7 +34,7 @@ function Home(props: homeProps) {
     <div className={cn(styles.home, className)}>
       <button
         onClick={handleLocaleChange}
-        className="w-40 h-10 bg-gray-500 text-white"
+        className="h-10 w-40 bg-gray-500 text-white"
       >
         change language
       </button>
